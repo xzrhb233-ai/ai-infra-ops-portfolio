@@ -1,0 +1,69 @@
+Collected: 2026-09-05 (WSL2 Ubuntu 24.04.1 LTS, DESKTOP-2ML4JJP)
+Docker Engine installed via apt (docker-ce) per local-gpu/scripts/install-docker-and-nvidia-toolkit.sh,
+NVIDIA Container Toolkit wired into the daemon with `nvidia-ctk runtime configure --runtime=docker`.
+
+### $ docker version
+Client: Docker Engine - Community
+ Version:           29.8.0
+ API version:       1.56
+ Go version:        go1.26.8
+ OS/Arch:           linux/amd64
+Server: Docker Engine - Community
+ Engine:
+  Version:          29.8.0
+  API version:      1.56 (minimum version 1.40)
+ containerd:
+  Version:          v2.3.4
+ runc:
+  Version:          1.5.1
+
+### $ docker run --rm hello-world
+Unable to find image 'hello-world:latest' locally
+latest: Pulling from library/hello-world
+Status: Downloaded newer image for hello-world:latest
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+(daemon reachable, image pull works, container executes and exits 0)
+
+### $ docker run --rm nvidia/cuda:12.4.1-base-ubuntu22.04 nvidia-smi
+(WITHOUT --gpus all)
+Unable to find image 'nvidia/cuda:12.4.1-base-ubuntu22.04' locally
+12.4.1-base-ubuntu22.04: Pulling from nvidia/cuda
+Status: Downloaded newer image for nvidia/cuda:12.4.1-base-ubuntu22.04
+docker: Error response from daemon: failed to create task for container: failed to create shim task:
+OCI runtime create failed: runc create failed: unable to start container process: error during container init:
+exec: "nvidia-smi": executable file not found in $PATH
+
+### $ docker run --rm --gpus all nvidia/cuda:12.4.1-base-ubuntu22.04 nvidia-smi
+(WITH --gpus all)
+Sat Sep  5 06:01:02 2026
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 610.43.02              KMD Version: 610.47        CUDA UMD Version: 13.3     |
++-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 4070        On  |   00000000:01:00.0  On |                  N/A |
+|  0%   44C    P8             15W /  200W |    9091MiB /  12282MiB |      4%      Default |
++-----------------------------------------+------------------------+----------------------+
+| Processes:                                                                              |
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+## 解读
+
+- 没有 `--gpus all` 时，容器完全看不到 GPU 设备，`nvidia-smi` 这个可执行文件本身也不在容器文件系统里
+  （`nvidia/cuda` base 镜像不打包 `nvidia-smi`，它是由 NVIDIA Container Runtime 在 `--gpus` 生效时
+  从宿主机挂载进容器的）。报错是 "not found in $PATH"，不是权限或驱动问题，说明 GPU 直通完全没有发生。
+- 加上 `--gpus all` 后，容器内的 `nvidia-smi` 读到的驱动版本（610.43.02 / KMD 610.47）和 GPU 型号
+  （RTX 4070，12282MiB）与宿主机 [environment-baseline.md](../environment-baseline.md) 记录的完全一致
+  —— 说明容器复用的是宿主机（Windows 主机）的 GPU 驱动，而不是在容器里单独装了一份驱动。
+- host driver 与 container CUDA 的关系：驱动（含 kernel-mode driver、GPU 硬件访问）永远只装在宿主机上，
+  且必须由宿主机提供；容器内只需要与之兼容的 CUDA **用户态**库/工具链（不同容器可以带不同版本的 CUDA
+  Toolkit，只要不高于宿主机驱动支持的最高 CUDA 版本）。这也是为什么 [environment-baseline.md](../environment-baseline.md)
+  里 Windows nvcc 是 13.3 而 WSL nvcc 是 12.0 却都能正常工作——nvcc 版本只是编译器版本，真正决定兼容性
+  的是驱动版本和运行时库版本。
+- 当前 GPU 已有 9091MiB/12282MiB 被占用（推测是 Windows 侧应用/WDDM 常驻占用），后续做 CUDA 基准测试
+  （Day 4）时需要把这部分基线占用记进报告，避免把"可用显存变少"误判为基准程序本身的问题。

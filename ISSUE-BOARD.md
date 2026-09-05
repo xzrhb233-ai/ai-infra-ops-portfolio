@@ -8,7 +8,7 @@
 | --- | --- | --- |
 | W1 D1：建立仓库、看板和环境基线 | Done（`v0.1-baseline`） | 六个目录、README、范围红线、原始版本证据、GitHub 仓库与看板均可访问 |
 | W1 D2：Linux / 网络诊断速查表 | Done | 能定位进程、端口、DNS、磁盘和内存问题 |
-| W1 D3：补齐 Docker 并验证 GPU 容器 | Todo | 记录 Docker client/server 与容器运行时；对比有无 `--gpus all` 的真实输出 |
+| W1 D3：补齐 Docker 并验证 GPU 容器 | Done | 记录 Docker client/server 与容器运行时；对比有无 `--gpus all` 的真实输出 |
 | W1 D4：CUDA 可重复基准 | Todo | 误差检查通过，至少三次测量并报告分散程度 |
 | W1 D5–7：GPU 指标与本地验收 | Todo | 指标支持矩阵、时间序列、复现和证据索引 |
 | W2：AWS 单机 GPU 与成本控制 | Todo | 先确认单次预算，再交付部署、基准和清理证据 |
