@@ -1,0 +1,74 @@
+Collected: 2026-09-04T20:27:52.5348565-05:00
+COMMAND: nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv
+name, memory.total [MiB], driver_version
+NVIDIA GeForce RTX 4070, 12282 MiB, 610.47
+COMMAND: Get-CimInstance Win32_OperatingSystem | Select Caption,Version,BuildNumber
+
+
+Caption     : Microsoft Windows 11 Home
+Version     : 10.0.26200
+BuildNumber : 26200
+
+
+
+COMMAND: wsl --version
+WSL version: 2.6.1.0
+
+Kernel version: 6.6.87.2-1
+
+WSLg version: 1.0.66
+
+MSRDC version: 1.2.6353
+
+Direct3D version: 1.611.1-81528511
+
+DXCore version: 10.0.26100.1-240331-1435.ge-release
+
+Windows version: 10.0.26200.9168
+
+
+COMMAND: wsl --list --verbose
+  NAME      STATE           VERSION
+
+* Ubuntu    Stopped         2
+
+
+COMMAND: nvcc --version (Windows)
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2026 NVIDIA Corporation
+Built on Fri_Apr_24_19:26:09_Pacific_Daylight_Time_2026
+Cuda compilation tools, release 13.3, V13.3.33
+Build cuda_13.3.r13.3/compiler.37862127_0
+COMMAND: git --version (Windows)
+git version 2.51.0.windows.2
+COMMAND: Get-Command docker -ErrorAction SilentlyContinue
+Docker command not found in Windows PATH
+COMMAND: Test-Path standard Docker Desktop CLI
+False
+COMMAND: wsl -e sh -lc [cat /etc/os-release; docker --version; git --version; nvcc --version]
+PRETTY_NAME="Ubuntu 24.04.1 LTS"
+NAME="Ubuntu"
+VERSION_ID="24.04"
+VERSION="24.04.1 LTS (Noble Numbat)"
+VERSION_CODENAME=noble
+ID=ubuntu
+ID_LIKE=debian
+HOME_URL="https://www.ubuntu.com/"
+SUPPORT_URL="https://help.ubuntu.com/"
+BUG_REPORT_URL="https://bugs.launchpad.net/ubuntu/"
+PRIVACY_POLICY_URL="https://www.ubuntu.com/legal/terms-and-policies/privacy-policy"
+UBUNTU_CODENAME=noble
+LOGO=ubuntu-logo
+wsl : sh: 1: docker: not found
+At line:23 char:1
++ wsl -e sh -lc 'cat /etc/os-release; docker --version; git --version;  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (sh: 1: docker: not found:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+git version 2.43.0
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2023 NVIDIA Corporation
+Built on Fri_Jan__6_16:45:21_PST_2023
+Cuda compilation tools, release 12.0, V12.0.140
+Build cuda_12.0.r12.0/compiler.32267302_0
