@@ -15,3 +15,8 @@ credentials*
 __pycache__/
 .venv/
 node_modules/
+
+# compiled CUDA benchmark binaries (build with `make`, do not commit)
+local-gpu/benchmarks/vector_add
+local-gpu/benchmarks/block_reduce_sum
+local-gpu/benchmarks/sgemm

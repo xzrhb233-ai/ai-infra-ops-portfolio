@@ -1,0 +1,4 @@
+kernel,n,run,time_ms,bandwidth_gbps
+block_reduce_sum,16777216,1,0.1587,422.81
+block_reduce_sum,16777216,2,0.1587,422.81
+block_reduce_sum,16777216,3,0.1587,422.81
