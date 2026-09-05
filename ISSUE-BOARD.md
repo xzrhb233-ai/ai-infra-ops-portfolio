@@ -1,0 +1,22 @@
+﻿# Issue board 初始化清单
+
+目标：GitHub Projects `AI Infra Ops Portfolio`，关联 `ai-infra-ops-portfolio`。
+状态列：Todo / In Progress / Done。每次只推进一个主要实验。
+远程看板：https://github.com/users/xzrhb233-ai/projects/1 。关联仓库：xzrhb233-ai/ai-infra-ops-portfolio。
+
+| 任务 | 初始状态 | 验收条件 |
+| --- | --- | --- |
+| W1 D1：建立仓库、看板和环境基线 | In Progress | 六个目录、README、范围红线、原始版本证据、GitHub 仓库与看板均可访问 |
+| W1 D2：Linux / 网络诊断速查表 | Todo | 能定位进程、端口、DNS、磁盘和内存问题 |
+| W1 D3：补齐 Docker 并验证 GPU 容器 | Todo | 记录 Docker client/server 与容器运行时；对比有无 `--gpus all` 的真实输出 |
+| W1 D4：CUDA 可重复基准 | Todo | 误差检查通过，至少三次测量并报告分散程度 |
+| W1 D5–7：GPU 指标与本地验收 | Todo | 指标支持矩阵、时间序列、复现和证据索引 |
+| W2：AWS 单机 GPU 与成本控制 | Todo | 先确认单次预算，再交付部署、基准和清理证据 |
+| W3–4：Kubernetes / EKS GPU 可观测性 | Todo | 调度、监控、告警闭环及销毁步骤 |
+| W5：GPU / Kubernetes 故障 Runbook | Todo | 五类受控故障和计时恢复证据 |
+| W6：Slurm / NCCL | Todo | 作业生命周期、真实通信测试或明确未执行的实验设计、清理证据 |
+| W7：单 GPU LLM 推理 | Todo | 健康请求、三次重复压测、故障恢复和成本 |
+| W8：作品集验收 | Todo | 三条主线、至少七份 Runbook、量化结果与证据索引 |
+
+Issue 正文模板：目标；前置条件；执行清单；验收标准；证据链接；费用及清理状态。后续任务入 Todo 不意味着授权启动云实验。
+

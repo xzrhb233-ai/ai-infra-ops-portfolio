@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.tfstate
+*.tfstate.*
+.terraform/
+*.tfvars
+!*.tfvars.example
+kubeconfig*
+credentials*
+*.safetensors
+*.gguf
+__pycache__/
+.venv/
+node_modules/
