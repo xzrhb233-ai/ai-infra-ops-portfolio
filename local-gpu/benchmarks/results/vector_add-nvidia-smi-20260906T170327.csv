@@ -1,0 +1,4 @@
+timestamp, utilization.gpu [%], memory.used [MiB], temperature.gpu
+2026/09/06 17:03:30.244, 1 %, 9301 MiB, 45
+2026/09/06 17:03:30.448, 21 %, 9454 MiB, 45
+2026/09/06 17:03:30.652, 23 %, 9301 MiB, 45

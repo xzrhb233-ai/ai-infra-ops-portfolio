@@ -1,0 +1,4 @@
+kernel,n,run,time_ms,bandwidth_gbps
+vector_add,16777216,1,0.4321,465.90
+vector_add,16777216,2,0.4332,464.79
+vector_add,16777216,3,0.4311,467.00

@@ -1,0 +1,7 @@
+kernel,dim,run,time_ms,gflops
+sgemm_naive_tiled,1024,1,0.9605,2235.77
+sgemm_naive_tiled,1024,2,0.9612,2234.06
+sgemm_naive_tiled,1024,3,0.9605,2235.77
+sgemm_cublas,1024,1,0.1706,12586.06
+sgemm_cublas,1024,2,0.1339,16039.40
+sgemm_cublas,1024,3,0.1331,16131.94

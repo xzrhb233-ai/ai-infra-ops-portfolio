@@ -1,0 +1,48 @@
+Collected: 2026-09-06 (WSL2 Ubuntu 24.04.1, Docker Engine + NVIDIA Container Toolkit from Day 3)
+
+### $ docker run -d --rm --gpus all -p 9400:9400 --name dcgm-exporter nvcr.io/nvidia/k8s/dcgm-exporter:3.3.5-3.4.1-ubuntu22.04
+(image pulled successfully, container started)
+
+### $ docker logs dcgm-exporter
+2026/09/06 22:05:36 maxprocs: Leaving GOMAXPROCS=32: CPU quota undefined
+time="2026-09-06T22:05:36Z" level=info msg="Starting dcgm-exporter"
+time="2026-09-06T22:05:36Z" level=info msg="DCGM successfully initialized!"
+time="2026-09-06T22:05:37Z" level=info msg="Not collecting DCP metrics: This request is serviced by a module of DCGM that is not currently loaded"
+time="2026-09-06T22:05:37Z" level=info msg="Falling back to metric file '/etc/dcgm-exporter/default-counters.csv'"
+time="2026-09-06T22:05:37Z" level=info msg="Initializing system entities of type: GPU"
+time="2026-09-06T22:05:37Z" level=info msg="Not collecting NvSwitch metrics; no fields to watch for device type: 3"
+time="2026-09-06T22:05:37Z" level=info msg="Not collecting NvLink metrics; no fields to watch for device type: 6"
+time="2026-09-06T22:05:37Z" level=info msg="Not collecting CPU metrics; no fields to watch for device type: 7"
+time="2026-09-06T22:05:37Z" level=info msg="Not collecting CPU Core metrics; no fields to watch for device type: 8"
+time="2026-09-06T22:05:37Z" level=info msg="Pipeline starting"
+time="2026-09-06T22:05:37Z" level=info msg="Starting webserver"
+time="2026-09-06T22:05:37Z" level=info msg="Listening on" address="[::]:9400"
+time="2026-09-06T22:05:37Z" level=info msg="TLS is disabled." address="[::]:9400" http2=false
+
+(first attempt ran without --cap-add SYS_ADMIN and printed an extra warning before the log above:
+"Warning #2: dcgm-exporter doesn't have sufficient privileges to expose profiling metrics.
+To get profiling metrics with dcgm-exporter, use --cap-add SYS_ADMIN" — re-running WITH
+--cap-add SYS_ADMIN produced the identical log above minus that one line, so the missing
+capability was not the actual blocker.)
+
+### $ curl -v http://localhost:9400/metrics
+< HTTP/1.1 200 OK
+< X-Content-Type-Options: nosniff
+< Content-Length: 0
+(empty body both with and without --cap-add SYS_ADMIN)
+
+### $ docker exec dcgm-exporter dcgmi discovery -l
+Error: unable to establish a connection to the specified host: localhost
+Error: Unable to connect to host engine. Host engine connection invalid/disconnected.
+
+## Conclusion
+
+DCGM's "DCP" module (Device Client Profiling — the piece that actually watches and reports field
+values) never loads on this RTX 4070 + WSL2 driver stack ("This request is serviced by a module of
+DCGM that is not currently loaded"), independent of container capabilities. The exporter falls back
+to its default-counters.csv field list but still returns zero metrics (HTTP 200, empty body) because
+none of those fields resolve either. This is a known class of limitation, not a misconfiguration on
+this machine: DCGM's field-watching stack targets datacenter GPUs and/or bare-metal Linux driver
+installs; consumer GeForce cards and WSL2's virtualized GPU passthrough are both outside what it
+fully supports. Container removed after the test (`docker rm -f dcgm-exporter`) — no resources left
+running.
