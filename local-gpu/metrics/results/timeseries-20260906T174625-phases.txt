@@ -1,0 +1,6 @@
+t0=1788734785
+load_start=1788735089
+sustained_load: dim=2048 duration=600s starting
+sustained_load: done, 98180 kernel launches in 600.0s (163.6 launches/s)
+load_end=1788735753
+done=1788735934

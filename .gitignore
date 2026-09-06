@@ -20,3 +20,4 @@ node_modules/
 local-gpu/benchmarks/vector_add
 local-gpu/benchmarks/block_reduce_sum
 local-gpu/benchmarks/sgemm
+local-gpu/benchmarks/sustained_load

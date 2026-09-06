@@ -27,4 +27,15 @@
 - 采样脚本：[metrics/sample-gpu-metrics.sh](metrics/sample-gpu-metrics.sh)，Day 6 会复用它做
   空闲/负载的完整时间序列。
 
-计划中尚未完成：负载与监控关联时间序列（Day 6）。
+## 负载与监控关联时间序列（W1 D6，已完成）
+
+- 连续采集空闲基线 5 分钟 → 持续 SGEMM 负载 10 分钟 → 冷却 3 分钟，同一个采样循环、时间戳连续可比，
+  负载由 [benchmarks/sustained_load.cu](benchmarks/sustained_load.cu) 持续排队产生（不是像 Day 4/5 那样
+  反复拉起进程）。
+- 图表：[evidence/local-gpu-timeseries.png](../evidence/local-gpu-timeseries.png)；完整分析（三阶段数据、
+  异常记录、监控盲区）：[analysis.md](analysis.md)。
+- 关键发现：利用率/功耗/时钟在 ~1-2 秒内完成阶跃，温度要 30-60 秒才爬到平台（热惯性）；采集链路本身有
+  规律性的 ~5.6 秒停顿（31 次，横跨三个阶段，根因未查明）；工作负载自报的运行时长（600.0s）和外部观测
+  到的窗口（664s）对不上，记录为不能信任程序自报耗时的证据。
+
+计划中尚未完成：周验收与首次发布 `v0.2-local-gpu`（Day 7）。
