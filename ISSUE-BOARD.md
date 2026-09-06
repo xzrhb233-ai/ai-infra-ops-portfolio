@@ -12,7 +12,7 @@
 | W1 D4：CUDA 可重复基准 | Done | 误差检查通过，至少三次测量并报告分散程度 |
 | W1 D5：GPU 指标采集 | Done | 指标支持矩阵；DCGM 试过并记录不可用原因，改用 nvidia-smi 定时采样 |
 | W1 D6：负载时间序列关联 | Done | 空闲/负载/冷却时间序列、异常与监控盲区记录 |
-| W1 D7：本地验收与首次发布 | Todo | 复现、发布 `v0.2-local-gpu` 和证据索引 |
+| W1 D7：本地验收与首次发布 | Done（`v0.2-local-gpu`） | 复现、发布 `v0.2-local-gpu` 和证据索引 |
 | W2：AWS 单机 GPU 与成本控制 | Todo | 先确认单次预算，再交付部署、基准和清理证据 |
 | W3–4：Kubernetes / EKS GPU 可观测性 | Todo | 调度、监控、告警闭环及销毁步骤 |
 | W5：GPU / Kubernetes 故障 Runbook | Todo | 五类受控故障和计时恢复证据 |
