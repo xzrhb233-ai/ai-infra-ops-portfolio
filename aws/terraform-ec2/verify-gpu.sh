@@ -19,7 +19,7 @@ cat > "$PARAMS_FILE" <<'EOF'
     "echo === nvidia-smi ===",
     "nvidia-smi --query-gpu=name,memory.total,driver_version,pstate --format=csv",
     "echo === PCIe GPU device ===",
-    "lspci | grep -i nvidia",
+    "if command -v lspci >/dev/null; then lspci | grep -i nvidia || echo NO_NVIDIA_PCI_MATCH; else echo LSPCI_NOT_INSTALLED -- cross-check the Bus-Id field in the nvidia-smi output above instead; fi",
     "echo === kernel ===",
     "uname -a",
     "echo === disk ===",

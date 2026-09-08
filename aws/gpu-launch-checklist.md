@@ -60,6 +60,22 @@ aws service-quotas get-requested-service-quota-change --region us-east-2 --profi
    - `aws/instance-selection.md` 或新建 `aws/local-vs-cloud-benchmark.md` 记录本次结果。
    - 如果启动过程中遇到任何真实故障（容量不足、驱动异常等），照 [故障记录 01](../runbooks/incident-01-docker-gpu-passthrough.md) 的模板写一份新的 runbook，不要略过不记。
 
+## 本地空跑验证（等配额期间做的，2026-09-08）
+
+在花 AWS 时间/额度之前，先把 `verify-gpu.sh` 里 SSM 会跑的那几条命令原样在本地 RTX 4070 上跑了一遍
+（不经过 SSM，直接本地 shell），确认脚本逻辑本身没问题：
+
+- `nvidia-smi --query-gpu=...`、`uname -a`、`df -h /`、`ip -brief addr`、两条 `docker run` 全部按预期跑通/失败。
+- **发现一个真问题**：`lspci | grep -i nvidia` 这一步在本机直接报 `command not found`——这台 WSL 没装
+  `pciutils`。如果原样搬到 AWS 实例上，一旦目标 AMI 也没装 `lspci`，这一步会因为非零退出码影响 SSM
+  命令的整体状态判断（和"不带 `--gpus all`"那条一样的坑），而且没有任何提示信息，不知道是"没有 GPU
+  设备"还是"命令根本不存在"。
+- **已修复**：`verify-gpu.sh` 现在先 `command -v lspci` 判断有没有这个命令，没有就打印明确提示
+  （"改看 nvidia-smi 输出里的 Bus-Id 字段"），不会让整个验证因为一个可选检查项而显得"失败"。
+
+这就是本地空跑的价值——脚本里的软依赖问题在本地免费发现，不用等实际起了 GPU 实例、花着钱的时候才发现
+一个命令行的小问题。
+
 ## 已知会遇到但不算故障的情况
 
 - `docker run --rm nvidia/cuda:... nvidia-smi`（不带 `--gpus all`）**预期失败**——这是用来验证云端和本地
