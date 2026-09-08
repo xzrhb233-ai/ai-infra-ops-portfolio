@@ -1,0 +1,29 @@
+Collected: 2026-09-08 (W2 D10 Terraform CPU smoke test, us-east-2)
+
+### $ aws ec2 describe-security-groups --group-ids sg-0494762077510153d
+IpPermissions (ingress): []  -- confirmed zero inbound rules
+IpPermissionsEgress: allow all outbound (0.0.0.0/0)
+
+### $ aws ssm describe-instance-information --filters Key=InstanceIds,Values=<id>
+PingStatus: Online
+PlatformName: Amazon Linux 2023
+AgentVersion: 3.3.4624.0
+
+### $ aws ssm send-command (AWS-RunShellScript: hostname, whoami, cat /etc/os-release)
+CommandId: 15e1546d-526d-440e-a473-cb761a100b50
+Status: Success
+ResponseCode: 0
+StandardOutputContent:
+ip-10-42-0-26.us-east-2.compute.internal
+root
+NAME="Amazon Linux"
+VERSION="2023"
+ID="amzn"
+VERSION_ID="2023"
+PRETTY_NAME="Amazon Linux 2023.12.20260831"
+
+Conclusion: real command execution on the instance confirmed via SSM Session
+Manager's send-command API, with zero open inbound security group rules
+(no port 22, no port anything). This is the "SSM instead of SSH" access
+pattern working end-to-end, not just a security group that happens to look
+right on paper.

@@ -1,1 +1,2 @@
 date,experiment,region,service,resource_count,runtime_hours,estimated_usd,actual_usd,cleanup_status,evidence
+2026-09-08,W2-D10-terraform-cpu-smoke-test,us-east-2,EC2 t3.micro + VPC/IGW/SGW/IAM (10 resources),0.15,~0.00 (free-tier eligible t3.micro),TBD at next bill,destroyed same session,evidence/terraform-destroy-log.txt

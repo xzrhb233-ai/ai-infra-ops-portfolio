@@ -6,6 +6,8 @@
 *.tfstate
 *.tfstate.*
 .terraform/
+tfplan
+*.tfplan
 *.tfvars
 !*.tfvars.example
 kubeconfig*

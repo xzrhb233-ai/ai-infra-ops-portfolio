@@ -1,0 +1,63 @@
+Collected: 2026-09-08 (W2 D10, us-east-2). Account ID and ARNs redacted per SCOPE-AND-COST.md.
+
+### $ terraform plan -out=tfplan  (reviewed before apply -- this is the "plan 截图" evidence,
+### kept as text instead of a screenshot since the full plan text is more checkable than a picture)
+Plan: 10 to add, 0 to change, 0 to destroy.
+
+  # aws_security_group.instance will be created
+  + resource "aws_security_group" "instance" {
+      + description = "No inbound rules; SSM Session Manager only. Outbound allowed for SSM/yum."
+      + egress      = [
+          + { cidr_blocks = ["0.0.0.0/0"], from_port = 0, to_port = 0, protocol = "-1" },
+        ]
+      + ingress     = (known after apply)   -- no ingress {} block was ever written in the .tf files,
+                                             -- so this resolves to zero rules; confirmed empty after
+                                             -- apply via describe-security-groups (see below).
+    }
+
+Reviewed: no `ingress` blocks appear anywhere in the plan, no port 22, no 0.0.0.0/0 inbound of any
+kind. This is the check the Day 10 completion criteria ("plan 无意外公网端口") asks for, done before
+typing yes to apply, not after.
+
+### $ terraform apply tfplan
+aws_iam_role.ssm_instance: Creation complete after 2s
+aws_iam_role_policy_attachment.ssm_core: Creation complete after 0s
+aws_iam_instance_profile.ssm_instance: Creation complete after 8s
+aws_vpc.main: Creation complete after 16s [id=vpc-0e28449597001921c]
+aws_internet_gateway.main: Creation complete after 2s [id=igw-0f6ddbb9cebde53fa]
+aws_route_table.public: Creation complete after 2s [id=rtb-03346924360c8b78e]
+aws_security_group.instance: Creation complete after 5s [id=sg-0494762077510153d]
+aws_subnet.public: Creation complete after 12s [id=subnet-0c4b251fd30823c6a]
+aws_route_table_association.public: Creation complete after 0s
+aws_instance.cpu_smoke_test: Creation complete after 15s [id=i-03014315c473f00bc]
+
+Apply complete! Resources: 10 added, 0 changed, 0 destroyed.
+instance_id = "i-03014315c473f00bc"
+
+### SSM verification (full output in evidence/terraform-ssm-verification.txt)
+- Security group ingress rules: [] (confirmed via describe-security-groups)
+- SSM PingStatus: Online
+- send-command (hostname/whoami/os-release) -> Status: Success, real output returned
+
+### $ terraform destroy -auto-approve
+Plan: 0 to add, 0 to change, 10 to destroy.
+
+aws_iam_role_policy_attachment.ssm_core: Destruction complete after 1s
+aws_route_table_association.public: Destruction complete after 1s
+aws_route_table.public: Destruction complete after 1s
+aws_internet_gateway.main: Destruction complete after 24s
+aws_instance.cpu_smoke_test: Destruction complete after 27s
+aws_security_group.instance: Destruction complete after 2s
+aws_iam_instance_profile.ssm_instance: Destruction complete after 1s
+aws_subnet.public: Destruction complete after 2s
+aws_iam_role.ssm_instance: Destruction complete after 1s
+aws_vpc.main: Destruction complete after 1s
+
+Destroy complete! Resources: 10 destroyed.
+
+### $ aws ec2 describe-instances --filters Name=tag:Project,Values=ai-infra-portfolio \
+    Name=instance-state-name,Values=pending,running,stopping,stopped
+[]   -- confirmed empty, nothing left running or stopped under this project tag
+
+Total wall-clock time from apply to destroy: under 10 minutes. No resources
+were left running overnight or between sessions.
