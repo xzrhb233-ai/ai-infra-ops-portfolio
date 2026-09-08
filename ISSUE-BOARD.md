@@ -14,7 +14,8 @@
 | W1 D6：负载时间序列关联 | Done | 空闲/负载/冷却时间序列、异常与监控盲区记录 |
 | W1 D7：本地验收与首次发布 | Done（`v0.2-local-gpu`） | 复现、发布 `v0.2-local-gpu` 和证据索引 |
 | W2 D8：账户、安全与预算护栏 | Done | root MFA、IAM 日常身份、CLI profile、$150 预算与四级告警均已验证 |
-| W2 D9-14：区域/Terraform/AWS GPU 与成本核对 | Todo | 先确认单次预算，再交付部署、基准和清理证据 |
+| W2 D9：区域、配额与机型选择 | Done | 目标/备选区域明确；配额为 0 但已提交可追踪的提升请求 |
+| W2 D10-14：Terraform/AWS GPU 与成本核对 | Todo | 先确认单次预算，再交付部署、基准和清理证据 |
 | W3–4：Kubernetes / EKS GPU 可观测性 | Todo | 调度、监控、告警闭环及销毁步骤 |
 | W5：GPU / Kubernetes 故障 Runbook | Todo | 五类受控故障和计时恢复证据 |
 | W6：Slurm / NCCL | Todo | 作业生命周期、真实通信测试或明确未执行的实验设计、清理证据 |
