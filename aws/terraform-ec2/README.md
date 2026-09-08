@@ -28,6 +28,21 @@ aws ssm start-session --target <instance_id> --profile personal-admin --region u
 terraform destroy
 ```
 
+## GPU 模式（W2 D11，配额批复后执行）
+
+同一套模板加两个变量就能切换成 GPU 实例，不用另写一套 Terraform：
+
+```bash
+terraform plan -out=tfplan -var="use_gpu_ami=true" -var="instance_type=g6.xlarge"
+terraform apply tfplan
+bash verify-gpu.sh <instance_id> personal-admin us-east-2   # 驱动/PCIe/内核/磁盘/网络/CUDA 容器一次性验证
+terraform destroy
+```
+
+完整执行清单（含前置条件、每一步做什么、怎么记录耗时和费用）见 [../gpu-launch-checklist.md](../gpu-launch-checklist.md)。
+GPU AMI 用的是 AWS 官方 Deep Learning Base OSS Nvidia Driver AMI（驱动/Docker/NVIDIA Container Toolkit
+已预装），不是从头装驱动——从头装的验证已经在 W1 D3 本地做过了。
+
 ## 状态与变量
 
 - `terraform.tfstate*`、`.terraform/`、`*.tfvars`（`*.tfvars.example` 除外）都在仓库根 `.gitignore` 里排除，
