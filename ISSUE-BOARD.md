@@ -21,6 +21,7 @@
 | W5：GPU / Kubernetes 故障 Runbook | Todo | 五类受控故障和计时恢复证据 |
 | W6：Slurm / NCCL | Todo | 作业生命周期、真实通信测试或明确未执行的实验设计、清理证据 |
 | W7：单 GPU LLM 推理 | Todo | 健康请求、三次重复压测、故障恢复和成本 |
+| 并行：NCA-AIIO 认证备考 | In Progress | 两套模拟卷均 ≥ 80% 且各领域 ≥ 70%，再报名考试；见 [cert-nca-aiio/](cert-nca-aiio/README.md) |
 | W8：作品集验收 | Todo | 三条主线、至少七份 Runbook、量化结果与证据索引 |
 
 Issue 正文模板：目标；前置条件；执行清单；验收标准；证据链接；费用及清理状态。后续任务入 Todo 不意味着授权启动云实验。

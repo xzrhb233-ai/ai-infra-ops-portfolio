@@ -41,6 +41,7 @@ bash local-gpu/metrics/sample-gpu-metrics.sh 1 30 /tmp/gpu-metrics-smoke.csv
 | `llm/` | 单 GPU 小模型推理、压测与恢复 | 尚未开始（Week 7） |
 | `runbooks/` | Linux、GPU、调度与服务故障排查 | Linux/网络诊断速查表 + 故障记录 01（容器 GPU 直通） |
 | `evidence/` | 命令输出、配置、日志、截图、结果、成本及清理证据 | 见 [evidence/README.md](evidence/README.md) 索引 |
+| `cert-nca-aiio/` | NCA-AIIO 认证自学：知识体系、速记表、模拟考 | 三大领域笔记 + 100 题题库 + 交互式考场，见 [cert-nca-aiio/README.md](cert-nca-aiio/README.md) |
 
 ## Week 1 完成情况
 
