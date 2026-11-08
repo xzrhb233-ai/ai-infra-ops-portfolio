@@ -112,6 +112,13 @@ button { cursor: pointer; }
 .card-head .pos { margin-left: auto; font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
 .card-body { padding: 26px 24px; display: grid; gap: 18px; align-content: center; min-width: 0; }
 @media (max-width: 480px) { .card-body { padding: 20px 16px; } }
+.front-zh { font-size: 1.1rem; color: var(--muted); font-weight: 500; overflow-wrap: anywhere; margin-top: -8px; }
+.back p + p { margin-top: 10px; padding-top: 10px; border-top: 1px dotted var(--line); }
+.back .lang, .li .lang { font-family: var(--font-mono); font-size: .68rem; letter-spacing: .06em; color: var(--muted); margin-right: 6px; }
+.deck .en { grid-column: 1 / -1; font-size: .74rem; color: var(--muted); margin-top: -3px; overflow-wrap: anywhere; }
+.li .f small { display: block; font-weight: 400; color: var(--muted); }
+.li .b > span { display: block; }
+.li .b > span + span { margin-top: 4px; }
 .front { font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; line-height: 1.35; text-wrap: balance; overflow-wrap: anywhere; }
 .hint { font-size: .85rem; color: var(--muted); }
 .back { font-size: 1.08rem; line-height: 1.7; border-top: 1px dashed var(--line); padding-top: 16px; overflow-wrap: anywhere; }
@@ -162,11 +169,11 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
   var DNAME = { 0: "缩写", 1: "领域 1 · AI 基础", 2: "领域 2 · 基础设施", 3: "领域 3 · 运维" };
   var CARDS = [];
   DECKS.forEach(function (d) {
-    d.cards.forEach(function (c, i) { CARDS.push({ id: d.key + "|" + c[0], deck: d.key, d: d.d, f: c[0], b: c[1], i: CARDS.length }); });
+    d.cards.forEach(function (c) { CARDS.push({ id: d.key + "|" + c[0], deck: d.key, d: d.d, ef: c[0], zf: c[1] && c[1] !== c[0] ? c[1] : "", eb: c[2], zb: c[3], i: CARDS.length }); });
   });
   var DECK = {}; DECKS.forEach(function (d) { DECK[d.key] = d; });
   var app = document.getElementById("app");
-  var K_PROG = "aiio.cards.v1", K_PREF = "aiio.cards.pref";
+  var K_PROG = "aiio.cards.v2", K_PREF = "aiio.cards.pref";
 
   function load(k, f) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch (e) { return f; } }
   function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
@@ -182,11 +189,22 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
   var pref = load(K_PREF, {});
   var S = {
     view: "study", deck: pref.deck || "all", dfil: pref.dfil || "all",
-    order: pref.order || "smart", scope: pref.scope || "all", reverse: !!pref.reverse,
+    order: pref.order || "smart", scope: pref.scope || "all", reverse: !!pref.reverse, lang: pref.lang || "both",
     queue: [], pos: 0, shown: false, tally: { 1: 0, 2: 0, 3: 0 }, again: [], q: ""
   };
   if (S.deck !== "all" && !DECK[S.deck] && !/^d[0-3]$/.test(S.deck)) S.deck = "all";
-  function savePref() { save(K_PREF, { deck: S.deck, dfil: S.dfil, order: S.order, scope: S.scope, reverse: S.reverse }); }
+  function savePref() { save(K_PREF, { deck: S.deck, dfil: S.dfil, order: S.order, scope: S.scope, reverse: S.reverse, lang: S.lang }); }
+
+  // ---------- language ----------
+  // 某张卡在当前语言下的一面：[{l: 语言标记, t: 文本}]，双语时英文在前
+  function sideOf(c, which) {
+    var en = which === "f" ? c.ef : c.eb, zh = which === "f" ? (c.zf || c.ef) : c.zb;
+    if (S.lang === "en") return [{ l: "EN", t: en }];
+    if (S.lang === "zh") return [{ l: "中", t: zh }];
+    if (which === "f" && !c.zf) return [{ l: "EN", t: en }];
+    return [{ l: "EN", t: en }, { l: "中", t: zh }];
+  }
+  function deckName(dk) { return S.lang === "en" ? dk.en : dk.name; }
 
   function selection() {
     return CARDS.filter(function (c) {
@@ -198,7 +216,7 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
   function deckLabel() {
     if (S.deck === "all") return "全部牌组";
     if (/^d[0-3]$/.test(S.deck)) return DNAME[+S.deck.slice(1)] + "（全部）";
-    return DECK[S.deck].name;
+    return deckName(DECK[S.deck]);
   }
 
   function buildQueue(ids) {
@@ -256,19 +274,21 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
       if (!ds.length) return;
       h += '<div class="deck-sep">' + DNAME[d] + '</div>';
       if (d !== 0) h += deckBtn("d" + d, "本领域全部", CARDS.filter(function (c) { return c.d === d; }), d);
-      ds.forEach(function (x) { h += deckBtn(x.key, x.name, CARDS.filter(function (c) { return c.deck === x.key; }), d); });
+      ds.forEach(function (x) { h += deckBtn(x.key, deckName(x), CARDS.filter(function (c) { return c.deck === x.key; }), d, S.lang === "both" ? x.en : ""); });
     });
     h += '</div></details>';
     return h;
   }
-  function deckBtn(key, name, cards, d) {
+  function deckBtn(key, name, cards, d, sub) {
     var c = counts(cards), m = c.done / c.total * 100, l = (c.learn + c.weak) / c.total * 100;
-    return '<button class="deck" data-deck="' + key + '" aria-current="' + (S.deck === key) + '"><span class="nm">' + esc(name) + '</span><span class="ct">' + c.done + '/' + c.total + '</span>' +
+    return '<button class="deck" data-deck="' + key + '" aria-current="' + (S.deck === key) + '"><span class="nm">' + esc(name) + '</span><span class="ct">' + c.done + '/' + c.total + '</span>' + (sub ? '<span class="en">' + esc(sub) + '</span>' : '') +
       '<span class="mbar" aria-hidden="true"><i class="m" style="width:' + m + '%"></i><i class="l" style="width:' + l + '%"></i></span></button>';
   }
 
   function options() {
     return '<div class="opts">' +
+      '<span class="seg" role="group" aria-label="语言 Language">' + [["both", "双语"], ["zh", "中文"], ["en", "EN"]].map(function (x) {
+        return '<button data-lang="' + x[0] + '" aria-pressed="' + (S.lang === x[0]) + '">' + x[1] + '</button>'; }).join('') + '</span>' +
       '<label for="sel-order">顺序<select id="sel-order"><option value="smart"' + (S.order === "smart" ? " selected" : "") + '>不会的优先</option><option value="shuffle"' + (S.order === "shuffle" ? " selected" : "") + '>完全乱序</option><option value="seq"' + (S.order === "seq" ? " selected" : "") + '>按牌组顺序</option></select></label>' +
       '<label for="sel-scope">范围<select id="sel-scope"><option value="all"' + (S.scope === "all" ? " selected" : "") + '>全部卡片</option><option value="todo"' + (S.scope === "todo" ? " selected" : "") + '>未掌握的</option><option value="weak"' + (S.scope === "weak" ? " selected" : "") + '>只看“不会”</option></select></label>' +
       '<label for="chk-rev"><input type="checkbox" id="chk-rev"' + (S.reverse ? " checked" : "") + '>反向（看解释说术语）</label>' +
@@ -292,13 +312,16 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
       return h;
     }
     var c = CARDS.filter(function (x) { return x.id === id; })[0], dk = DECK[c.deck], b = box(id);
-    var q = S.reverse ? c.b : c.f, a = S.reverse ? c.f : c.b;
-    h += '<article class="card" aria-live="polite"><div class="card-head"><span class="chip d' + c.d + '">' + (c.d ? 'D' + c.d : '缩写') + '</span><span class="muted" style="font-size:.85rem">' + esc(dk.name) + '</span>' +
+    var q = sideOf(c, S.reverse ? "b" : "f"), a = sideOf(c, S.reverse ? "f" : "b");
+    h += '<article class="card" aria-live="polite"><div class="card-head"><span class="chip d' + c.d + '">' + (c.d ? 'D' + c.d : '缩写') + '</span><span class="muted" style="font-size:.85rem">' + esc(deckName(dk)) + '</span>' +
       '<span class="dots" title="熟练度 ' + b + '/5" aria-label="熟练度 ' + b + '/5">' + [1, 2, 3, 4, 5].map(function (k) { return '<i class="' + (k <= b ? 'on' : '') + '"></i>'; }).join('') + '</span>' +
       '<span class="pos">' + (S.pos + 1) + ' / ' + S.queue.length + '</span></div>';
-    h += '<div class="card-body"><div class="front' + (S.reverse ? '" style="font-family:var(--font-body);font-size:1.15rem;font-weight:500' : '') + '">' + esc(q) + '</div>';
-    if (!S.shown) h += '<p class="hint">' + (S.reverse ? '这说的是哪个术语或命令？' : (dk.hint ? dk.hint + '。' : '先在心里回答，再翻面对照。')) + '</p>';
-    else h += '<div class="back">' + esc(a) + '</div>';
+    h += '<div class="card-body">';
+    if (S.reverse) h += '<div class="back" style="border-top:0;padding-top:0">' + q.map(function (x) { return '<p>' + (q.length > 1 ? '<span class="lang">' + x.l + '</span>' : '') + esc(x.t) + '</p>'; }).join('') + '</div>';
+    else h += '<div class="front">' + esc(q[0].t) + '</div>' + (q[1] ? '<div class="front-zh">' + esc(q[1].t) + '</div>' : '');
+    if (!S.shown) h += '<p class="hint">' + (S.reverse ? '这说的是哪个术语或命令？Which term or command is this?' : (dk.hint ? dk.hint : '先在心里回答，再翻面对照。Answer in your head, then flip.')) + '</p>';
+    else if (S.reverse) h += '<div class="back"><p><b>' + esc(a[0].t) + '</b>' + (a[1] ? '　' + esc(a[1].t) : '') + '</p></div>';
+    else h += '<div class="back">' + a.map(function (x) { return '<p>' + (a.length > 1 ? '<span class="lang">' + x.l + '</span>' : '') + esc(x.t) + '</p>'; }).join('') + '</div>';
     h += '</div><div class="card-foot">';
     if (!S.shown) h += '<button class="btn primary reveal" id="btn-reveal">翻面看答案</button><button class="btn" id="btn-skip">跳过</button>';
     else h += '<button class="rate r1" data-rate="1">不会<small>1 · 明天还要看</small></button><button class="rate r2" data-rate="2">模糊<small>2 · 想了很久</small></button><button class="rate r3" data-rate="3">记住<small>3 · 立刻答出</small></button>';
@@ -309,15 +332,18 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
 
   function listView() {
     var cards = selection(), q = S.q.trim().toLowerCase();
-    if (q) cards = CARDS.filter(function (c) { return (c.f + " " + c.b).toLowerCase().indexOf(q) >= 0; });
-    var h = '<input class="search" id="search" type="search" placeholder="搜索全部 ' + CARDS.length + ' 张卡片：术语、命令、数字…" value="' + esc(S.q) + '" aria-label="搜索卡片">';
+    if (q) cards = CARDS.filter(function (c) { return [c.ef, c.zf, c.eb, c.zb].join(" ").toLowerCase().indexOf(q) >= 0; });
+    var h = '<input class="search" id="search" type="search" placeholder="搜索全部 ' + CARDS.length + ' 张卡片（中英文均可）：MIG、显存、Xid…" value="' + esc(S.q) + '" aria-label="搜索卡片">';
     h += '<p class="note">' + (q ? '在全部牌组中找到 ' + cards.length + ' 张' : esc(deckLabel()) + ' · ' + cards.length + ' 张') + '</p>';
     if (!cards.length) return h + '<p class="muted">没有匹配的卡片，换个关键词试试，例如 “MIG”、“PUE”、“Xid”。</p>';
     var mk = function (s) { s = esc(s); if (!q) return s; var i = s.toLowerCase().indexOf(esc(q)); return i < 0 ? s : s.slice(0, i) + '<mark>' + s.slice(i, i + esc(q).length) + '</mark>' + s.slice(i + esc(q).length); };
     h += '<div class="list">';
     cards.slice(0, 400).forEach(function (c) {
       var s = status(c.id);
-      h += '<div class="li"><span class="f">' + mk(c.f) + '</span><span class="b">' + mk(c.b) + '</span><span class="st s-' + s + '">' + ST_LABEL[s] + '</span></div>';
+      var fr = sideOf(c, "f"), bk = sideOf(c, "b");
+      h += '<div class="li"><span class="f">' + mk(fr[0].t) + (fr[1] ? '<small>' + mk(fr[1].t) + '</small>' : '') + '</span><span class="b">' +
+        bk.map(function (x) { return '<span>' + (bk.length > 1 ? '<span class="lang">' + x.l + '</span>' : '') + mk(x.t) + '</span>'; }).join('') +
+        '</span><span class="st s-' + s + '">' + ST_LABEL[s] + '</span></div>';
     });
     h += '</div>';
     if (cards.length > 400) h += '<p class="note">只显示前 400 张，请缩小牌组或搜索范围。</p>';
@@ -335,6 +361,7 @@ mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
   app.addEventListener("click", function (ev) {
     var t = ev.target.closest("button"); if (!t) return;
     if (t.dataset.view) { S.view = t.dataset.view; render(); return; }
+    if (t.dataset.lang) { S.lang = t.dataset.lang; savePref(); render(); return; }
     if (t.dataset.dfil) { S.dfil = t.dataset.dfil; S.rackOpen = true; savePref(); render(); return; }
     if (t.dataset.deck) {
       S.deck = t.dataset.deck; S.q = ""; savePref(); buildQueue();

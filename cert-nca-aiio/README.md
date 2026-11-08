@@ -20,7 +20,7 @@
 | [02-ai-infrastructure.md](02-ai-infrastructure.md) | 领域 2：计算节点、NVLink/NVSwitch、InfiniBand/以太网、DPU、存储、机房供电散热、本地 vs 云（约 40%） |
 | [03-ai-operations.md](03-ai-operations.md) | 领域 3：监控与 DCGM、Slurm/Kubernetes、GPU 共享与虚拟化、容器、故障排查（约 22%） |
 | [04-cheatsheet.md](04-cheatsheet.md) | 考前一页速记：数字、命令、易混淆概念对照 |
-| [flashcards/](flashcards/) | 736 张速记卡（27 个牌组）：翻卡页面（熟练度记录、反向模式、搜索）、[Markdown 全表](flashcards/flashcards.md)、Anki 导入文件 |
+| [flashcards/](flashcards/) | 736 张中英双语速记卡（27 个牌组）：翻卡页面（双语/中文/EN 切换、熟练度记录、反向模式、中英文搜索）、[Markdown 全表](flashcards/flashcards.md)、Anki 导入文件 |
 | [mock-exam/](mock-exam/) | 交互式模拟考场（计时、按领域出分、错题本）+ 100 题题库 + 答案解析 |
 
 ## 知识体系总图
