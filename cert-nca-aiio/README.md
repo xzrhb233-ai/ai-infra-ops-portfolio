@@ -20,6 +20,7 @@
 | [02-ai-infrastructure.md](02-ai-infrastructure.md) | 领域 2：计算节点、NVLink/NVSwitch、InfiniBand/以太网、DPU、存储、机房供电散热、本地 vs 云（约 40%） |
 | [03-ai-operations.md](03-ai-operations.md) | 领域 3：监控与 DCGM、Slurm/Kubernetes、GPU 共享与虚拟化、容器、故障排查（约 22%） |
 | [04-cheatsheet.md](04-cheatsheet.md) | 考前一页速记：数字、命令、易混淆概念对照 |
+| [flashcards/](flashcards/) | 736 张速记卡（27 个牌组）：翻卡页面（熟练度记录、反向模式、搜索）、[Markdown 全表](flashcards/flashcards.md)、Anki 导入文件 |
 | [mock-exam/](mock-exam/) | 交互式模拟考场（计时、按领域出分、错题本）+ 100 题题库 + 答案解析 |
 
 ## 知识体系总图
@@ -85,7 +86,8 @@ mindmap
 | 第 4 周 | 速记表 + 错题本 | 模拟考 A（计时）→ 复盘 → 模拟考 B（计时）→ 随机组卷 | 两套整卷都 ≥ 80%，且没有任何领域 < 70% |
 
 **备考方法**：
-1. 先读笔记里的"必会"小节，再做对应领域练习，错题进错题本（模拟考场自动记录在浏览器里）。
+1. 先读笔记里的"必会"小节，再刷对应领域的速记卡，然后做领域练习，错题进错题本（模拟考场自动记录在浏览器里）。
+   速记卡每天 15–20 分钟，用"不会的优先"顺序；考前目标是 736 张里 ≥ 90% 进入"已掌握"。
 2. 每道错题回到笔记对应小节（解析里标了 `§x.y`），用自己的话补一句到笔记的"我的补充"里。
 3. 整卷模拟严格计时 60 分钟、一次做完，模拟真实考试节奏（平均 72 秒/题）。
 4. 官方推荐课程（以官方页面为准）：NVIDIA DLI / Coursera 上的 *AI Infrastructure and Operations Fundamentals*；

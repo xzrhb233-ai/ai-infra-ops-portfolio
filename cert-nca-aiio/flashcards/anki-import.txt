@@ -1,0 +1,739 @@
+#separator:tab
+#html:false
+#tags column:3
+AI、ML、DL 的包含关系	AI ⊃ ML ⊃ DL。ML 从数据学规律；DL 是用多层神经网络的 ML。	AIIO::D1 AIIO::ai-basics
+Artificial Intelligence（AI）	让机器表现出智能行为的总称，包括规则系统、搜索、机器学习等。	AIIO::D1 AIIO::ai-basics
+Machine Learning（ML）	从数据中学习模式来做预测或决策，而不是人工写死规则。	AIIO::D1 AIIO::ai-basics
+Deep Learning（DL）	用多层（深层）神经网络自动学习特征表示；数据和算力越多效果越好，是 GPU 需求的主要来源。	AIIO::D1 AIIO::ai-basics
+Supervised learning（监督学习）	训练数据带标签（输入→正确答案）。典型任务：分类、回归。	AIIO::D1 AIIO::ai-basics
+Unsupervised learning（无监督学习）	数据没有标签，模型自己发现结构。典型：聚类、降维、异常检测。	AIIO::D1 AIIO::ai-basics
+Reinforcement learning（强化学习）	智能体在环境中行动，根据奖励信号学习策略。用于机器人、游戏、RLHF。	AIIO::D1 AIIO::ai-basics
+Self-supervised learning（自监督学习）	从数据本身构造监督信号（例如预测下一个 token、遮盖词），LLM 预训练就是这种方式。	AIIO::D1 AIIO::ai-basics
+Classification vs Regression	分类：输出离散类别（猫/狗）；回归：输出连续数值（房价）。	AIIO::D1 AIIO::ai-basics
+Clustering（聚类）	把相似样本自动分组，无需标签。例：客户分群。	AIIO::D1 AIIO::ai-basics
+Neural network（神经网络）	由层层神经元（加权求和 + 激活函数）组成的模型，参数是权重和偏置。	AIIO::D1 AIIO::ai-basics
+Weights and biases（权重与偏置）	神经网络中训练得到的参数。“参数量 70B”指的就是这些数值的个数。	AIIO::D1 AIIO::ai-basics
+Activation function（激活函数）	给网络引入非线性，例如 ReLU、GELU、Sigmoid。没有它，多层网络等价于一层线性变换。	AIIO::D1 AIIO::ai-basics
+Loss function（损失函数）	衡量模型预测和真实值差距的函数，训练目标是最小化它。例：交叉熵、均方误差。	AIIO::D1 AIIO::ai-basics
+Gradient descent（梯度下降）	沿损失函数梯度的反方向更新参数，逐步降低损失。	AIIO::D1 AIIO::ai-basics
+Backpropagation（反向传播）	用链式法则从输出层往回计算每个参数的梯度，是训练的核心步骤，推理时不需要。	AIIO::D1 AIIO::ai-basics
+Optimizer（优化器）	决定如何用梯度更新参数的算法，例如 SGD、Adam、AdamW。Adam 需要额外保存两份状态（动量和方差）。	AIIO::D1 AIIO::ai-basics
+Learning rate（学习率）	每次参数更新的步长。太大不收敛，太小训练慢。	AIIO::D1 AIIO::ai-basics
+Hyperparameter（超参数）	训练前人为设定、不由训练学习的配置：学习率、batch size、层数、epoch 数等。	AIIO::D1 AIIO::ai-basics
+Epoch	完整遍历一次训练数据集。	AIIO::D1 AIIO::ai-basics
+Batch / mini-batch	一次前向+反向处理的一组样本。batch size 影响显存占用、吞吐和收敛。	AIIO::D1 AIIO::ai-basics
+Iteration / step	处理一个 mini-batch 并更新一次参数。1 个 epoch = 数据量 ÷ batch size 个 step。	AIIO::D1 AIIO::ai-basics
+Overfitting（过拟合）	模型在训练集上很好、在新数据上差，记住了噪声。对策：更多数据、正则化、dropout、early stopping。	AIIO::D1 AIIO::ai-basics
+Underfitting（欠拟合）	模型太简单或训练不够，训练集上都表现差。	AIIO::D1 AIIO::ai-basics
+Training / validation / test set	训练集用于学参数；验证集调超参、早停；测试集最终评估，训练中不可见。	AIIO::D1 AIIO::ai-basics
+CNN（卷积神经网络）	用卷积核提取局部特征，擅长图像和视频。	AIIO::D1 AIIO::ai-basics
+RNN / LSTM	按时间步处理序列的网络，早期用于语音和文本；长序列难并行，已大量被 Transformer 取代。	AIIO::D1 AIIO::ai-basics
+Transformer	基于自注意力（self-attention）的架构，可并行处理整个序列。现代 LLM、ViT 都基于它。	AIIO::D1 AIIO::ai-basics
+Self-attention（自注意力）	序列中每个 token 计算与其他所有 token 的相关性并加权汇总；计算量随序列长度平方增长。	AIIO::D1 AIIO::ai-basics
+Foundation model（基础模型）	在海量数据上预训练、可适配多种下游任务的大模型，例如 LLM、视觉大模型。	AIIO::D1 AIIO::ai-basics
+Generative AI（生成式 AI）	生成新内容（文本、图像、代码、音频、视频）的模型，如 LLM、扩散模型。	AIIO::D1 AIIO::ai-basics
+Diffusion model（扩散模型）	通过逐步去噪从随机噪声生成图像/视频的生成模型。	AIIO::D1 AIIO::ai-basics
+Agentic AI（智能体 AI）	LLM 结合规划、工具调用、记忆，能自主多步完成任务。	AIIO::D1 AIIO::ai-basics
+Computer vision（计算机视觉）	让机器理解图像和视频：分类、检测、分割、跟踪。	AIIO::D1 AIIO::ai-basics
+NLP（自然语言处理）	处理人类语言：翻译、摘要、问答、情感分析。	AIIO::D1 AIIO::ai-basics
+Recommender system（推荐系统）	根据用户行为推荐内容；大型 embedding 表，数据量大。NVIDIA 对应 Merlin。	AIIO::D1 AIIO::ai-basics
+AI 端到端工作流顺序	数据准备（采集/清洗/标注/ETL）→ 训练 → 优化（量化/剪枝/TensorRT）→ 部署推理 → 监控与再训练。	AIIO::D1 AIIO::workflow
+Training（训练）	前向 + 反向传播，反复更新权重。计算量极大、持续时间长，通常多 GPU / 多节点。	AIIO::D1 AIIO::workflow
+Inference（推理）	用训练好的固定权重只做前向计算，得到预测。关注延迟、吞吐、成本，长期在线运行。	AIIO::D1 AIIO::workflow
+训练和推理的硬件侧重点差异	训练：最大算力、显存容量、节点间高速网络、高速存储。推理：延迟、吞吐/瓦、成本、弹性扩缩。	AIIO::D1 AIIO::workflow
+Pretraining（预训练）	在海量通用数据上从零训练基础模型，成本最高（成千上万 GPU、数周到数月）。	AIIO::D1 AIIO::workflow
+Fine-tuning（微调）	在预训练模型基础上用领域数据继续训练，使其适配特定任务。	AIIO::D1 AIIO::workflow
+Transfer learning（迁移学习）	把在一个任务上学到的知识用于另一个任务，微调是最常见形式。	AIIO::D1 AIIO::workflow
+Data preparation（数据准备）	采集、清洗、去重、标注、格式转换。常是最耗时的阶段，可用 RAPIDS 在 GPU 上加速。	AIIO::D1 AIIO::workflow
+ETL	Extract-Transform-Load：抽取、转换、加载数据。GPU 加速可用 RAPIDS cuDF / Spark RAPIDS。	AIIO::D1 AIIO::workflow
+Data labeling（数据标注）	给样本加上正确答案，供监督学习使用。	AIIO::D1 AIIO::workflow
+Model optimization（模型优化）	部署前减小模型、提高速度：量化、剪枝、蒸馏、层融合（TensorRT）。	AIIO::D1 AIIO::workflow
+Pruning（剪枝）	移除不重要的权重或结构，减小模型和计算量。	AIIO::D1 AIIO::workflow
+Knowledge distillation（知识蒸馏）	用大模型（teacher）的输出训练小模型（student），小模型接近大模型效果。	AIIO::D1 AIIO::workflow
+Batch inference vs real-time inference	批量离线推理追求吞吐（如夜间处理数据）；实时在线推理追求低延迟（如聊天、推荐）。	AIIO::D1 AIIO::workflow
+Latency（延迟）	单个请求从发出到得到结果的时间。在线服务的关键指标。	AIIO::D1 AIIO::workflow
+Throughput（吞吐）	单位时间处理的请求数、样本数或 token 数。	AIIO::D1 AIIO::workflow
+Latency vs throughput 的权衡	增大 batch 提高 GPU 利用率和吞吐，但单请求等待和计算时间变长，延迟上升。	AIIO::D1 AIIO::workflow
+Checkpoint（检查点）	定期保存模型权重和优化器状态，训练中断后可从最近检查点恢复。	AIIO::D1 AIIO::workflow
+为什么大规模训练必须做 checkpoint	上千 GPU 长时间运行，硬件故障几乎必然发生；没有 checkpoint 就要从头训练。	AIIO::D1 AIIO::workflow
+Model drift（模型漂移）	上线后真实数据分布变化导致效果下降，需要监控并再训练。	AIIO::D1 AIIO::workflow
+MLOps	把 DevOps 实践用于机器学习：数据和模型版本管理、自动训练流水线、部署、监控。	AIIO::D1 AIIO::workflow
+Model registry（模型仓库）	存储和版本化训练好的模型及元数据，供部署使用。	AIIO::D1 AIIO::workflow
+MLPerf	MLCommons 发布的行业标准 AI 基准测试，分 Training 和 Inference 等类别。	AIIO::D1 AIIO::workflow
+Edge inference（边缘推理）	在数据产生地附近（工厂、车、摄像头）推理：低延迟、省带宽、保护隐私。	AIIO::D1 AIIO::workflow
+Data center inference vs edge inference	数据中心：大模型、高并发、集中管理；边缘：功耗和体积受限、离线可用、实时性强。	AIIO::D1 AIIO::workflow
+CPU vs GPU 设计取向	CPU：少量强核心、大缓存、高频率，延迟优化，擅长串行和复杂分支。GPU：成千上万简单核心，吞吐优化，擅长数据并行。	AIIO::D1 AIIO::gpu-hw
+为什么 GPU 适合深度学习	深度学习核心是大规模矩阵乘加，可拆成大量独立运算并行执行；GPU 并行核心多、显存带宽高。	AIIO::D1 AIIO::gpu-hw
+SM（Streaming Multiprocessor）	GPU 的基本计算单元，内含 CUDA Core、Tensor Core、寄存器、共享内存/L1。GPU 由几十到上百个 SM 组成。	AIIO::D1 AIIO::gpu-hw
+CUDA Core	执行通用标量浮点/整数运算的单元。	AIIO::D1 AIIO::gpu-hw
+Tensor Core	专门执行矩阵乘加（MMA）的单元，Volta 首次引入，深度学习加速的主力。	AIIO::D1 AIIO::gpu-hw
+RT Core	光线追踪加速单元（Turing 起），用于图形渲染，与 AI 训练无关——常见干扰项。	AIIO::D1 AIIO::gpu-hw
+Warp	GPU 调度的基本单位：32 个线程同时执行同一条指令（SIMT）。	AIIO::D1 AIIO::gpu-hw
+SIMT	Single Instruction, Multiple Threads：一条指令驱动多个线程处理不同数据。	AIIO::D1 AIIO::gpu-hw
+Kernel（CUDA 内核）	在 GPU 上并行执行的函数，以 grid → block → thread 的层次启动。	AIIO::D1 AIIO::gpu-hw
+Host vs Device	CUDA 术语：Host = CPU 及其内存；Device = GPU 及其显存。	AIIO::D1 AIIO::gpu-hw
+HBM（High Bandwidth Memory）	堆叠在 GPU 封装内的高带宽显存，数据中心 GPU 使用（A100 HBM2e、H100 HBM3、H200/B200 HBM3e）。	AIIO::D1 AIIO::gpu-hw
+GDDR 显存	板载显存，带宽低于 HBM、成本低。用于 L4、L40S、RTX 系列等。	AIIO::D1 AIIO::gpu-hw
+Memory bandwidth（显存带宽）	每秒能从显存读写的数据量（TB/s）。访存密集型任务（如 LLM decode）的瓶颈。	AIIO::D1 AIIO::gpu-hw
+Compute-bound vs memory-bound	计算密集：受 FLOPS 限制（大矩阵乘）；访存密集：受带宽限制（逐元素运算、LLM decode）。	AIIO::D1 AIIO::gpu-hw
+Arithmetic intensity（算术强度）	每读写 1 字节数据做多少次运算（FLOPs/Byte）。低 → 访存瓶颈；高 → 计算瓶颈。	AIIO::D1 AIIO::gpu-hw
+Roofline model	用算术强度判断性能上限是算力还是带宽的分析模型。	AIIO::D1 AIIO::gpu-hw
+FLOPS / TFLOPS / PFLOPS	每秒浮点运算次数。T = 10¹²，P = 10¹⁵。比较时要注意精度和是否含稀疏。	AIIO::D1 AIIO::gpu-hw
+L2 cache	所有 SM 共享的片上缓存；MIG 会把 L2 也按实例切分。	AIIO::D1 AIIO::gpu-hw
+Shared memory（共享内存）	SM 内、同一 block 线程共享的高速片上存储，程序员可显式管理。	AIIO::D1 AIIO::gpu-hw
+Unified Memory（统一内存）	CPU 和 GPU 共用一个地址空间，数据按需自动迁移，简化编程。	AIIO::D1 AIIO::gpu-hw
+NVENC / NVDEC	GPU 上的硬件视频编码 / 解码单元。视频分析、转码用，非训练用。	AIIO::D1 AIIO::gpu-hw
+Copy engine（拷贝引擎）	GPU 上负责数据搬运（DMA）的单元，可与计算重叠。	AIIO::D1 AIIO::gpu-hw
+TDP / TGP	GPU 设计功耗上限。H100 SXM 约 700 W，H100 PCIe 约 350 W，L4 约 72 W。	AIIO::D1 AIIO::gpu-hw
+GPU Boost / 降频	GPU 根据功耗、温度余量动态调整频率；过热或触及功耗上限就会降频（throttle）。	AIIO::D1 AIIO::gpu-hw
+Compute capability	GPU 架构特性版本号：A100 = 8.0，Ada = 8.9，H100 = 9.0，B200 = 10.0。编译时 sm_XX 要匹配。	AIIO::D1 AIIO::gpu-hw
+Structured sparsity（2:4 结构化稀疏）	Ampere 引入：每 4 个权重中 2 个为零时，Tensor Core 可跳过，最高约 2 倍吞吐。	AIIO::D1 AIIO::gpu-hw
+DPX instructions	Hopper 引入的动态规划加速指令（基因组比对、路径规划等）。	AIIO::D1 AIIO::gpu-hw
+TMA（Tensor Memory Accelerator）	Hopper 引入的硬件单元，异步搬运大块张量数据，减轻 SM 负担。	AIIO::D1 AIIO::gpu-hw
+Confidential computing（机密计算）	Hopper 起支持：GPU 内数据在使用中加密隔离，防止宿主机/管理员窥探。	AIIO::D1 AIIO::gpu-hw
+RAS engine	Blackwell 引入的可靠性、可用性、可服务性引擎，用于预测性故障检测与诊断。	AIIO::D1 AIIO::gpu-hw
+Decompression engine	Blackwell 引入的硬件解压引擎，加速数据分析/数据库查询。	AIIO::D1 AIIO::gpu-hw
+架构代际顺序（数据中心）	Pascal → Volta → Turing → Ampere → (Ada Lovelace) → Hopper → Blackwell → Rubin（路线图）。	AIIO::D1 AIIO::gpu-gen
+Pascal（P100，2016）	第一代 NVLink，HBM2。	AIIO::D1 AIIO::gpu-gen
+Volta（V100，2017）	第一代 Tensor Core；NVLink 2（300 GB/s）。	AIIO::D1 AIIO::gpu-gen
+Turing（T4，2018）	INT8/INT4 Tensor Core、RT Core。T4 是经典 70 W 低功耗推理卡（16 GB）。	AIIO::D1 AIIO::gpu-gen
+Ampere（A100，2020）	MIG（最多 7 实例）、TF32、2:4 结构化稀疏、第三代 Tensor Core、NVLink 3（600 GB/s）。	AIIO::D1 AIIO::gpu-gen
+A100 显存规格	40 GB HBM2（~1.6 TB/s）或 80 GB HBM2e（~2 TB/s）。	AIIO::D1 AIIO::gpu-gen
+A30	Ampere 主流计算卡，24 GB HBM2，支持 MIG（最多 4 个实例）。	AIIO::D1 AIIO::gpu-gen
+A10 / A10G	Ampere 24 GB GDDR6，推理与图形；A10G 是 AWS g5 实例里的变体。	AIIO::D1 AIIO::gpu-gen
+Ada Lovelace（L4 / L40S / RTX 40）	第四代 Tensor Core，支持 FP8；面向推理、图形、视频。本仓库的 RTX 4070 就是 Ada。	AIIO::D1 AIIO::gpu-gen
+L4	Ada，24 GB GDDR6，约 72 W，半高单槽。高效推理和视频处理。	AIIO::D1 AIIO::gpu-gen
+L40S	Ada，48 GB GDDR6，约 350 W。通用 AI（推理、小规模训练）+ 图形/Omniverse。	AIIO::D1 AIIO::gpu-gen
+Hopper（H100，2022）	Transformer Engine（FP8）、第四代 Tensor Core、NVLink 4（900 GB/s）、机密计算、第二代 MIG、DPX。	AIIO::D1 AIIO::gpu-gen
+H100 SXM vs H100 PCIe	SXM：80 GB HBM3、~3.35 TB/s、~700 W、NVSwitch 全互联。PCIe：80 GB、更低带宽、~350 W、标准服务器。	AIIO::D1 AIIO::gpu-gen
+H100 NVL	面向 LLM 推理的 PCIe 版 H100，成对用 NVLink bridge 连接，显存更大（94 GB/卡）。	AIIO::D1 AIIO::gpu-gen
+H200	Hopper 架构，141 GB HBM3e、~4.8 TB/s。相比 H100 主要提升显存容量和带宽，利好 LLM 推理。	AIIO::D1 AIIO::gpu-gen
+Grace CPU	NVIDIA 的 Arm 架构数据中心 CPU，LPDDR5X 内存，高能效。	AIIO::D1 AIIO::gpu-gen
+GH200 Grace Hopper Superchip	Grace CPU + H100/H200 GPU，通过 NVLink-C2C（900 GB/s）一致性互联，GPU 可直接访问大容量 CPU 内存。	AIIO::D1 AIIO::gpu-gen
+Blackwell（B200，2024）	第二代 Transformer Engine（FP4/FP6）、NVLink 5（1.8 TB/s）、双芯片设计、RAS 引擎、解压引擎。	AIIO::D1 AIIO::gpu-gen
+B200 显存	约 180–192 GB HBM3e、~8 TB/s；DGX B200 整机 8 卡共 1,440 GB。	AIIO::D1 AIIO::gpu-gen
+GB200 Superchip	1 颗 Grace CPU + 2 颗 B200 GPU，NVLink-C2C 连接。	AIIO::D1 AIIO::gpu-gen
+GB200 NVL72	液冷机柜：36 Grace + 72 Blackwell GPU，在同一个 NVLink 域内，像一块巨型 GPU，面向万亿参数 LLM。	AIIO::D1 AIIO::gpu-gen
+Blackwell Ultra（B300 / GB300）	Blackwell 增强版：更大 HBM3e（约 288 GB）、更强 FP4 推理。	AIIO::D1 AIIO::gpu-gen
+Rubin / Vera Rubin	Blackwell 之后的 GPU 架构代号（Vera 为配套 CPU）。路线图级别，了解即可。	AIIO::D1 AIIO::gpu-gen
+数据中心卡 vs 消费级卡	数据中心卡：ECC、MIG、NVLink/NVSwitch、长期驱动支持、7×24 设计、DCGM 完整支持。消费卡（GeForce）不面向数据中心部署。	AIIO::D1 AIIO::gpu-gen
+RTX PRO / 专业卡	面向工作站和图形 + AI 的专业卡（原 Quadro 系列），支持 vGPU 图形工作站场景。	AIIO::D1 AIIO::gpu-gen
+Jetson（Orin / Thor）	嵌入式边缘 AI 模组，用于机器人、无人机、智能摄像头。	AIIO::D1 AIIO::gpu-gen
+DGX Spark / DGX Station	桌面级 AI 开发机（Grace Blackwell），本地原型开发后再迁移到数据中心。	AIIO::D1 AIIO::gpu-gen
+“首次引入”速记	NVLink=Pascal；Tensor Core=Volta；RT Core=Turing；MIG/TF32/稀疏=Ampere；FP8 Transformer Engine=Hopper；FP4/NVLink5=Blackwell。	AIIO::D1 AIIO::gpu-gen
+FP64	双精度。科学计算/HPC 必需，深度学习基本不用。	AIIO::D1 AIIO::precision
+FP32	单精度，8 位指数 + 23 位尾数。传统训练基线，混合精度中保存主权重。	AIIO::D1 AIIO::precision
+TF32	Ampere 引入的 Tensor Core 计算模式：8 位指数（同 FP32 范围）+ 10 位尾数。FP32 代码无需修改即可加速。	AIIO::D1 AIIO::precision
+BF16（bfloat16）	16 位：8 位指数 + 7 位尾数。与 FP32 动态范围相同，训练稳定，一般不需要 loss scaling。	AIIO::D1 AIIO::precision
+FP16（half）	16 位：5 位指数 + 10 位尾数。精度比 BF16 高但范围小，训练需要 loss scaling 防下溢。	AIIO::D1 AIIO::precision
+FP8（E4M3 / E5M2）	Hopper 引入。E4M3 精度高（常用于前向），E5M2 范围大（常用于梯度）。由 Transformer Engine 管理。	AIIO::D1 AIIO::precision
+FP4 / NVFP4	Blackwell 支持的 4 位浮点，主要用于推理，配合块级缩放因子保持精度。	AIIO::D1 AIIO::precision
+FP6	Blackwell 支持的 6 位浮点格式，介于 FP8 和 FP4 之间。	AIIO::D1 AIIO::precision
+INT8	8 位整数，推理量化常用；需要校准（calibration）确定缩放因子。	AIIO::D1 AIIO::precision
+INT4	4 位整数，LLM 权重量化常用（如 AWQ、GPTQ），显存减为 FP16 的 1/4。	AIIO::D1 AIIO::precision
+Mixed precision training（混合精度训练）	矩阵运算用 FP16/BF16（Tensor Core 加速），保留 FP32 主权重。更快、更省显存、精度基本不变。	AIIO::D1 AIIO::precision
+AMP（Automatic Mixed Precision）	框架自动选择每个算子的精度，例如 PyTorch torch.autocast。	AIIO::D1 AIIO::precision
+Loss scaling（损失缩放）	FP16 训练时把损失乘一个系数，防止小梯度下溢为 0，更新前再缩回。	AIIO::D1 AIIO::precision
+Transformer Engine	Hopper/Blackwell 的软硬件结合特性，按层动态选择 FP8（或 FP4）与更高精度，并管理缩放因子。	AIIO::D1 AIIO::precision
+Quantization（量化）	把权重/激活从高精度转为低精度（FP8/INT8/INT4/FP4）：显存↓、吞吐↑，可能有少量精度损失。	AIIO::D1 AIIO::precision
+PTQ（训练后量化）	Post-Training Quantization：训练完直接量化，用少量校准数据，成本低。	AIIO::D1 AIIO::precision
+QAT（量化感知训练）	Quantization-Aware Training：训练时模拟量化误差，精度损失更小但需要再训练。	AIIO::D1 AIIO::precision
+Calibration（校准）	用代表性数据统计激活分布，确定量化缩放因子。TensorRT INT8 需要。	AIIO::D1 AIIO::precision
+每参数字节数	FP32 = 4，FP16/BF16 = 2，FP8/INT8 = 1，INT4/FP4 = 0.5。	AIIO::D1 AIIO::precision
+精度越低的代价	动态范围或分辨率下降，可能影响收敛或精度；需要缩放、校准或 QAT 补偿。	AIIO::D1 AIIO::precision
+GPU 软件栈分层（自下而上）	GPU 驱动 → CUDA（运行时 + CUDA-X 库）→ 框架（PyTorch/TF/JAX）→ 平台与服务（NGC、AI Enterprise、NIM）→ 应用。	AIIO::D1 AIIO::sw-stack
+NVIDIA GPU Driver	内核模块 + 用户态库，让操作系统和应用使用 GPU。宿主机上唯一必须安装的 NVIDIA 组件（容器场景）。	AIIO::D1 AIIO::sw-stack
+CUDA	NVIDIA 的并行计算平台与编程模型，包含编译器、运行时、库和工具。	AIIO::D1 AIIO::sw-stack
+CUDA Toolkit	开发套件：nvcc 编译器、CUDA 运行时、数学库、cuda-gdb、Nsight 工具。运行容器化应用时宿主机不需要安装。	AIIO::D1 AIIO::sw-stack
+nvcc	CUDA C/C++ 编译器。本仓库 W1 的 benchmark 就是用 nvcc 编译的。	AIIO::D1 AIIO::sw-stack
+CUDA-X	NVIDIA 基于 CUDA 的加速库和工具集合的统称（cuBLAS、cuDNN、NCCL、RAPIDS 等）。	AIIO::D1 AIIO::sw-stack
+cuBLAS	GPU 加速的基础线性代数库（矩阵乘 GEMM 等）。	AIIO::D1 AIIO::sw-stack
+cuDNN	深度神经网络原语库：卷积、注意力、归一化、激活等。框架底层调用。	AIIO::D1 AIIO::sw-stack
+NCCL	NVIDIA Collective Communications Library（读作 nickel）：all-reduce、all-gather、broadcast 等多 GPU/多节点集合通信。	AIIO::D1 AIIO::sw-stack
+cuFFT / cuSPARSE / cuRAND / cuSOLVER	分别为 GPU 加速的快速傅里叶变换、稀疏矩阵、随机数、线性方程求解库。	AIIO::D1 AIIO::sw-stack
+CUTLASS	CUDA C++ 模板库，用于编写高性能自定义矩阵乘 kernel。	AIIO::D1 AIIO::sw-stack
+Nsight Systems	系统级性能分析：CPU/GPU 时间线，找出 IO、同步、kernel 间空隙等瓶颈。	AIIO::D1 AIIO::sw-stack
+Nsight Compute	Kernel 级性能分析：单个 CUDA kernel 的占用率、访存、指令细节。	AIIO::D1 AIIO::sw-stack
+TensorRT	推理优化器 + 运行时：层融合、精度校准（FP16/INT8/FP8）、kernel 自动调优，生成优化后的 engine。	AIIO::D1 AIIO::sw-stack
+TensorRT engine 的可移植性	engine（plan 文件）与 GPU 架构和 TensorRT 版本绑定，换卡型或升级版本通常要重新构建。	AIIO::D1 AIIO::sw-stack
+trtexec	TensorRT 命令行工具，用于把 ONNX 转成 engine 并做性能测试。	AIIO::D1 AIIO::sw-stack
+TensorRT-LLM	专为 LLM 推理优化的库：in-flight batching、paged KV cache、量化（FP8/INT4/FP4）、张量并行。	AIIO::D1 AIIO::sw-stack
+TensorRT Model Optimizer	模型量化、剪枝、蒸馏、稀疏化的工具库，产出可供 TensorRT-LLM 部署的模型。	AIIO::D1 AIIO::sw-stack
+Triton Inference Server	开源推理服务软件：多框架后端、动态批处理、多模型并发、模型仓库、HTTP/gRPC、Prometheus 指标。	AIIO::D1 AIIO::sw-stack
+Triton 默认端口	HTTP 8000、gRPC 8001、Prometheus 指标 8002。	AIIO::D1 AIIO::sw-stack
+Triton dynamic batching	服务端把多个独立请求自动合并成一个 batch 执行，提高吞吐。	AIIO::D1 AIIO::sw-stack
+Triton model repository	按目录组织的模型存储（模型名/版本/配置 config.pbtxt），Triton 启动时加载。	AIIO::D1 AIIO::sw-stack
+Triton ensemble	把预处理、模型推理、后处理串成一个流水线，在服务端一次完成。	AIIO::D1 AIIO::sw-stack
+perf_analyzer / Model Analyzer	Triton 的压测工具 / 自动搜索最佳模型配置（batch、实例数）的工具。	AIIO::D1 AIIO::sw-stack
+NVIDIA Dynamo	面向大规模分布式 LLM 推理的开源服务框架，支持 prefill/decode 分离、KV cache 感知路由。	AIIO::D1 AIIO::sw-stack
+NIM（NVIDIA Inference Microservices）	预打包、预优化的推理微服务容器，提供标准（OpenAI 兼容）API，可在任何 NVIDIA GPU 环境快速部署。	AIIO::D1 AIIO::sw-stack
+NIM 内部用什么引擎	按模型和 GPU 自动选择优化后端，例如 TensorRT-LLM、vLLM 等；对使用者透明。	AIIO::D1 AIIO::sw-stack
+NeMo	构建、定制、部署生成式 AI 的框架：数据整理、训练、微调、评估、护栏。	AIIO::D1 AIIO::sw-stack
+NeMo Curator	大规模训练数据整理工具：去重、过滤、分类，GPU 加速。	AIIO::D1 AIIO::sw-stack
+NeMo Guardrails	给 LLM 应用加可编程护栏：话题限制、安全、事实核查。	AIIO::D1 AIIO::sw-stack
+NeMo Retriever	面向 RAG 的检索微服务集合（embedding、reranking），以 NIM 形式提供。	AIIO::D1 AIIO::sw-stack
+Megatron-LM / Megatron-Core	NVIDIA 的大规模 Transformer 训练库，实现张量/流水线/序列并行。	AIIO::D1 AIIO::sw-stack
+Nemotron	NVIDIA 发布的开放模型家族（LLM、推理模型），可用 NeMo 定制。	AIIO::D1 AIIO::sw-stack
+RAPIDS	GPU 加速数据科学套件：cuDF（类 pandas）、cuML（类 scikit-learn）、cuGraph（图分析）、cuVS（向量搜索）。	AIIO::D1 AIIO::sw-stack
+cuDF	GPU DataFrame 库，API 类似 pandas；cudf.pandas 模式可零代码修改加速。	AIIO::D1 AIIO::sw-stack
+cuML	GPU 加速的传统机器学习算法库，API 类似 scikit-learn。	AIIO::D1 AIIO::sw-stack
+Spark RAPIDS Accelerator	让 Apache Spark SQL/DataFrame 作业在 GPU 上运行的插件。	AIIO::D1 AIIO::sw-stack
+Dask	Python 并行计算框架，与 RAPIDS 结合实现多 GPU/多节点数据处理。	AIIO::D1 AIIO::sw-stack
+DALI	Data Loading Library：在 GPU 上做数据解码与增强，解决 CPU 预处理瓶颈。	AIIO::D1 AIIO::sw-stack
+NGC Catalog	NVIDIA GPU 优化软件中心：框架容器（每月更新）、预训练模型、Helm chart、SDK。	AIIO::D1 AIIO::sw-stack
+nvcr.io	NGC 的容器镜像仓库地址，例如 nvcr.io/nvidia/pytorch:24.05-py3。	AIIO::D1 AIIO::sw-stack
+NGC 容器标签 YY.MM	如 24.05 表示 2024 年 5 月版本，每月发布，经过测试的框架 + CUDA + 库组合。	AIIO::D1 AIIO::sw-stack
+NGC API key	从 NGC 拉取受限镜像/模型（如 NIM）需要的密钥。	AIIO::D1 AIIO::sw-stack
+NVIDIA AI Enterprise	企业级 AI 软件套件：包含 NIM、NeMo、Triton、RAPIDS 等，提供企业支持、安全补丁、稳定分支；按 GPU 授权。	AIIO::D1 AIIO::sw-stack
+AI Enterprise 的价值	生产级支持（SLA）、安全漏洞修复、长期稳定的 API 分支、在认证系统/云上的兼容性保证。	AIIO::D1 AIIO::sw-stack
+Magnum IO	数据中心 IO 加速栈的统称：GPUDirect RDMA/Storage、NCCL、NVSHMEM、UCX、网络在网计算等。	AIIO::D1 AIIO::sw-stack
+NVSHMEM	面向 GPU 集群的 OpenSHMEM 实现，GPU 可直接发起对远端 GPU 内存的读写。	AIIO::D1 AIIO::sw-stack
+UCX	Unified Communication X：高性能通信框架，MPI、Spark 等可通过它使用 RDMA/GPUDirect。	AIIO::D1 AIIO::sw-stack
+PyTorch / TensorFlow / JAX	主流深度学习框架，均通过 CUDA、cuDNN、NCCL 使用 NVIDIA GPU。	AIIO::D1 AIIO::sw-stack
+ONNX	开放模型交换格式，可把不同框架训练的模型导出，再给 TensorRT/ONNX Runtime 推理。	AIIO::D1 AIIO::sw-stack
+NVIDIA HPC SDK	HPC 编译器（nvc/nvfortran）、数学库、通信库的套件。	AIIO::D1 AIIO::sw-stack
+驱动分支：Production Branch / New Feature Branch / LTSB	生产分支：稳定、长期修复；新特性分支：较新功能；LTSB：长期支持分支，适合要求稳定的环境。	AIIO::D1 AIIO::sw-stack
+Data Center 驱动 vs Game Ready 驱动	数据中心驱动面向 Tesla/数据中心 GPU，经过企业验证；Game Ready 面向游戏卡。	AIIO::D1 AIIO::sw-stack
+Open GPU kernel modules	NVIDIA 开源的 Linux GPU 内核模块，Turing 及以后可用，Blackwell 起为必需。	AIIO::D1 AIIO::sw-stack
+GSP（GPU System Processor）	GPU 上的 RISC-V 处理器，承担驱动部分初始化和管理工作（GSP 固件）。	AIIO::D1 AIIO::sw-stack
+Data parallelism（数据并行）	每张 GPU 一份完整模型，切分 mini-batch；反向后 all-reduce 平均梯度。最常用的并行方式。	AIIO::D1 AIIO::parallel
+Model parallelism（模型并行）	把模型本身切到多张 GPU 上，用于模型放不进单卡显存的情况，包括张量并行和流水线并行。	AIIO::D1 AIIO::parallel
+Tensor parallelism（张量并行）	把单层内的矩阵切分到多 GPU，每层都要通信，通信极频繁 → 一般限制在节点内 NVLink 域。	AIIO::D1 AIIO::parallel
+Pipeline parallelism（流水线并行）	按层把模型分成多个 stage 放在不同 GPU，用 micro-batch 填充流水线减少气泡。	AIIO::D1 AIIO::parallel
+Pipeline bubble（流水线气泡）	流水线开始和结束时部分 stage 空闲的时间，micro-batch 越多气泡占比越小。	AIIO::D1 AIIO::parallel
+Sequence / context parallelism	沿序列长度切分激活，处理超长上下文。	AIIO::D1 AIIO::parallel
+Expert parallelism	MoE 模型中把不同专家放到不同 GPU，需要 all-to-all 通信。	AIIO::D1 AIIO::parallel
+3D parallelism	数据 + 张量 + 流水线并行组合，大模型训练的常规做法（如 Megatron）。	AIIO::D1 AIIO::parallel
+ZeRO（DeepSpeed）	把优化器状态（stage 1）、梯度（stage 2）、参数（stage 3）分片到各 GPU，减少冗余显存。	AIIO::D1 AIIO::parallel
+FSDP（Fully Sharded Data Parallel）	PyTorch 的全分片数据并行，思路同 ZeRO-3。	AIIO::D1 AIIO::parallel
+All-reduce	所有 GPU 的数据求和（或平均）后，每个 GPU 都得到完整结果。数据并行同步梯度用。	AIIO::D1 AIIO::parallel
+All-gather	每个 GPU 贡献一部分，最终每个 GPU 都拿到全部拼接结果。	AIIO::D1 AIIO::parallel
+Reduce-scatter	先归约，再把结果分片发给各 GPU。all-reduce = reduce-scatter + all-gather。	AIIO::D1 AIIO::parallel
+Broadcast	一个 GPU 把数据发给所有 GPU（如初始权重同步）。	AIIO::D1 AIIO::parallel
+All-to-all	每个 GPU 给其他每个 GPU 发不同数据；MoE 专家并行常用，对网络压力大。	AIIO::D1 AIIO::parallel
+Ring all-reduce	GPU 排成环逐段传递，带宽利用好，延迟随 GPU 数线性增长。	AIIO::D1 AIIO::parallel
+Tree all-reduce	树形归约，延迟随 GPU 数对数增长，适合大规模、小消息。NCCL 会自动选 ring 或 tree。	AIIO::D1 AIIO::parallel
+nccl-tests	NCCL 官方性能测试工具，如 all_reduce_perf，报告 algbw 和 busbw。	AIIO::D1 AIIO::parallel
+algbw vs busbw	algbw = 数据量 ÷ 时间；busbw 按算法修正后反映硬件链路实际带宽，可与 NVLink/网卡理论值对比。	AIIO::D1 AIIO::parallel
+Strong scaling vs weak scaling	强扩展：总问题规模不变、加 GPU 看提速；弱扩展：每 GPU 负载不变、加 GPU 同时扩大问题。	AIIO::D1 AIIO::parallel
+Scaling efficiency（扩展效率）	N 张 GPU 的实际加速比 ÷ N。下降常因通信开销、网络带宽不足、IO 或负载不均。	AIIO::D1 AIIO::parallel
+Gang scheduling	分布式作业的所有进程必须同时获得资源才能启动，否则全部等待；Slurm 原生支持。	AIIO::D1 AIIO::parallel
+Gradient accumulation（梯度累积）	多个小 batch 累积梯度后再更新一次，用小显存模拟大 batch。	AIIO::D1 AIIO::parallel
+Activation checkpointing（激活重计算）	前向时不保存部分激活，反向时重新计算，用计算换显存。	AIIO::D1 AIIO::parallel
+训练显存估算（Adam 混合精度）	约 16 字节/参数（FP16 权重 2 + 梯度 2 + FP32 主权重 4 + Adam 两份状态 8），还不含激活。7B 模型约 112 GB。	AIIO::D1 AIIO::parallel
+推理显存估算	权重 = 参数量 × 每参数字节（70B × 2 B = 140 GB），再加 KV cache 和激活。	AIIO::D1 AIIO::parallel
+MFU（Model FLOPs Utilization）	实际达到的模型 FLOPS ÷ 硬件峰值 FLOPS，衡量训练效率的常用指标。	AIIO::D1 AIIO::parallel
+MPI	Message Passing Interface：HPC 多进程通信标准，常用 mpirun 启动多节点作业，可与 NCCL 配合。	AIIO::D1 AIIO::parallel
+torchrun	PyTorch 分布式启动器，为每张 GPU 起一个进程并设置 rank 等环境变量。	AIIO::D1 AIIO::parallel
+Rank / world size	分布式训练中每个进程的编号 / 进程总数。local rank 是节点内编号。	AIIO::D1 AIIO::parallel
+LLM（大语言模型）	基于 Transformer、在海量文本上训练、能理解和生成语言的模型，参数量从数十亿到万亿。	AIIO::D1 AIIO::genai
+Token	模型处理文本的基本单位（词或子词）。英文约 1 token ≈ 0.75 个单词。计费和性能都按 token 计。	AIIO::D1 AIIO::genai
+Tokenizer	把文本切成 token 并映射为 ID 的组件。	AIIO::D1 AIIO::genai
+Context window（上下文窗口）	模型一次能处理的最大 token 数（输入 + 输出）。越长 KV cache 越大。	AIIO::D1 AIIO::genai
+Embedding	把文本/图像映射成稠密向量，语义相近的内容向量距离近。用于检索和 RAG。	AIIO::D1 AIIO::genai
+Prompt engineering	通过设计输入提示词（指令、示例、格式）来引导模型输出，不改变权重。	AIIO::D1 AIIO::genai
+Few-shot / zero-shot	在 prompt 中给几个示例 / 不给示例直接让模型完成任务。	AIIO::D1 AIIO::genai
+Temperature	采样随机度。低 → 输出更确定；高 → 更多样。	AIIO::D1 AIIO::genai
+Top-p / Top-k sampling	只从累计概率前 p 或概率最高的 k 个 token 中采样，控制多样性。	AIIO::D1 AIIO::genai
+Hallucination（幻觉）	模型生成看似合理但不真实的内容。缓解：RAG、护栏、事实校验。	AIIO::D1 AIIO::genai
+RAG（检索增强生成）	文档切块 → embedding → 存入向量库；提问时检索相关片段拼入 prompt 再生成。数据经常变、不想重训时首选。	AIIO::D1 AIIO::genai
+RAG 的流程组件	文档解析与切块 → embedding 模型 → 向量数据库 → 检索（+ reranker 重排）→ LLM 生成。	AIIO::D1 AIIO::genai
+Vector database（向量数据库）	存储 embedding，按向量相似度检索（如 Milvus）。GPU 加速可用 cuVS。	AIIO::D1 AIIO::genai
+Reranker（重排序模型）	对初步检索结果重新打分排序，提高 RAG 上下文的相关性。	AIIO::D1 AIIO::genai
+Chunking（切块）	把长文档切成合适长度的片段再做 embedding，影响检索质量。	AIIO::D1 AIIO::genai
+SFT（监督微调）	用指令-回答对数据微调模型，让它学会遵循指令。	AIIO::D1 AIIO::genai
+RLHF	基于人类反馈的强化学习：用人类偏好训练奖励模型，再优化 LLM，使输出更符合人类偏好。	AIIO::D1 AIIO::genai
+PEFT（参数高效微调）	只训练少量额外参数，冻结主模型。LoRA、P-tuning、Adapter 都属于此类。	AIIO::D1 AIIO::genai
+LoRA	Low-Rank Adaptation：冻结原权重，训练小的低秩矩阵加到原层上。显存和成本远低于全量微调。	AIIO::D1 AIIO::genai
+Full fine-tuning（全量微调）	更新所有参数，效果上限高，但显存和算力成本接近预训练规模的一部分。	AIIO::D1 AIIO::genai
+RAG vs fine-tuning 怎么选	知识频繁变化、需要引用来源 → RAG；改变风格/格式/特定能力 → 微调；二者可结合。	AIIO::D1 AIIO::genai
+MoE（Mixture of Experts）	每层有多个专家子网络，每个 token 只激活其中少数，总参数大而单 token 计算量小。	AIIO::D1 AIIO::genai
+Prefill vs decode	Prefill：一次性处理整个输入 prompt，计算密集；Decode：逐个生成 token，受显存带宽限制。	AIIO::D1 AIIO::genai
+KV cache	缓存注意力层已算过的 Key/Value，避免重复计算；随上下文长度和并发数线性增长，吃大量显存。	AIIO::D1 AIIO::genai
+Paged attention / paged KV cache	像操作系统分页一样管理 KV cache，减少显存碎片，提高并发（vLLM、TensorRT-LLM 都支持）。	AIIO::D1 AIIO::genai
+In-flight batching / continuous batching	请求随到随加入、完成即退出 batch，而不是等整批结束，大幅提高 LLM 服务吞吐。	AIIO::D1 AIIO::genai
+Speculative decoding（投机解码）	小模型先草拟多个 token，大模型一次验证，降低生成延迟。	AIIO::D1 AIIO::genai
+Disaggregated serving	把 prefill 和 decode 放到不同 GPU 池分别扩展（如 NVIDIA Dynamo）。	AIIO::D1 AIIO::genai
+TTFT（Time To First Token）	从发送请求到收到第一个 token 的时间，主要受 prefill 和排队影响。	AIIO::D1 AIIO::genai
+TPOT / ITL	Time Per Output Token / Inter-Token Latency：后续每个 token 的间隔，决定“打字速度”。	AIIO::D1 AIIO::genai
+端到端延迟估算	≈ TTFT + TPOT × (输出 token 数 − 1)。	AIIO::D1 AIIO::genai
+Tokens per second（吞吐）	整机每秒生成 token 数；与并发数、batch、模型大小、精度有关。	AIIO::D1 AIIO::genai
+Guardrails（护栏）	在输入和输出侧检查、过滤、引导 LLM 行为（安全、话题、合规）。	AIIO::D1 AIIO::genai
+Multimodal model（多模态模型）	能同时处理文本、图像、音频等多种输入或输出的模型（如 VLM 视觉语言模型）。	AIIO::D1 AIIO::genai
+Tool calling / function calling	LLM 输出结构化调用请求，由应用执行外部工具（API、数据库、搜索）后把结果返回给模型。	AIIO::D1 AIIO::genai
+NVIDIA AI Blueprints	NVIDIA 提供的生成式 AI 参考工作流（如 RAG、数字人、视频分析），基于 NIM 构建。	AIIO::D1 AIIO::genai
+Scaling laws	模型效果随参数量、数据量、算力按幂律提升的经验规律，是持续扩大集群的依据。	AIIO::D1 AIIO::genai
+Test-time scaling / reasoning models	推理时花更多计算（长思考链）提升答案质量，推理算力需求随之增加。	AIIO::D1 AIIO::genai
+Omniverse	3D 协作、仿真与数字孪生平台，基于 OpenUSD。	AIIO::D1 AIIO::industry
+Cosmos	NVIDIA 面向物理 AI（机器人、自动驾驶）的世界基础模型平台。	AIIO::D1 AIIO::industry
+Isaac	机器人开发平台：仿真（Isaac Sim）、感知、操作库。	AIIO::D1 AIIO::industry
+Metropolis	智能视频分析 / 视觉 AI 平台（智慧城市、零售、工厂）。	AIIO::D1 AIIO::industry
+DeepStream SDK	GPU 加速的流式视频分析管线 SDK，Metropolis 的核心组件。	AIIO::D1 AIIO::industry
+Clara	医疗健康 AI 平台：医学影像、基因组学（Parabricks）、药物研发（BioNeMo）。	AIIO::D1 AIIO::industry
+Riva	语音 AI SDK：语音识别（ASR）、语音合成（TTS）、翻译。	AIIO::D1 AIIO::industry
+Maxine	音视频增强 SDK：降噪、视线校正、超分辨率等。	AIIO::D1 AIIO::industry
+Morpheus	网络安全 AI 框架：对网络流量、日志做实时异常检测。	AIIO::D1 AIIO::industry
+Merlin	推荐系统框架：数据处理、训练、推理全流程 GPU 加速。	AIIO::D1 AIIO::industry
+Holoscan	边缘传感器数据（医疗器械等）实时 AI 处理平台。	AIIO::D1 AIIO::industry
+DRIVE	自动驾驶平台（车载计算 + 软件栈）。	AIIO::D1 AIIO::industry
+cuOpt	GPU 加速的组合优化求解器（车辆路径规划等）。	AIIO::D1 AIIO::industry
+CUDA-Q / cuQuantum	量子-经典混合计算编程平台 / 量子电路仿真加速库。	AIIO::D1 AIIO::industry
+TAO Toolkit	低代码迁移学习工具，用少量数据微调视觉 AI 模型。	AIIO::D1 AIIO::industry
+IGX	面向工业和医疗的边缘 AI 平台，强调功能安全和长生命周期。	AIIO::D1 AIIO::industry
+Fleet Command	边缘 AI 远程部署和管理的云服务（零接触配置、OTA 更新、安全）。	AIIO::D1 AIIO::industry
+Sovereign AI（主权 AI）	国家或地区用本土基础设施、数据和人才构建 AI 能力，强调数据主权。	AIIO::D1 AIIO::industry
+AI Factory（AI 工厂）	NVIDIA 提出的概念：把数据中心看作生产“智能”（token）的工厂，以 token 吞吐和能效衡量。	AIIO::D1 AIIO::industry
+PCIe 卡 vs SXM 模组	PCIe：插标准槽，功耗低，GPU 间走 PCIe 或 NVLink bridge。SXM：装在 HGX 基板上，NVSwitch 全互联，功耗和性能更高。	AIIO::D2 AIIO::compute
+为什么大规模训练选 SXM	GPU 之间需要 NVLink/NVSwitch 的高带宽（张量并行、all-reduce），且 SXM 功耗上限更高、性能更强。	AIIO::D2 AIIO::compute
+HGX	NVIDIA 的 GPU 基板平台（4 或 8 块 SXM GPU + NVSwitch），OEM 厂商（Dell、HPE、Supermicro、Lenovo 等）基于它制造服务器。	AIIO::D2 AIIO::compute
+DGX	NVIDIA 自家的完整 AI 系统：硬件 + DGX OS + 软件栈 + 企业支持，开箱即用。	AIIO::D2 AIIO::compute
+HGX vs DGX 一句话	HGX 是给 OEM 的 GPU 主板平台；DGX 是 NVIDIA 卖的整机。	AIIO::D2 AIIO::compute
+MGX	NVIDIA 的模块化服务器参考设计，OEM 用它快速组合不同 CPU/GPU/DPU 配置。	AIIO::D2 AIIO::compute
+NVIDIA-Certified Systems	OEM 服务器经 NVIDIA 测试验证（性能、管理、安全、网络、可扩展性），可获 NVIDIA AI Enterprise 支持。	AIIO::D2 AIIO::compute
+DGX A100 配置	8× A100（共 320 或 640 GB）、6 个 NVSwitch、8 个 200 Gb/s HDR 计算网卡、2 颗 AMD EPYC，约 6.5 kW。	AIIO::D2 AIIO::compute
+DGX H100 配置	8× H100 SXM（共 640 GB HBM3）、4 颗 NVSwitch 芯片、8 个 400 Gb/s ConnectX-7 计算端口、2 颗 Intel Xeon、2 TB 内存，最大约 10.2 kW。	AIIO::D2 AIIO::compute
+DGX H100 网卡分工	8 个 ConnectX-7 单端口 400G 用于计算网络（每 GPU 一个）；另有双端口 ConnectX-7/BlueField-3 用于存储和带内管理。	AIIO::D2 AIIO::compute
+DGX H100 本地存储	操作系统盘 + 约 30 TB NVMe 数据盘，用作数据集缓存。	AIIO::D2 AIIO::compute
+DGX H200	8× H200，共约 1.1 TB HBM3e，适合更大模型推理与训练。	AIIO::D2 AIIO::compute
+DGX B200 配置	8× B200（共 1,440 GB HBM3e），NVLink 5，最大约 14 kW 级。	AIIO::D2 AIIO::compute
+DGX GB200	以 GB200 NVL72 机柜为单元的 DGX 系统，液冷，用于 DGX SuperPOD。	AIIO::D2 AIIO::compute
+GB200 NVL72 NVLink 总带宽	72 颗 GPU 通过 NVLink Switch 托盘互联，机柜内 NVLink 总带宽约 130 TB/s。	AIIO::D2 AIIO::compute
+NVL72 中的 “72”	一个 NVLink 域里的 Blackwell GPU 数量。	AIIO::D2 AIIO::compute
+DGX OS	DGX 系统的操作系统，基于 Ubuntu，预装 GPU 驱动、Fabric Manager、DCGM、容器运行时等。	AIIO::D2 AIIO::compute
+BMC（Baseboard Management Controller）	服务器主板上的独立管理芯片，经带外网络提供远程电源控制、传感器、日志、远程控制台（IPMI/Redfish）。	AIIO::D2 AIIO::compute
+CPU 在 GPU 服务器中的作用	运行操作系统、数据预处理与加载、调度 kernel、网络和存储 IO；CPU 不足会让 GPU 等数据。	AIIO::D2 AIIO::compute
+系统内存与 GPU 显存的关系	建议系统内存 ≥ 总显存（常见 2 倍），以便数据预处理、pinned memory 和缓存。	AIIO::D2 AIIO::compute
+Grace Hopper / Grace Blackwell 的好处	CPU 和 GPU 通过 NVLink-C2C 一致性互联（900 GB/s），GPU 可高速访问大容量 CPU 内存，减少 PCIe 瓶颈。	AIIO::D2 AIIO::compute
+推理服务器常见卡型	L4、L40S、H100 NVL / PCIe、H200、B200；按模型大小、延迟和成本选择。	AIIO::D2 AIIO::compute
+AWS GPU 实例举例	p4d（8× A100 40GB）、p5（8× H100）、p5e（H200）、g5（A10G）、g6（L4）、g6e（L40S）。	AIIO::D2 AIIO::compute
+GPU 服务器选型要考虑	GPU 型号与数量、显存容量、GPU 间互联、网卡数量与速率、CPU/内存、本地 NVMe、功耗与散热、软件支持。	AIIO::D2 AIIO::compute
+PCIe 每代 x16 单向带宽	Gen3 ≈ 16 GB/s，Gen4 ≈ 32 GB/s，Gen5 ≈ 64 GB/s，Gen6 ≈ 128 GB/s。双向翻倍。	AIIO::D2 AIIO::interconnect
+PCIe switch（PCIe 交换芯片）	扩展 PCIe 通道，把多块 GPU、网卡、NVMe 挂在同一交换芯片下，让它们之间直接通信不经过 CPU。	AIIO::D2 AIIO::interconnect
+NVLink	GPU 之间（及 GPU-CPU）的高带宽、低延迟点对点互联，带宽远高于 PCIe。	AIIO::D2 AIIO::interconnect
+NVLink 每代每 GPU 带宽	NVLink 1（P100）160 GB/s → 2（V100）300 → 3（A100）600 → 4（H100）900 GB/s → 5（B200）1.8 TB/s。	AIIO::D2 AIIO::interconnect
+H100 有多少条 NVLink	18 条，每条 50 GB/s（双向），合计 900 GB/s。	AIIO::D2 AIIO::interconnect
+NVSwitch	NVLink 交换芯片：让节点内所有 GPU 两两以全 NVLink 带宽通信，不需要多跳。	AIIO::D2 AIIO::interconnect
+NVLink bridge	PCIe 卡之间的 NVLink 桥接器，通常只连 2 张卡。	AIIO::D2 AIIO::interconnect
+NVLink Switch System / NVLink 域	用外置 NVSwitch 把 NVLink 扩展出单台服务器，组成更大的 NVLink 域（如 NVL72 的 72 GPU）。	AIIO::D2 AIIO::interconnect
+NVLink-C2C	芯片到芯片的一致性互联（Grace↔Hopper、Grace↔Blackwell），900 GB/s。	AIIO::D2 AIIO::interconnect
+Fabric Manager	NVSwitch 系统（HGX A100/H100 等）上必须运行的服务，负责配置 NVSwitch 和 NVLink 分区；没运行会导致 CUDA 初始化失败。	AIIO::D2 AIIO::interconnect
+GPUDirect P2P	同一节点内 GPU 之间直接访问对方显存（经 NVLink 或 PCIe），不经过 CPU 内存。	AIIO::D2 AIIO::interconnect
+NUMA	非一致性内存访问：多 CPU 插槽系统里，每颗 CPU 访问本地内存快、远端慢。GPU 和网卡也属于某个 NUMA 节点。	AIIO::D2 AIIO::interconnect
+CPU 亲和性（affinity）为什么重要	进程绑定到与 GPU/网卡同一 NUMA 节点的 CPU 核，避免跨插槽访问降低带宽、增加延迟。	AIIO::D2 AIIO::interconnect
+nvidia-smi topo -m	打印 GPU、网卡、CPU 之间的拓扑矩阵和 CPU/NUMA 亲和性。	AIIO::D2 AIIO::interconnect
+topo 矩阵：NV#	通过 # 条 NVLink 直连，最快。	AIIO::D2 AIIO::interconnect
+topo 矩阵：PIX	最多经过一个 PCIe 交换芯片，路径很短。GPUDirect RDMA 理想配对。	AIIO::D2 AIIO::interconnect
+topo 矩阵：PXB	经过多个 PCIe 交换芯片，但不经过 CPU 主桥。	AIIO::D2 AIIO::interconnect
+topo 矩阵：PHB	经过 PCIe Host Bridge（CPU），较慢。	AIIO::D2 AIIO::interconnect
+topo 矩阵：NODE	在同一 NUMA 节点内跨多个 PCIe Host Bridge。	AIIO::D2 AIIO::interconnect
+topo 矩阵：SYS	跨 NUMA 节点，需经过 CPU 之间的 SMP 互联（UPI/xGMI），最慢。	AIIO::D2 AIIO::interconnect
+topo 矩阵从快到慢	NV# > PIX > PXB > PHB > NODE > SYS。	AIIO::D2 AIIO::interconnect
+nvbandwidth	NVIDIA 的带宽测量工具，测 GPU↔GPU、CPU↔GPU 各种拷贝路径的带宽。	AIIO::D2 AIIO::interconnect
+p2pBandwidthLatencyTest	CUDA samples 里的 GPU 之间 P2P 带宽和延迟测试程序。	AIIO::D2 AIIO::interconnect
+为什么 AI 集群需要高速网络	多节点训练每步都要跨节点同步梯度/激活，网络带宽和延迟直接决定扩展效率。	AIIO::D2 AIIO::network-ib
+RDMA（远程直接内存访问）	网卡直接读写远端主机内存，不经过对方 CPU 和内核协议栈：低延迟、高带宽、低 CPU 占用。	AIIO::D2 AIIO::network-ib
+InfiniBand（IB）	为 HPC/AI 设计的网络：原生 RDMA、基于信用的无损流控、低延迟、在网计算（SHARP）。	AIIO::D2 AIIO::network-ib
+InfiniBand 速率代际	SDR → DDR → QDR(40) → FDR(56) → EDR(100) → HDR(200) → NDR(400) → XDR(800 Gb/s)。	AIIO::D2 AIIO::network-ib
+HDR / NDR / XDR	HDR = 200 Gb/s，NDR = 400 Gb/s，XDR = 800 Gb/s（每端口）。	AIIO::D2 AIIO::network-ib
+Credit-based flow control	IB 链路层流控：发送方只有在接收方给出缓冲“信用”时才发送，因此不会因拥塞丢包（无损）。	AIIO::D2 AIIO::network-ib
+Subnet Manager（SM）	IB 网络必需的管理实体：发现拓扑、分配 LID、计算路由表。实现：OpenSM 或 UFM 内置 SM。	AIIO::D2 AIIO::network-ib
+没有 Subnet Manager 会怎样	IB 端口停在 Initializing 状态，无法通信。	AIIO::D2 AIIO::network-ib
+LID（Local Identifier）	Subnet Manager 给 IB 端口分配的子网内 16 位地址。	AIIO::D2 AIIO::network-ib
+GUID	IB 设备/端口的全球唯一 64 位标识，类似 MAC 地址。	AIIO::D2 AIIO::network-ib
+Partition / PKey	IB 的网络隔离机制（类似 VLAN），只有同一分区的端口能互相通信，用于多租户。	AIIO::D2 AIIO::network-ib
+Adaptive routing（自适应路由）	交换机根据拥塞情况动态选择路径，均衡负载。IB 和 Spectrum-X 都支持。	AIIO::D2 AIIO::network-ib
+IPoIB	IP over InfiniBand：在 IB 上跑 IP 协议，方便普通 TCP/IP 应用使用 IB 网络。	AIIO::D2 AIIO::network-ib
+ConnectX	NVIDIA（原 Mellanox）的网卡系列，同时支持 IB 和以太网。ConnectX-6 = 200G，ConnectX-7 = 400G，ConnectX-8 = 800G。	AIIO::D2 AIIO::network-ib
+Quantum 交换机系列	NVIDIA InfiniBand 交换机：Quantum（HDR）、Quantum-2（NDR，64 个 400G 端口）、Quantum-X800（XDR）。	AIIO::D2 AIIO::network-ib
+UFM（Unified Fabric Manager）	InfiniBand 网络管理平台：拓扑可视化、遥测、告警、健康检查，内置 Subnet Manager。	AIIO::D2 AIIO::network-ib
+SHARP	Scalable Hierarchical Aggregation and Reduction Protocol：在 IB 交换机内完成 all-reduce 等归约，减少数据往返、降低延迟。	AIIO::D2 AIIO::network-ib
+ibstat / ibstatus	查看本机 IB 网卡端口状态、速率、LID。端口应为 Active / LinkUp。	AIIO::D2 AIIO::network-ib
+ibv_devinfo	列出 RDMA 设备及其属性（verbs 层）。	AIIO::D2 AIIO::network-ib
+iblinkinfo / ibdiagnet	查看整个 IB 网络的链路状态 / 全网诊断（错误计数、速率不匹配等）。	AIIO::D2 AIIO::network-ib
+perftest（ib_write_bw 等）	RDMA 带宽和延迟测试工具：ib_write_bw、ib_read_bw、ib_send_lat 等。	AIIO::D2 AIIO::network-ib
+DOCA-OFED / MLNX_OFED	NVIDIA 网卡的驱动和 RDMA 软件栈（新版整合进 DOCA-Host）。	AIIO::D2 AIIO::network-ib
+LinkX 线缆	NVIDIA 的线缆与光模块产品线：DAC、AOC、光模块。	AIIO::D2 AIIO::network-ib
+DAC / AOC / 光模块	DAC：无源铜缆，几米内、便宜省电；AOC：有源光缆，更长；光模块 + 光纤：数据中心长距离。	AIIO::D2 AIIO::network-ib
+OSFP / QSFP	高速端口/光模块封装形式。Quantum-2 交换机的双口 OSFP 可承载两路 400G NDR。	AIIO::D2 AIIO::network-ib
+IB 网络健康常看什么	端口状态、链路速率与宽度是否降级、符号错误/链路恢复计数、拥塞。	AIIO::D2 AIIO::network-ib
+RoCE	RDMA over Converged Ethernet：在以太网上跑 RDMA。	AIIO::D2 AIIO::network-eth
+RoCE v1 vs RoCE v2	v1：二层以太网，不可路由；v2：封装在 UDP/IP 中（UDP 4791），可跨三层路由，是主流。	AIIO::D2 AIIO::network-eth
+iWARP	基于 TCP 的 RDMA 实现，AI 集群中较少使用。	AIIO::D2 AIIO::network-eth
+RoCE 对网络的要求	需要接近无损：PFC + ECN 等拥塞控制；丢包会导致性能急剧下降。	AIIO::D2 AIIO::network-eth
+PFC（Priority Flow Control）	以太网按优先级逐跳暂停发送，防止缓冲溢出丢包。	AIIO::D2 AIIO::network-eth
+ECN（Explicit Congestion Notification）	交换机在拥塞时给包打标记，通知发送端降速，而不是丢包。	AIIO::D2 AIIO::network-eth
+DCQCN	RoCE 常用的拥塞控制算法，结合 ECN 标记调整发送速率。	AIIO::D2 AIIO::network-eth
+InfiniBand vs 以太网（RoCE）选型	IB：原生无损、低延迟、SHARP，AI 训练性能标杆。以太网：运维生态熟悉、可与现有网络融合，需调优拥塞控制。	AIIO::D2 AIIO::network-eth
+Spectrum-X	NVIDIA 面向 AI 的以太网平台：Spectrum-4 交换机 + BlueField-3 SuperNIC，自适应路由、拥塞控制、性能隔离。	AIIO::D2 AIIO::network-eth
+Spectrum-4	NVIDIA 以太网交换芯片/交换机，51.2 Tb/s 交换容量，用于 Spectrum-X。	AIIO::D2 AIIO::network-eth
+SuperNIC	专为 AI 东西向流量设计的网卡（BlueField-3 SuperNIC、ConnectX-8 SuperNIC），配合 Spectrum-X 做拥塞控制和乱序重排。	AIIO::D2 AIIO::network-eth
+Cumulus Linux	NVIDIA 以太网交换机的网络操作系统。	AIIO::D2 AIIO::network-eth
+东西向 vs 南北向流量	东西向：数据中心内服务器之间（GPU↔GPU、到存储）；南北向：进出数据中心（用户请求、互联网）。	AIIO::D2 AIIO::network-eth
+Fat-tree（胖树）	叶-脊多层网络，越往上带宽越“胖”，可实现无阻塞全对分带宽，AI 计算网络的标准拓扑。	AIIO::D2 AIIO::network-eth
+Leaf-spine（叶-脊）	服务器连叶交换机，叶全连脊交换机；任意两台服务器最多经过 叶-脊-叶 三跳，路径等价。	AIIO::D2 AIIO::network-eth
+Non-blocking（无阻塞）	上行带宽 = 下行带宽（1:1 无收敛），任意服务器对可同时满速通信。	AIIO::D2 AIIO::network-eth
+Oversubscription（收敛比）	下行总带宽 ÷ 上行总带宽，如 2:1。计算网络通常要求 1:1。	AIIO::D2 AIIO::network-eth
+Bisection bandwidth（对分带宽）	把网络一分为二后两半之间的总带宽，衡量网络整体通信能力。	AIIO::D2 AIIO::network-eth
+Rail-optimized（轨道优化）拓扑	所有服务器的第 N 号 GPU 网卡连到同一台“第 N 号”叶交换机；同号 GPU 一跳可达，与 NCCL 通信模式匹配。	AIIO::D2 AIIO::network-eth
+Compute fabric（计算网络）	GPU↔GPU 跨节点东西向通信网络，IB 或 Spectrum-X，承载分布式训练流量。	AIIO::D2 AIIO::network-eth
+Storage fabric（存储网络）	节点访问高性能共享存储的网络，与计算网络隔离，避免 IO 干扰集合通信。	AIIO::D2 AIIO::network-eth
+In-band management（带内管理网络）	SSH、集群管理、作业调度、镜像和软件包下载，走操作系统。	AIIO::D2 AIIO::network-eth
+Out-of-band management（带外管理网络）	连接 BMC（IPMI/Redfish）和交换机管理口；操作系统宕机也能远程开关机、看日志。	AIIO::D2 AIIO::network-eth
+SuperPOD 的四张网络	计算网络、存储网络、带内管理网络、带外管理网络。	AIIO::D2 AIIO::network-eth
+MTU / Jumbo frame	以太网最大传输单元；存储和 RDMA 网络常用 9000 字节巨帧提高效率（全路径一致）。	AIIO::D2 AIIO::network-eth
+VLAN / VRF	以太网二层隔离 / 三层路由隔离，用于多租户和网络分段。	AIIO::D2 AIIO::network-eth
+LACP / 链路聚合	多条以太网链路绑定成一条逻辑链路，增加带宽和冗余（常用于管理/存储网络）。	AIIO::D2 AIIO::network-eth
+GPUDirect 家族	GPUDirect P2P（节点内 GPU↔GPU）、GPUDirect RDMA（网卡↔GPU 显存）、GPUDirect Storage（存储↔GPU 显存）。	AIIO::D2 AIIO::gpudirect
+GPUDirect RDMA	网卡直接读写 GPU 显存，省掉经过 CPU 内存的中转拷贝，降低跨节点通信延迟和 CPU 负载。	AIIO::D2 AIIO::gpudirect
+没有 GPUDirect RDMA 时的数据路径	GPU 显存 → 拷到 CPU 内存 → 网卡发送 → 对端 CPU 内存 → 拷到对端 GPU，多两次拷贝。	AIIO::D2 AIIO::gpudirect
+GPUDirect Storage（GDS）	本地 NVMe、NVMe-oF 或并行文件系统通过 DMA 直接读写 GPU 显存，绕过 CPU 内存中的 bounce buffer。	AIIO::D2 AIIO::gpudirect
+Bounce buffer	数据在设备之间搬运时，先暂存到 CPU 内存的中转缓冲区。GDS 就是消除它。	AIIO::D2 AIIO::gpudirect
+cuFile	GPUDirect Storage 的用户态 API 库。	AIIO::D2 AIIO::gpudirect
+GPUDirect RDMA 的拓扑要求	GPU 与网卡最好在同一 PCIe 交换芯片下（PIX）；跨 CPU 插槽（SYS）性能会大幅下降。	AIIO::D2 AIIO::gpudirect
+nvidia-peermem	让 RDMA 网卡驱动能直接访问 GPU 显存的内核模块，GPUDirect RDMA 依赖它（或 DMA-BUF）。	AIIO::D2 AIIO::gpudirect
+GPUDirect Video / Async	其他 GPUDirect 成员：视频采集卡直写显存 / GPU 直接触发网络操作。	AIIO::D2 AIIO::gpudirect
+Magnum IO 包括什么	GPUDirect RDMA/Storage、NCCL、NVSHMEM、UCX、SHARP 在网计算、网络管理（UFM）等 IO 加速技术。	AIIO::D2 AIIO::gpudirect
+DPU（Data Processing Unit）	集成高速网卡、Arm CPU 核和加速引擎的“基础设施处理器”，处理网络、存储、安全任务。	AIIO::D2 AIIO::dpu
+CPU / GPU / DPU 分工	CPU：通用计算与控制；GPU：加速计算；DPU：数据中心基础设施（数据搬运、网络、存储、安全）。	AIIO::D2 AIIO::dpu
+DPU 的核心价值	把基础设施任务从主机 CPU 卸载（offload）、加速，并与租户工作负载隔离（零信任）。	AIIO::D2 AIIO::dpu
+BlueField	NVIDIA 的 DPU 产品线。BlueField-2 = 200 Gb/s，BlueField-3 = 400 Gb/s。	AIIO::D2 AIIO::dpu
+DOCA	BlueField DPU 的软件框架/SDK：库、驱动、服务，地位类似 CUDA 之于 GPU。	AIIO::D2 AIIO::dpu
+DPU 能卸载的网络功能	虚拟交换（OVS）、overlay 封装（VXLAN）、负载均衡、遥测。	AIIO::D2 AIIO::dpu
+DPU 能卸载的存储功能	NVMe-oF（把远端存储呈现为本地 NVMe）、加密、压缩、存储虚拟化。	AIIO::D2 AIIO::dpu
+DPU 能卸载的安全功能	防火墙、IPsec/TLS 加密、入侵检测、微分段。	AIIO::D2 AIIO::dpu
+DPU 隔离的意义（零信任）	基础设施控制面运行在 DPU 上，即使主机被攻破，租户也无法篡改网络/存储策略。	AIIO::D2 AIIO::dpu
+DPU 模式 vs NIC 模式	DPU 模式：Arm 核运行基础设施服务；NIC 模式：只当普通高速网卡使用。	AIIO::D2 AIIO::dpu
+DPU 常见误区	DPU 不增加 GPU 显存、不替代 NVSwitch、不用来训练模型。	AIIO::D2 AIIO::dpu
+BlueField 在 AI 云中的角色	多租户 GPU 云中实现网络隔离、存储接入和安全，同时释放主机 CPU 给 AI 工作负载。	AIIO::D2 AIIO::dpu
+AI 训练对存储的需求	大量 GPU 并发读数据集（高聚合吞吐、高 IOPS），周期性写大 checkpoint（高写带宽）。	AIIO::D2 AIIO::storage
+存储分层	GPU 显存 → 系统内存 → 本地 NVMe → 高性能共享存储/并行文件系统 → 对象存储/归档。	AIIO::D2 AIIO::storage
+Local NVMe	节点内 SSD：延迟最低、速度快，适合数据集缓存和临时文件，但不在节点间共享，节点故障数据可能丢失。	AIIO::D2 AIIO::storage
+Parallel file system（并行文件系统）	数据条带化分布在多台存储服务器，客户端并行访问，提供高聚合带宽。例：Lustre、IBM Storage Scale (GPFS)、WEKA、VAST、DDN。	AIIO::D2 AIIO::storage
+Lustre 组件	MDS/MDT（元数据服务器/目标）、OSS/OST（对象存储服务器/目标）、客户端。	AIIO::D2 AIIO::storage
+NFS	传统网络文件系统，适合家目录、代码和配置；大规模并发训练 IO 下容易成为瓶颈。	AIIO::D2 AIIO::storage
+Object storage（对象存储）	S3 兼容，容量大、成本低、易扩展，延迟较高。用于数据湖、原始数据、归档、模型制品。	AIIO::D2 AIIO::storage
+Block storage（块存储）	以块设备形式提供给单台主机（云盘、SAN），常用于系统盘和数据库。	AIIO::D2 AIIO::storage
+NVMe-oF	NVMe over Fabrics：通过 RDMA/TCP 网络访问远端 NVMe，延迟接近本地。	AIIO::D2 AIIO::storage
+Checkpoint 对存储的压力	大模型 checkpoint 可达数 TB，写入期间训练可能暂停；写带宽不足会显著拉长停顿时间。	AIIO::D2 AIIO::storage
+Small files problem	海量小文件导致元数据压力大、IOPS 瓶颈。对策：打包成大文件分片格式（WebDataset、TFRecord 等）。	AIIO::D2 AIIO::storage
+Data loader 瓶颈的症状	GPU 利用率低、波动，CPU iowait 高，step 时间不稳定。	AIIO::D2 AIIO::storage
+数据加载瓶颈的对策	并行文件系统、本地 NVMe 缓存、GPUDirect Storage、增加 DataLoader worker、DALI 在 GPU 上预处理、数据预取。	AIIO::D2 AIIO::storage
+Throughput vs IOPS vs latency	吞吐：大文件顺序读写速度（GB/s）；IOPS：每秒小 IO 次数；延迟：单次 IO 响应时间。训练通常要高吞吐。	AIIO::D2 AIIO::storage
+Caching（缓存）	把热数据缓存在本地 NVMe 或内存，减少重复访问共享存储。	AIIO::D2 AIIO::storage
+RAID	磁盘冗余阵列：RAID 0 条带（快、无冗余），RAID 1 镜像，RAID 5/6 校验，RAID 10 镜像+条带。	AIIO::D2 AIIO::storage
+NVIDIA 认证存储（SuperPOD storage）	经 NVIDIA 验证、满足 DGX SuperPOD 性能要求的存储合作伙伴方案。	AIIO::D2 AIIO::storage
+数据集放在哪里	原始数据 → 对象存储/数据湖；当前训练热数据 → 并行文件系统；每节点副本 → 本地 NVMe 缓存。	AIIO::D2 AIIO::storage
+PUE 公式	PUE = 数据中心总功耗 ÷ IT 设备功耗。理想值 1.0，越低越好。	AIIO::D2 AIIO::datacenter
+PUE 计算例	总 1.5 MW、IT 1.2 MW → PUE = 1.25；即每 1 W IT 负载额外消耗 0.25 W 在制冷、配电等。	AIIO::D2 AIIO::datacenter
+WUE	Water Usage Effectiveness：数据中心用水量 ÷ IT 能耗（L/kWh），衡量水资源效率。	AIIO::D2 AIIO::datacenter
+传统机柜功率密度	约 5–15 kW/柜。AI 机柜：风冷 DGX 约 40 kW/柜，液冷 NVL72 约 120 kW 级。	AIIO::D2 AIIO::datacenter
+4 台 DGX H100 一柜的功率	4 × 10.2 kW ≈ 41 kW，远超传统机柜，需提前规划供电和散热。	AIIO::D2 AIIO::datacenter
+功率换算热量	1 W ≈ 3.412 BTU/h；IT 消耗的电几乎全部变成热，需要等量的散热能力。	AIIO::D2 AIIO::datacenter
+Air cooling（风冷）	风扇 + 机房空调（CRAC/CRAH）。上限约每柜几十 kW，高密度时效率下降。	AIIO::D2 AIIO::datacenter
+CRAC vs CRAH	CRAC：自带压缩机的机房空调；CRAH：使用冷冻水的机房空气处理机。	AIIO::D2 AIIO::datacenter
+Hot aisle / cold aisle（冷热通道）	机柜面对面排列：冷通道送冷风进服务器前面板，热通道收集后部热风。	AIIO::D2 AIIO::datacenter
+冷/热通道封闭（containment）	用门和顶板封闭通道，防止冷热风混合，提高制冷效率、降低 PUE。	AIIO::D2 AIIO::datacenter
+RDHx（后门热交换器）	机柜后门装水冷盘管，直接带走排出的热风，可提升风冷机柜的密度上限。	AIIO::D2 AIIO::datacenter
+Direct-to-chip liquid cooling（冷板液冷）	冷却液流过贴在 GPU/CPU 上的冷板直接带走热量。GB200 NVL72 等高密度系统必须使用。	AIIO::D2 AIIO::datacenter
+CDU（冷却液分配单元）	液冷系统中负责冷却液循环、换热与温度/流量控制的设备。	AIIO::D2 AIIO::datacenter
+Immersion cooling（浸没式液冷）	整台服务器浸在绝缘冷却液中散热，密度极高，运维方式改变较大。	AIIO::D2 AIIO::datacenter
+液冷的好处	支持更高功率密度、降低风扇功耗和 PUE、更低噪音、可回收余热。	AIIO::D2 AIIO::datacenter
+ASHRAE 推荐进风温度	约 18–27 °C（ASHRAE 推荐范围），并控制湿度。	AIIO::D2 AIIO::datacenter
+UPS	不间断电源：市电中断时短时供电，并过滤电力波动，等待发电机启动。	AIIO::D2 AIIO::datacenter
+PDU	机柜配电单元，把电源分配给各设备，智能 PDU 可远程计量和开关。	AIIO::D2 AIIO::datacenter
+A/B 双路供电	服务器双电源分别接两路独立供电，一路故障不影响运行。	AIIO::D2 AIIO::datacenter
+三相电	高密度 AI 机柜通常使用三相电（如 415 V）以提供足够功率。	AIIO::D2 AIIO::datacenter
+N / N+1 / 2N 冗余	N：刚好够用；N+1：额外一个备用；2N：完整双套独立系统。	AIIO::D2 AIIO::datacenter
+Uptime Institute Tier I–IV	数据中心可用性等级：Tier I 基本，Tier IV 完全容错（2N+）。	AIIO::D2 AIIO::datacenter
+Floor loading（楼板承重）	满配 GPU 机柜（尤其液冷）重量可超过 1 吨，部署前要核对楼板承重。	AIIO::D2 AIIO::datacenter
+Power capping（功耗上限）	用 nvidia-smi -pl 或管理软件限制 GPU 功耗，在供电受限时提高能效或避免过载。	AIIO::D2 AIIO::datacenter
+数据中心规划要考虑的因素	供电容量、散热方式、功率密度、承重、网络布线（线缆长度/光模块）、空间、冗余、交付周期、扩展性。	AIIO::D2 AIIO::datacenter
+DGX BasePOD	基于 DGX 系统 + 网络 + 存储的参考架构，规模较小，适合企业起步。	AIIO::D2 AIIO::deploy
+DGX SuperPOD	交钥匙的大规模 AI 数据中心方案：DGX 系统、IB/Spectrum-X 计算网络、认证存储、管理软件、专家服务。	AIIO::D2 AIIO::deploy
+Scalable Unit（SU）	SuperPOD 的标准构建块。DGX H100 SuperPOD：1 SU = 32 台 DGX（256 GPU）。	AIIO::D2 AIIO::deploy
+为什么用参考架构	经过验证的设计降低风险、缩短部署时间、保证性能可预期、获得厂商支持。	AIIO::D2 AIIO::deploy
+On-premises（本地部署）优点	长期高利用率下 TCO 低、数据主权与合规、完全掌控、性能可预期。	AIIO::D2 AIIO::deploy
+On-premises 缺点	前期 CapEx 大、采购交付周期长、需要机房和运维团队、硬件更新周期长。	AIIO::D2 AIIO::deploy
+Cloud（云）优点	按需付费（OpEx）、弹性扩缩、启动快、无需机房、可试用最新硬件。	AIIO::D2 AIIO::deploy
+Cloud 缺点	长期满载成本高、GPU 配额/容量受限、数据出云（egress）费用、合规限制。	AIIO::D2 AIIO::deploy
+CapEx vs OpEx	CapEx：一次性资本支出（买硬件）；OpEx：持续运营支出（云按需付费、电费、人力）。	AIIO::D2 AIIO::deploy
+Hybrid（混合部署）	基础负载在本地，高峰溢出（cloud bursting）到云；或训练在一处、推理在另一处。	AIIO::D2 AIIO::deploy
+Cloud bursting	本地容量不足时临时把作业扩展到云上。	AIIO::D2 AIIO::deploy
+选本地的典型信号	持续高利用率、数据量大不便迁移、数据主权/合规要求、长期稳定需求。	AIIO::D2 AIIO::deploy
+选云的典型信号	短期/突发/不确定的需求、快速验证、没有机房和运维团队。	AIIO::D2 AIIO::deploy
+DGX Cloud	NVIDIA 与云厂商合作提供的托管 AI 平台：NVIDIA 优化的基础设施、软件和专家支持。	AIIO::D2 AIIO::deploy
+TCO（总拥有成本）	采购 + 机房 + 电力 + 散热 + 网络 + 运维人力 + 软件授权 + 折旧的总成本。	AIIO::D2 AIIO::deploy
+GPU 利用率对成本的影响	GPU 闲置也在折旧或计费；提高利用率（调度、共享、回收）是降低单位成本最直接的手段。	AIIO::D2 AIIO::deploy
+Data gravity（数据引力）	数据量越大越难迁移，计算倾向于部署在数据所在位置。	AIIO::D2 AIIO::deploy
+Egress cost（出云费用）	把数据从云上传出时收取的流量费，影响混合/多云架构成本。	AIIO::D2 AIIO::deploy
+Edge（边缘）部署场景	低延迟、带宽受限、离线运行、隐私（工厂质检、零售、自动驾驶、医疗设备）。	AIIO::D2 AIIO::deploy
+边缘的运维挑战	站点分散、无现场 IT、物理安全差、网络不稳定 → 需要零接触部署与远程管理（Fleet Command）。	AIIO::D2 AIIO::deploy
+NVML	NVIDIA Management Library：驱动提供的 C 管理接口。nvidia-smi、DCGM、各类监控工具都基于它。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi	基于 NVML 的命令行工具：查看 GPU 状态、进程、显存、温度、功耗，并修改部分配置。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi 默认输出看什么	驱动版本、驱动支持的最高 CUDA 版本、每卡温度/功耗/显存/利用率、ECC、占用 GPU 的进程。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi 里的 “CUDA Version”	驱动支持的最高 CUDA 版本，不是已安装的 CUDA Toolkit 版本。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -q	打印所有 GPU 的完整详细信息。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -q -d PERFORMANCE	查看时钟降频原因（Clocks Event / Throttle Reasons）：温度、功耗上限、硬件 slowdown 等。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -q -d ECC	查看 ECC 错误计数（易失/累计、可纠正/不可纠正）。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -q -d ROW_REMAPPER	查看行重映射状态（A100 及以后）：已重映射行数、是否有待生效的重映射。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi --query-gpu=... --format=csv -l 1	按字段定时输出 CSV（本仓库 W1 的指标采集就用它）。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi dmon	按设备滚动输出功耗、温度、SM/显存利用率等。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi pmon	按进程滚动输出 GPU 使用情况。	AIIO::D3 AIIO::nvidia-smi
+用哪个命令查看 GPU、网卡之间的连接拓扑？	nvidia-smi topo -m：输出 NV#/PIX/PXB/PHB/NODE/SYS 矩阵和 CPU/NUMA 亲和性。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi nvlink -s	查看每条 NVLink 的状态和速率。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -pm 1	开启持久模式（Linux），保持驱动初始化，降低作业启动延迟。推荐改用 nvidia-persistenced 守护进程。	AIIO::D3 AIIO::nvidia-smi
+nvidia-persistenced	持久化守护进程，没有客户端时也保持 GPU 驱动状态初始化。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -pl <W>	设置 GPU 功耗上限（瓦）。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -lgc / -ac	锁定 GPU 时钟范围 / 设置应用时钟，用于基准测试获得稳定结果。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -c（compute mode）	DEFAULT：多进程共享；EXCLUSIVE_PROCESS：只允许一个进程使用 GPU；PROHIBITED：禁止计算。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -e 1	开启 ECC（需要重启或 GPU 重置后生效）。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -r	重置 GPU（要求没有进程在使用该 GPU）。	AIIO::D3 AIIO::nvidia-smi
+nvidia-smi -i 0 -mig 1	在 0 号 GPU 上开启 MIG 模式（需 GPU 重置后生效）。	AIIO::D3 AIIO::nvidia-smi
+nvidia-bug-report.sh	收集驱动、日志、配置的完整诊断包，提交给 NVIDIA 支持时使用。	AIIO::D3 AIIO::nvidia-smi
+utilization.gpu 的真实含义	采样周期内有任何 kernel 在执行的时间比例。100% 不代表所有 SM 都在满负荷工作。	AIIO::D3 AIIO::nvidia-smi
+CUDA_VISIBLE_DEVICES	环境变量，限制 CUDA 应用能看到哪些 GPU（如 0,1），并重新编号。	AIIO::D3 AIIO::nvidia-smi
+DCGM（Data Center GPU Manager）	数据中心 GPU 管理套件：健康监控、主动诊断、策略告警、作业统计、遥测，可在集群规模使用。	AIIO::D3 AIIO::dcgm
+DCGM 与 nvidia-smi 的区别	nvidia-smi 是单机查看/配置工具；DCGM 面向集群运维：后台持续监控、诊断、策略、作业级统计、与 Prometheus/K8s 集成。	AIIO::D3 AIIO::dcgm
+nv-hostengine	DCGM 的后台守护进程，持续采集 GPU 数据，dcgmi 等客户端连接它。	AIIO::D3 AIIO::dcgm
+dcgmi	DCGM 命令行客户端。	AIIO::D3 AIIO::dcgm
+dcgmi discovery -l	列出 DCGM 能看到的 GPU 和 NVSwitch。	AIIO::D3 AIIO::dcgm
+dcgmi diag -r 1	快速诊断（秒级）：基本部署和软件检查，适合每个作业前跑。	AIIO::D3 AIIO::dcgm
+dcgmi diag -r 2	中等诊断（约几分钟）：增加短时压力和 PCIe 等检查。	AIIO::D3 AIIO::dcgm
+dcgmi diag -r 3	长诊断（数十分钟级）：显存、计算压力、带宽、功耗等全面测试，用于上线验收或故障后排查。	AIIO::D3 AIIO::dcgm
+dcgmi health	开启并查询健康监控（PCIe、显存、ECC、温度、NVLink 等子系统）。	AIIO::D3 AIIO::dcgm
+dcgmi policy	设置策略：发生特定事件（如 DBE、XID、温度过高）时告警或执行动作。	AIIO::D3 AIIO::dcgm
+dcgmi stats	作业级统计：记录某作业期间 GPU 利用率、显存、功耗、错误等。	AIIO::D3 AIIO::dcgm
+DCGM Exporter	把 DCGM 指标以 Prometheus 格式暴露（默认端口 9400，路径 /metrics），常由 GPU Operator 部署。	AIIO::D3 AIIO::dcgm
+GPU 监控标准链路	DCGM Exporter → Prometheus（抓取/存储/告警）→ Grafana（仪表盘）；告警经 Alertmanager 发出。	AIIO::D3 AIIO::dcgm
+DCGM 适用环境	数据中心 GPU + 原生 Linux 驱动。本仓库实测：消费卡 + WSL2 上 DCGM Exporter 能启动但采不到指标。	AIIO::D3 AIIO::dcgm
+DCGM_FI_DEV_GPU_UTIL	GPU 利用率（同 nvidia-smi 的 utilization.gpu）。	AIIO::D3 AIIO::dcgm
+DCGM_FI_DEV_FB_USED	已用显存（frame buffer）。	AIIO::D3 AIIO::dcgm
+DCGM_FI_DEV_GPU_TEMP / POWER_USAGE	GPU 温度 / 当前功耗。	AIIO::D3 AIIO::dcgm
+DCGM_FI_DEV_XID_ERRORS	最近一次 XID 错误编号，用于告警。	AIIO::D3 AIIO::dcgm
+DCGM_FI_PROF_SM_ACTIVE	SM 活跃度：至少有一个 warp 在 SM 上的时间比例，比 GPU_UTIL 更能反映实际负载。	AIIO::D3 AIIO::dcgm
+DCGM_FI_PROF_SM_OCCUPANCY	SM 占用率：驻留 warp 数相对最大值的比例。	AIIO::D3 AIIO::dcgm
+DCGM_FI_PROF_PIPE_TENSOR_ACTIVE	Tensor Core 管线活跃度，反映混合精度矩阵运算是否在用 Tensor Core。	AIIO::D3 AIIO::dcgm
+DCGM_FI_PROF_DRAM_ACTIVE	显存接口活跃度，高说明访存密集。	AIIO::D3 AIIO::dcgm
+DCGM profiling 指标（DCP）	SM Active、Occupancy、Tensor Active、DRAM Active、PCIe/NVLink 吞吐等，比 utilization 更准确地反映效率。	AIIO::D3 AIIO::dcgm
+Prometheus	开源监控系统：定时抓取（scrape）目标的指标，存为时间序列，支持 PromQL 查询和告警规则。	AIIO::D3 AIIO::dcgm
+Grafana	开源可视化平台，连接 Prometheus 等数据源做仪表盘。NVIDIA 提供 DCGM 官方 dashboard。	AIIO::D3 AIIO::dcgm
+Alertmanager	Prometheus 的告警路由组件：分组、去重、静默，发送到邮件、IM、PagerDuty 等。	AIIO::D3 AIIO::dcgm
+应该监控的 GPU 指标	利用率与 SM Active、显存、温度、功耗、时钟与降频原因、ECC/行重映射、XID、PCIe/NVLink 吞吐与错误。	AIIO::D3 AIIO::dcgm
+应该监控的集群指标	节点健康状态、作业排队时长、GPU 分配率、作业成功率、网络错误/拥塞、存储吞吐与容量。	AIIO::D3 AIIO::dcgm
+采样间隔的影响	间隔太长会漏掉短时尖峰和异常；采集链路自身也可能有停顿（本仓库 W1 analysis.md 的监控盲区）。	AIIO::D3 AIIO::dcgm
+日志收集	dmesg/journalctl（内核与驱动、XID）、应用日志、调度器日志，集中到 ELK/Loki 等系统便于检索。	AIIO::D3 AIIO::dcgm
+XID 错误	NVIDIA 驱动写入内核日志的 GPU 错误编号，用 dmesg 或 journalctl -k 查看，格式如 “NVRM: Xid ... 79”。	AIIO::D3 AIIO::xid
+Xid 13	Graphics Engine Exception：多为应用程序问题（越界访问、非法指令），先查代码和驱动版本。	AIIO::D3 AIIO::xid
+Xid 31	GPU 内存页错误（MMU fault）：多为应用非法内存访问。	AIIO::D3 AIIO::xid
+Xid 43	GPU 停止处理：通常是用户应用出错（如被终止）。	AIIO::D3 AIIO::xid
+Xid 45	被抢占/清理：通常因为进程被终止或其他错误的后续，常可忽略。	AIIO::D3 AIIO::xid
+Xid 48	双比特 ECC 错误（DBE，不可纠正）：隔离节点、重置 GPU、检查行重映射/页退役，反复出现则 RMA。	AIIO::D3 AIIO::xid
+Xid 63	ECC 页退役或行重映射记录事件：通常需要计划内重置 GPU 让其生效。	AIIO::D3 AIIO::xid
+Xid 64	ECC 页退役或行重映射记录失败：需要处理，可能需更换。	AIIO::D3 AIIO::xid
+Xid 74	NVLink 错误：检查 NVLink 状态和线缆/连接器，重置；持续出现需硬件排查。	AIIO::D3 AIIO::xid
+Xid 79	GPU 从总线掉线（fallen off the bus）：严重。隔离节点，检查 PCIe、供电、散热，重启、重新插拔或 RMA。	AIIO::D3 AIIO::xid
+Xid 92	单比特 ECC 错误率过高：关注趋势，可能预示硬件老化。	AIIO::D3 AIIO::xid
+Xid 94	被隔离的（contained）ECC 错误：只影响相关应用，其他进程不受影响（A100+）。	AIIO::D3 AIIO::xid
+Xid 95	未被隔离的（uncontained）ECC 错误：需要重置 GPU（A100+）。	AIIO::D3 AIIO::xid
+Xid 119 / 120	GSP 固件相关错误/超时：收集日志，更新驱动，必要时重置。	AIIO::D3 AIIO::xid
+ECC	Error Correcting Code：自动检测并纠正显存位翻转，数据中心 GPU 默认开启。	AIIO::D3 AIIO::xid
+SBE vs DBE	单比特错误（SBE）可自动纠正；双比特错误（DBE）不可纠正，会导致应用出错。	AIIO::D3 AIIO::xid
+Volatile vs aggregate ECC 计数	Volatile：自上次驱动加载以来的计数；Aggregate：GPU 生命周期累计。	AIIO::D3 AIIO::xid
+Page retirement（页退役）	Volta 及以前：把出错的显存页标记为不再使用。	AIIO::D3 AIIO::xid
+Row remapping（行重映射）	A100 及以后：用备用行替换出错的显存行，通常在 GPU 重置后生效。	AIIO::D3 AIIO::xid
+关闭 ECC 能解决 ECC 错误吗	不能。关闭 ECC 只会掩盖错误，导致静默数据损坏。	AIIO::D3 AIIO::xid
+PCIe 链路降级	nvidia-smi -q 中 Link Width/Gen 低于预期（如 x16 变 x8、Gen5 变 Gen3），带宽下降，需检查插槽、转接卡、固件。	AIIO::D3 AIIO::xid
+GPU 过热降频	温度达到阈值触发降频保护；检查风扇/液冷、进风温度、气流、灰尘、机柜布局。	AIIO::D3 AIIO::xid
+RMA	Return Merchandise Authorization：硬件故障退回厂商维修或更换。	AIIO::D3 AIIO::xid
+硬件故障标准处理流程	发现 → 隔离（drain，不再调度新作业）→ 诊断（dcgmi diag、日志）→ 修复/重置/RMA → 验证 → 恢复上线 → 记录。	AIIO::D3 AIIO::xid
+Slurm	开源 HPC 作业调度器/资源管理器，AI 训练集群最常用，擅长批处理、多节点作业、队列和公平共享。	AIIO::D3 AIIO::slurm
+slurmctld	Slurm 中央控制守护进程（控制节点），负责调度和资源分配。	AIIO::D3 AIIO::slurm
+slurmd	每个计算节点上的 Slurm 守护进程，负责启动和监控作业。	AIIO::D3 AIIO::slurm
+slurmdbd	Slurm 数据库守护进程，记录作业记账（accounting）信息。	AIIO::D3 AIIO::slurm
+Partition（分区）	Slurm 中一组节点的逻辑队列，可设置不同的限制和优先级（类似队列）。	AIIO::D3 AIIO::slurm
+sbatch	提交批处理脚本，作业进入队列等待调度。	AIIO::D3 AIIO::slurm
+srun	在分配的资源上启动并行任务；也可直接申请资源并运行。	AIIO::D3 AIIO::slurm
+salloc	交互式申请资源分配，获得后在 shell 中运行命令。	AIIO::D3 AIIO::slurm
+squeue	查看作业队列和作业状态（PD 排队、R 运行等）。	AIIO::D3 AIIO::slurm
+sinfo	查看分区和节点状态（idle、alloc、mix、drain、down）。	AIIO::D3 AIIO::slurm
+scancel	取消作业。	AIIO::D3 AIIO::slurm
+sacct	查询已完成作业的记账信息（时长、资源、退出码）。	AIIO::D3 AIIO::slurm
+scontrol	查看和修改 Slurm 配置与状态，如 scontrol show job / show node。	AIIO::D3 AIIO::slurm
+如何把节点隔离出调度	scontrol update nodename=<节点> state=drain reason="原因"；修复后 state=resume。	AIIO::D3 AIIO::slurm
+Slurm 节点状态 drain	节点不再接受新作业，正在运行的作业继续完成。用于维护和故障隔离。	AIIO::D3 AIIO::slurm
+GRES	Generic RESources：Slurm 管理 GPU 等特殊资源的机制，在 gres.conf 中定义。	AIIO::D3 AIIO::slurm
+申请 GPU 的写法	--gres=gpu:4 或 --gpus=4、--gpus-per-node=8。	AIIO::D3 AIIO::slurm
+#SBATCH 指令	批处理脚本开头的资源声明，如 #SBATCH --nodes=2、--ntasks-per-node=8、--time=04:00:00。	AIIO::D3 AIIO::slurm
+Fair-share（公平共享）	根据用户/账户的历史使用量调整优先级，用得多的优先级降低。	AIIO::D3 AIIO::slurm
+Backfill scheduling（回填调度）	在不推迟高优先级作业的前提下，用小作业填充空闲资源，提高利用率。	AIIO::D3 AIIO::slurm
+Preemption（抢占）	高优先级作业可以暂停、重新排队或终止低优先级作业以获得资源。	AIIO::D3 AIIO::slurm
+QoS（Slurm）	服务质量配置：限制资源上限、设置优先级、抢占规则。	AIIO::D3 AIIO::slurm
+Reservation（预留）	为特定用户或维护窗口预留节点和时间段。	AIIO::D3 AIIO::slurm
+Job array（作业数组）	一次提交大量相似作业（如超参搜索），用索引区分。	AIIO::D3 AIIO::slurm
+Prolog / Epilog	作业开始前 / 结束后在节点上执行的脚本，常用于健康检查（如 dcgmi diag -r 1）和清理。	AIIO::D3 AIIO::slurm
+HealthCheckProgram	Slurm 定期在节点上运行的健康检查程序，发现问题自动 drain 节点。	AIIO::D3 AIIO::slurm
+Pyxis + Enroot	Enroot：把容器镜像转为非特权沙箱运行；Pyxis：Slurm 插件，支持 srun --container-image=nvcr.io#nvidia/pytorch:xx.xx-py3。	AIIO::D3 AIIO::slurm
+Apptainer / Singularity	HPC 常用的容器运行时，非 root 运行，适合多用户共享集群。	AIIO::D3 AIIO::slurm
+PMIx	进程管理接口，srun --mpi=pmix 用它启动 MPI 多节点作业。	AIIO::D3 AIIO::slurm
+Kubernetes（K8s）	容器编排平台：自动部署、扩缩容、服务发现、滚动升级、自愈。擅长长期运行的服务（如推理）。	AIIO::D3 AIIO::k8s
+Slurm vs Kubernetes 怎么选	多节点紧耦合训练、批处理、公平共享 → Slurm；推理微服务、自动扩缩、滚动更新、云原生 → Kubernetes。	AIIO::D3 AIIO::k8s
+Pod	K8s 最小调度单元，包含一个或多个共享网络/存储的容器。	AIIO::D3 AIIO::k8s
+Node / kubelet	Node 是工作节点；kubelet 是节点上的代理，负责启动 Pod 并上报资源。	AIIO::D3 AIIO::k8s
+Deployment / StatefulSet / Job	Deployment：无状态服务；StatefulSet：有状态服务；Job：一次性批处理任务。	AIIO::D3 AIIO::k8s
+Namespace	K8s 中的资源隔离与分组单位，常用于多租户和配额。	AIIO::D3 AIIO::k8s
+ResourceQuota	按 namespace 限制资源总量（如 GPU 数）。	AIIO::D3 AIIO::k8s
+nvidia.com/gpu	NVIDIA Device Plugin 注册的扩展资源名，Pod 在 resources.limits 中申请整数个 GPU。	AIIO::D3 AIIO::k8s
+GPU 在 K8s 中只能写在 limits 吗	GPU 作为扩展资源，在 limits 中指定（requests 若写必须等于 limits），不支持超额分配。	AIIO::D3 AIIO::k8s
+NVIDIA Device Plugin	DaemonSet，向 kubelet 注册 nvidia.com/gpu 资源，并在 Pod 启动时分配具体 GPU。	AIIO::D3 AIIO::k8s
+NVIDIA GPU Operator	用 Operator 自动部署和管理 GPU 节点所需全部组件，让 GPU 节点像 CPU 节点一样即插即用。	AIIO::D3 AIIO::k8s
+GPU Operator 包含哪些组件	GPU 驱动容器、Container Toolkit、Device Plugin、GPU Feature Discovery、DCGM/DCGM Exporter、MIG Manager、Node Feature Discovery、Validator。	AIIO::D3 AIIO::k8s
+ClusterPolicy	GPU Operator 的 CRD，集中声明各组件的开关和配置。	AIIO::D3 AIIO::k8s
+驱动容器（driver container）	GPU Operator 以容器方式在节点上安装驱动，无需在主机 OS 预装驱动。	AIIO::D3 AIIO::k8s
+GPU Feature Discovery（GFD）	给节点打 GPU 标签：型号（nvidia.com/gpu.product）、显存、数量、MIG 配置、CUDA 驱动版本。	AIIO::D3 AIIO::k8s
+Node Feature Discovery（NFD）	检测节点硬件特性（如 PCI 设备）并打标签，GPU Operator 依赖它识别 GPU 节点。	AIIO::D3 AIIO::k8s
+MIG Manager	GPU Operator 组件，根据节点标签自动配置 MIG 分区。	AIIO::D3 AIIO::k8s
+MIG 在 K8s 中的 single vs mixed 策略	single：节点上所有 MIG 实例同规格，仍以 nvidia.com/gpu 暴露；mixed：不同规格分别暴露为 nvidia.com/mig-1g.10gb 等资源。	AIIO::D3 AIIO::k8s
+K8s GPU 时间片（time-slicing）	通过 Device Plugin 配置把一张 GPU 宣告为多个副本，多个 Pod 轮流共享；无显存和故障隔离。	AIIO::D3 AIIO::k8s
+NVIDIA Network Operator	在 K8s 中部署高速网络组件：网卡驱动（OFED）、RDMA 设备插件、SR-IOV、GPUDirect RDMA 所需模块。	AIIO::D3 AIIO::k8s
+SR-IOV	把一块物理网卡虚拟成多个虚拟功能（VF），分给不同 Pod/VM 直接使用，接近原生性能。	AIIO::D3 AIIO::k8s
+Helm	K8s 包管理器；GPU Operator、Network Operator 都通过 Helm chart 安装。	AIIO::D3 AIIO::k8s
+Operator 模式	用自定义控制器 + CRD 把运维知识自动化（安装、升级、修复）。	AIIO::D3 AIIO::k8s
+DaemonSet	确保每个（或选定的）节点上都运行一个 Pod 副本，Device Plugin、DCGM Exporter 都用它部署。	AIIO::D3 AIIO::k8s
+nodeSelector / affinity / taints & tolerations	控制 Pod 调度到哪些节点；GPU 节点常加 taint，只有声明 toleration 的 GPU 作业才能调度上去。	AIIO::D3 AIIO::k8s
+HPA（水平自动扩缩）	根据指标（CPU、QPS、自定义 GPU 指标）自动增减 Pod 副本数，用于推理服务。	AIIO::D3 AIIO::k8s
+Run:ai	NVIDIA 收购的 K8s AI 工作负载编排平台：GPU 配额、分数 GPU、队列、公平共享、动态调度。	AIIO::D3 AIIO::k8s
+KAI Scheduler	由 Run:ai 调度器开源而来的 K8s AI 调度器，支持 gang scheduling、配额与公平共享。	AIIO::D3 AIIO::k8s
+K8s 上的批调度方案	Volcano、Kueue、KAI Scheduler 等，补充原生调度器缺少的 gang scheduling 和队列功能。	AIIO::D3 AIIO::k8s
+Kubeflow / KServe	Kubeflow：K8s 上的 ML 平台（流水线、训练作业）；KServe：K8s 上的模型推理服务框架。	AIIO::D3 AIIO::k8s
+DRA（Dynamic Resource Allocation）	K8s 较新的设备分配机制，比 Device Plugin 更灵活地描述和共享 GPU 等设备。	AIIO::D3 AIIO::k8s
+Base Command Manager（BCM）	集群管理软件（原 Bright Cluster Manager）：裸机部署、OS 镜像、Slurm/K8s 部署、监控、用户管理。	AIIO::D3 AIIO::k8s
+NVIDIA Mission Control	AI 工厂运维软件栈：整合集群管理（BCM）、工作负载调度（Run:ai/Slurm）、健康监控与自动故障恢复。	AIIO::D3 AIIO::k8s
+Base Command Platform	DGX Cloud 上的 Web/CLI 平台，管理作业、数据集、工作区。	AIIO::D3 AIIO::k8s
+GPU 共享的五种方式	PCIe 直通、NVIDIA vGPU、MIG、时间片（time-slicing）、MPS。	AIIO::D3 AIIO::sharing
+PCIe passthrough（GPU 直通）	把整张物理 GPU 直接分配给一个虚拟机，接近裸机性能，但一张卡只能给一个 VM。	AIIO::D3 AIIO::sharing
+NVIDIA vGPU	在 hypervisor（如 VMware vSphere）上把一张 GPU 分给多个虚拟机共享；需要 vGPU 软件和授权（license）。	AIIO::D3 AIIO::sharing
+vGPU 组成	hypervisor 上的 Virtual GPU Manager + 虚拟机内的 guest 驱动 + 授权服务器（NVIDIA License System）。	AIIO::D3 AIIO::sharing
+vGPU 软件版本（产品）	vPC（虚拟桌面）、vWS / RTX Virtual Workstation（专业图形）、vCS（Virtual Compute Server，计算/AI，现含在 NVIDIA AI Enterprise 中）。	AIIO::D3 AIIO::sharing
+vGPU 调度策略	Best effort（默认，空闲时可多用）、Equal share（平均分）、Fixed share（固定份额，性能可预测）。	AIIO::D3 AIIO::sharing
+MIG-backed vGPU	把 MIG 实例分配给虚拟机，兼具虚拟化与 MIG 硬件隔离。	AIIO::D3 AIIO::sharing
+MIG（Multi-Instance GPU）	把一张 GPU 硬件切分成最多 7 个独立实例，每个有独立的 SM、L2 缓存、显存和带宽，硬件级隔离与 QoS。	AIIO::D3 AIIO::sharing
+支持 MIG 的 GPU	Ampere 起的数据中心 GPU：A100、A30、H100、H200、B200 等（A30 最多 4 实例）。消费级卡不支持。	AIIO::D3 AIIO::sharing
+A100 40GB 的 MIG 规格	1g.5gb（最多 7 个）、2g.10gb、3g.20gb、4g.20gb、7g.40gb。	AIIO::D3 AIIO::sharing
+80 GB 卡的 MIG 最小规格	A100 80GB / H100 80GB 最小为 1g.10gb，最多 7 个。	AIIO::D3 AIIO::sharing
+MIG 规格命名“3g.20gb”	3 个计算切片（g）+ 20 GB 显存。	AIIO::D3 AIIO::sharing
+GPU Instance（GI）vs Compute Instance（CI）	GI：显存和计算切片的硬件分区；CI：在 GI 内进一步划分计算资源，共享 GI 的显存。	AIIO::D3 AIIO::sharing
+开启 MIG 的步骤	nvidia-smi -i 0 -mig 1（需重置 GPU）→ 创建 GPU 实例（-cgi）→ 创建计算实例（-cci），或用 -C 一并创建。	AIIO::D3 AIIO::sharing
+nvidia-smi mig -lgip	列出该 GPU 支持的 MIG GPU 实例规格和可用数量。	AIIO::D3 AIIO::sharing
+mig-parted	NVIDIA 的声明式 MIG 分区工具，按配置文件批量设置，GPU Operator 的 MIG Manager 使用它。	AIIO::D3 AIIO::sharing
+MIG 实例重启后还在吗	MIG 模式设置会保留，但实例通常需要重新创建，所以生产中用 mig-parted/MIG Manager 自动化。	AIIO::D3 AIIO::sharing
+Time-slicing（时间片）	多个进程/容器轮流使用整张 GPU；配置简单、任何 GPU 可用，但没有显存隔离和故障隔离。	AIIO::D3 AIIO::sharing
+MPS（Multi-Process Service）	让多个 CUDA 进程的 kernel 并发跑在同一 GPU 上，提高小任务利用率；可限制 SM 比例，但显存/故障隔离有限。	AIIO::D3 AIIO::sharing
+MPS 控制命令	nvidia-cuda-mps-control -d 启动守护进程；CUDA_MPS_ACTIVE_THREAD_PERCENTAGE 限制每个客户端可用的 SM 比例。	AIIO::D3 AIIO::sharing
+需要强隔离 + 多租户选什么	MIG（容器场景）或 MIG-backed vGPU（虚拟机场景）。	AIIO::D3 AIIO::sharing
+多个 VM 共享 GPU 选什么	NVIDIA vGPU（需授权）。	AIIO::D3 AIIO::sharing
+开发测试、小推理、想榨干空闲 GPU 选什么	时间片（简单）或 MPS（并发更好），接受弱隔离。	AIIO::D3 AIIO::sharing
+单 VM 要整卡最高性能选什么	PCIe 直通。	AIIO::D3 AIIO::sharing
+隔离强度从强到弱	直通（独占）≈ MIG（硬件分区）> vGPU 时间片 > MPS > 时间片（无隔离）。	AIIO::D3 AIIO::sharing
+为什么 AI 用容器	把框架、CUDA、库和依赖打包成一致环境，可复现、可移植、易部署，避免“我机器上能跑”。	AIIO::D3 AIIO::containers
+NVIDIA Container Toolkit	让 Docker、containerd、CRI-O 等容器运行时访问 GPU：在容器启动时注入 GPU 设备和驱动库。	AIIO::D3 AIIO::containers
+Container Toolkit 组件	libnvidia-container、nvidia-container-runtime、nvidia-ctk 命令行工具、CDI 支持。	AIIO::D3 AIIO::containers
+nvidia-ctk runtime configure	把 NVIDIA 运行时写入 Docker/containerd 配置。	AIIO::D3 AIIO::containers
+CDI（Container Device Interface）	描述如何把设备暴露给容器的标准规范，Container Toolkit 可生成 GPU 的 CDI 描述。	AIIO::D3 AIIO::containers
+docker run --gpus all	请求把所有 GPU 交给容器；也可 --gpus '"device=0,1"' 指定。	AIIO::D3 AIIO::containers
+不加 --gpus 的后果	容器里没有 GPU 设备和 nvidia-smi，报 executable file not found（本仓库故障记录 01）。	AIIO::D3 AIIO::containers
+NVIDIA_VISIBLE_DEVICES	容器环境变量，指定容器可见的 GPU（all、none 或编号/UUID）。	AIIO::D3 AIIO::containers
+NVIDIA_DRIVER_CAPABILITIES	指定注入哪些驱动能力：compute、utility（nvidia-smi）、graphics、video 等。	AIIO::D3 AIIO::containers
+宿主机需要装什么	只需要 NVIDIA 驱动 + Container Toolkit。CUDA Toolkit、cuDNN、框架都在容器镜像里。	AIIO::D3 AIIO::containers
+CUDA 驱动向后兼容	新驱动可以运行用旧 CUDA 版本构建的应用。	AIIO::D3 AIIO::containers
+容器 CUDA 比驱动新会怎样	报 “CUDA driver version is insufficient”。解决：升级宿主机驱动；数据中心卡也可用 CUDA forward compatibility 包。	AIIO::D3 AIIO::containers
+在宿主机装新 CUDA Toolkit 能解决驱动不足吗	不能。能运行哪个 CUDA 版本由驱动决定，Toolkit 只是开发工具。	AIIO::D3 AIIO::containers
+CUDA minor version compatibility	CUDA 11 起，同一主版本内用较新小版本构建的应用通常可在该主版本的较旧驱动上运行（新特性除外）。	AIIO::D3 AIIO::containers
+CUDA forward compatibility package	在数据中心 GPU 上让旧驱动运行更新 CUDA 主版本应用的兼容包（cuda-compat）。	AIIO::D3 AIIO::containers
+NGC 容器的优势	NVIDIA 每月发布、经过测试与性能调优的框架 + CUDA + 库组合，减少依赖冲突。	AIIO::D3 AIIO::containers
+CUDA 基础镜像 base / runtime / devel	base：最小 CUDA 运行时；runtime：加上 CUDA 数学库等；devel：再加编译器和头文件，用于构建。	AIIO::D3 AIIO::containers
+镜像安全实践	使用可信来源（NGC）、固定版本标签、扫描漏洞、最小化镜像、不以 root 运行。	AIIO::D3 AIIO::containers
+集群上线验收（burn-in）	交付前跑长时间压力和诊断：dcgmi diag -r 3、NCCL 测试、HPL、存储压测，确认性能和稳定性达标。	AIIO::D3 AIIO::ops
+HPL（High Performance Linpack）	衡量集群浮点性能的标准基准（TOP500 排名用），也用于整机稳定性压测。	AIIO::D3 AIIO::ops
+Provisioning（部署/装机）	通过 PXE 网络启动 + 系统镜像批量部署节点（BCM 等工具），保证配置一致。	AIIO::D3 AIIO::ops
+版本基线	统一 OS、内核、GPU 驱动、CUDA、固件（GPU、网卡、BMC）、OFED、容器运行时版本，避免“雪花节点”。	AIIO::D3 AIIO::ops
+滚动升级	分批 drain 节点 → 升级驱动/固件 → 验证 → 恢复，保证集群整体持续可用。	AIIO::D3 AIIO::ops
+固件更新工具	DGX 用 nvfwupd 等工具更新固件；网卡固件用 mlxfwmanager / mlxup。	AIIO::D3 AIIO::ops
+IPMI / Redfish	通过 BMC 远程管理服务器的协议：电源控制、传感器、日志、远程控制台。Redfish 是基于 REST 的新标准。	AIIO::D3 AIIO::ops
+ipmitool	IPMI 命令行工具，例如 ipmitool power status / power cycle。	AIIO::D3 AIIO::ops
+作业前健康检查	在 Slurm Prolog 或 K8s init 容器中跑快速检查（dcgmi diag -r 1、NVLink/IB 状态），有问题自动隔离节点。	AIIO::D3 AIIO::ops
+症状：nvidia-smi 报无法与驱动通信	检查驱动模块是否加载（lsmod | grep nvidia）、内核升级后 DKMS 是否重编译、Secure Boot 是否阻止加载。	AIIO::D3 AIIO::ops
+症状：HGX/DGX 上 CUDA 初始化失败	检查 nvidia-fabricmanager 服务是否运行、版本是否与驱动一致。	AIIO::D3 AIIO::ops
+症状：容器里看不到 GPU	检查 --gpus 参数、Container Toolkit 配置、K8s 中 Device Plugin/GPU Operator 状态、Pod 是否申请了 nvidia.com/gpu。	AIIO::D3 AIIO::ops
+症状：GPU 性能突然下降	看降频原因（温度/功耗）、PCIe 链路宽度/代数、ECC 错误、是否有其他进程抢占、时钟设置。	AIIO::D3 AIIO::ops
+症状：多节点训练慢	NCCL_DEBUG=INFO 看是否走 NET/IB；用 nccl-tests 测 busbw；检查 IB 端口速率、拓扑、GPUDirect RDMA、拥塞。	AIIO::D3 AIIO::ops
+NCCL_DEBUG=INFO	打印 NCCL 初始化信息：使用的网络（IB/Socket）、拓扑、通道数，排查通信问题第一步。	AIIO::D3 AIIO::ops
+NCCL 回退到 NET/Socket 说明什么	没有用上 InfiniBand/RDMA，走了 TCP。检查 RDMA 驱动、网卡状态、容器是否挂载 RDMA 设备、NCCL_IB_HCA 设置。	AIIO::D3 AIIO::ops
+NCCL_SOCKET_IFNAME / NCCL_IB_HCA	指定 NCCL 使用的 TCP 网卡接口 / InfiniBand 网卡设备。	AIIO::D3 AIIO::ops
+症状：GPU 利用率低、iowait 高	数据加载或存储瓶颈（见存储牌组）。	AIIO::D3 AIIO::ops
+症状：CUDA out of memory	减小 batch、混合精度、梯度累积、激活重计算、量化、模型并行，或检查是否有残留进程占用显存。	AIIO::D3 AIIO::ops
+症状：dmesg 出现 XID	按 XID 编号判断是应用问题（13/31/43）还是硬件问题（48/74/79/95），硬件问题先 drain 节点。	AIIO::D3 AIIO::ops
+Runbook（运维手册）	针对特定告警/故障的标准处理步骤，让值班人员可重复执行（本仓库 runbooks/ 目录）。	AIIO::D3 AIIO::ops
+Postmortem（事后复盘）	故障后记录时间线、根因、影响和改进项，强调不追责、持续改进。	AIIO::D3 AIIO::ops
+MTTR / MTBF	平均修复时间 / 平均故障间隔时间。大集群运维要降低 MTTR、提高有效训练时间。	AIIO::D3 AIIO::ops
+SLA / SLO / SLI	SLA：对客户的服务承诺；SLO：内部目标（如 99.9% 可用）；SLI：实际测量的指标。	AIIO::D3 AIIO::ops
+Capacity planning（容量规划）	基于 GPU 使用率、排队时长、增长趋势规划扩容；同时回收闲置资源。	AIIO::D3 AIIO::ops
+GPU 利用率低的常见管理原因	作业申请了 GPU 却空闲（交互式会话、调试）、资源碎片、调度策略不佳、数据瓶颈。	AIIO::D3 AIIO::ops
+Chargeback / showback	按团队统计并分摊（或展示）GPU 使用成本，促进资源合理使用。	AIIO::D3 AIIO::ops
+多租户安全措施	RBAC 最小权限、namespace/账户配额、MIG 或 vGPU 隔离、网络分区（PKey/VLAN）、DPU 隔离、镜像来源控制。	AIIO::D3 AIIO::ops
+RBAC	基于角色的访问控制：按角色授予最小必要权限。	AIIO::D3 AIIO::ops
+云上成本运维纪律	实验前定预算和销毁时间，结束即清理（实例、存储、快照、负载均衡、NAT），核对账单（本仓库 cost-safety.md）。	AIIO::D3 AIIO::ops
+Infrastructure as Code（IaC）	用代码（Terraform、Ansible）描述和部署基础设施，可复现、可审查、可销毁（本仓库 W2 Terraform 实践）。	AIIO::D3 AIIO::ops
+Ansible	无代理的配置管理工具，通过 SSH 批量配置节点（装驱动、改配置）。	AIIO::D3 AIIO::ops
+Terraform	声明式基础设施编排工具，plan → apply → destroy 管理云资源生命周期。	AIIO::D3 AIIO::ops
+AIIO	AI Infrastructure and Operations。	AIIO::D0 AIIO::acronyms
+NCA / NCP	NVIDIA-Certified Associate（助理级）/ NVIDIA-Certified Professional（专业级）。	AIIO::D0 AIIO::acronyms
+GPU / CPU / DPU	Graphics / Central / Data Processing Unit。	AIIO::D0 AIIO::acronyms
+SM	Streaming Multiprocessor，GPU 的基本计算单元。	AIIO::D0 AIIO::acronyms
+HBM	High Bandwidth Memory。	AIIO::D0 AIIO::acronyms
+NVML	NVIDIA Management Library。	AIIO::D0 AIIO::acronyms
+DCGM	Data Center GPU Manager。	AIIO::D0 AIIO::acronyms
+MIG	Multi-Instance GPU。	AIIO::D0 AIIO::acronyms
+MPS	Multi-Process Service。	AIIO::D0 AIIO::acronyms
+vGPU / vCS / vWS	virtual GPU / Virtual Compute Server / Virtual Workstation。	AIIO::D0 AIIO::acronyms
+NCCL	NVIDIA Collective Communications Library。	AIIO::D0 AIIO::acronyms
+NIM	NVIDIA Inference Microservices。	AIIO::D0 AIIO::acronyms
+NGC	NVIDIA GPU Cloud（现为 NVIDIA 的 GPU 优化软件目录）。	AIIO::D0 AIIO::acronyms
+DALI	Data Loading Library。	AIIO::D0 AIIO::acronyms
+RAPIDS / cuDF / cuML	GPU 数据科学套件 / GPU DataFrame / GPU 机器学习库。	AIIO::D0 AIIO::acronyms
+DOCA	Data Center Infrastructure-on-a-Chip Architecture（BlueField SDK）。	AIIO::D0 AIIO::acronyms
+RDMA	Remote Direct Memory Access。	AIIO::D0 AIIO::acronyms
+RoCE	RDMA over Converged Ethernet。	AIIO::D0 AIIO::acronyms
+IB / HCA	InfiniBand / Host Channel Adapter（IB 网卡）。	AIIO::D0 AIIO::acronyms
+SHARP	Scalable Hierarchical Aggregation and Reduction Protocol。	AIIO::D0 AIIO::acronyms
+UFM	Unified Fabric Manager。	AIIO::D0 AIIO::acronyms
+SM（InfiniBand 语境）	Subnet Manager（注意与 GPU 的 Streaming Multiprocessor 区分）。	AIIO::D0 AIIO::acronyms
+PFC / ECN	Priority Flow Control / Explicit Congestion Notification。	AIIO::D0 AIIO::acronyms
+GDS	GPUDirect Storage。	AIIO::D0 AIIO::acronyms
+NVMe-oF	NVMe over Fabrics。	AIIO::D0 AIIO::acronyms
+PUE	Power Usage Effectiveness。	AIIO::D0 AIIO::acronyms
+CDU / RDHx	Coolant Distribution Unit / Rear Door Heat Exchanger。	AIIO::D0 AIIO::acronyms
+UPS / PDU	Uninterruptible Power Supply / Power Distribution Unit。	AIIO::D0 AIIO::acronyms
+BMC / IPMI	Baseboard Management Controller / Intelligent Platform Management Interface。	AIIO::D0 AIIO::acronyms
+OOB	Out-of-Band（带外管理）。	AIIO::D0 AIIO::acronyms
+BCM	Base Command Manager。	AIIO::D0 AIIO::acronyms
+GFD / NFD	GPU Feature Discovery / Node Feature Discovery。	AIIO::D0 AIIO::acronyms
+CRD	Custom Resource Definition（K8s 自定义资源）。	AIIO::D0 AIIO::acronyms
+GRES	Generic RESources（Slurm）。	AIIO::D0 AIIO::acronyms
+XID	NVIDIA 驱动报告的 GPU 错误编号。	AIIO::D0 AIIO::acronyms
+ECC / SBE / DBE	Error Correcting Code / Single-Bit Error / Double-Bit Error。	AIIO::D0 AIIO::acronyms
+RMA	Return Merchandise Authorization（退修）。	AIIO::D0 AIIO::acronyms
+TTFT / TPOT / ITL	Time To First Token / Time Per Output Token / Inter-Token Latency。	AIIO::D0 AIIO::acronyms
+RAG	Retrieval-Augmented Generation。	AIIO::D0 AIIO::acronyms
+LoRA / PEFT	Low-Rank Adaptation / Parameter-Efficient Fine-Tuning。	AIIO::D0 AIIO::acronyms
+RLHF / SFT	Reinforcement Learning from Human Feedback / Supervised Fine-Tuning。	AIIO::D0 AIIO::acronyms
+MoE	Mixture of Experts。	AIIO::D0 AIIO::acronyms
+AMP	Automatic Mixed Precision。	AIIO::D0 AIIO::acronyms
+TF32 / BF16	TensorFloat-32 / Brain Floating Point 16。	AIIO::D0 AIIO::acronyms
+PTQ / QAT	Post-Training Quantization / Quantization-Aware Training。	AIIO::D0 AIIO::acronyms
+FSDP / ZeRO	Fully Sharded Data Parallel / Zero Redundancy Optimizer。	AIIO::D0 AIIO::acronyms
+MFU	Model FLOPs Utilization。	AIIO::D0 AIIO::acronyms
+TCO	Total Cost of Ownership。	AIIO::D0 AIIO::acronyms
+CapEx / OpEx	Capital Expenditure / Operational Expenditure。	AIIO::D0 AIIO::acronyms
+SU	Scalable Unit（DGX SuperPOD 构建块）。	AIIO::D0 AIIO::acronyms
+IaC	Infrastructure as Code。	AIIO::D0 AIIO::acronyms
+MTTR / MTBF	Mean Time To Repair / Mean Time Between Failures。	AIIO::D0 AIIO::acronyms

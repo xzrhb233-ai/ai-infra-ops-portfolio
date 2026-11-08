@@ -1,0 +1,382 @@
+<title>AIIO 速记卡</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: study desk — deck rack on the left, one index card centered on the right; deck rack folds into a disclosure on phones. Same token family as the AIIO mock exam page. */
+:root {
+  --bg: #f2f4f3;
+  --surface: #ffffff;
+  --sunk: #e8ecea;
+  --ink: #16201c;
+  --muted: #56625d;
+  --line: #d5dcd9;
+  --accent: #2c46a6;
+  --accent-soft: #e3e8f8;
+  --on-accent: #ffffff;
+  --d0: #4b5a54;
+  --d1: #6a47b8;
+  --d2: #18786d;
+  --d3: #a8601a;
+  --ok: #1d7444;
+  --ok-soft: #dcefe3;
+  --bad: #ad2a20;
+  --bad-soft: #f6dfdc;
+  --mid: #946700;
+  --mid-soft: #f6ebcc;
+  --font-display: "IBM Plex Sans Condensed", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-body: "IBM Plex Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111614; --surface: #19201d; --sunk: #222a27; --ink: #e4ebe8; --muted: #9aa8a2; --line: #2f3935;
+    --accent: #93a6f2; --accent-soft: #263156; --on-accent: #0f1530;
+    --d0: #a9b8b1; --d1: #b297f0; --d2: #4fc4b3; --d3: #e7a463;
+    --ok: #66cf94; --ok-soft: #1c3527; --bad: #f2897e; --bad-soft: #3d2220; --mid: #e8bd4f; --mid-soft: #3a311a;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111614; --surface: #19201d; --sunk: #222a27; --ink: #e4ebe8; --muted: #9aa8a2; --line: #2f3935;
+  --accent: #93a6f2; --accent-soft: #263156; --on-accent: #0f1530;
+  --d0: #a9b8b1; --d1: #b297f0; --d2: #4fc4b3; --d3: #e7a463;
+  --ok: #66cf94; --ok-soft: #1c3527; --bad: #f2897e; --bad-soft: #3d2220; --mid: #e8bd4f; --mid-soft: #3a311a;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.6; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--surface); }
+.wrap { max-width: 1120px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; margin: 0; line-height: 1.2; }
+p { margin: 0; }
+.label { font-family: var(--font-mono); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
+.mono, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.muted { color: var(--muted); }
+button, select, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 8px 14px; font-weight: 500; }
+.btn:hover { border-color: var(--accent); }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.chip { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono); font-size: 0.74rem; padding: 1px 8px; border-radius: 999px; border: 1px solid currentColor; white-space: nowrap; }
+.d0 { color: var(--d0); } .d1 { color: var(--d1); } .d2 { color: var(--d2); } .d3 { color: var(--d3); }
+
+/* header */
+.top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--surface); border-bottom: 1px solid var(--line); }
+.top .wrap { padding-block: 12px; display: flex; gap: 10px 22px; align-items: center; flex-wrap: wrap; }
+.top h1 { font-size: 1.4rem; margin-right: auto; }
+.stat { display: grid; line-height: 1.25; }
+.stat b { font-family: var(--font-mono); font-size: 1.05rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.seg button { border: 0; background: var(--surface); padding: 6px 12px; color: var(--muted); }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+
+/* layout */
+.layout { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 26px; padding-block: 22px 60px; align-items: start; }
+@media (max-width: 860px) { .layout { grid-template-columns: 1fr; gap: 16px; } }
+.rack { background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); position: sticky; top: calc(env(safe-area-inset-top, 0px) + 74px); max-height: calc(100vh - 100px); overflow: auto; }
+@media (max-width: 860px) { .rack { position: static; max-height: none; } }
+.rack summary { list-style: none; padding: 12px 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; cursor: pointer; border-bottom: 1px solid var(--line); }
+.rack summary::-webkit-details-marker { display: none; }
+.rack summary .cur { font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+.rack summary .caret { font-family: var(--font-mono); color: var(--muted); }
+.rack[open] summary .caret { transform: rotate(180deg); }
+.dfilter { display: flex; gap: 6px; flex-wrap: wrap; padding: 12px 14px 4px; }
+.dfilter button { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 2px 10px; font-size: .8rem; color: var(--muted); }
+.dfilter button[aria-pressed="true"] { border-color: var(--ink); color: var(--ink); font-weight: 600; }
+.decks { display: grid; padding: 6px 6px 10px; }
+.deck { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3px 10px; text-align: left; border: 0; background: transparent; padding: 8px 10px; border-radius: 4px; }
+.deck:hover { background: var(--sunk); }
+.deck[aria-current="true"] { background: var(--accent-soft); }
+.deck .nm { font-size: .9rem; overflow-wrap: anywhere; }
+.deck .ct { font-family: var(--font-mono); font-size: .76rem; color: var(--muted); align-self: center; }
+.deck .mbar { grid-column: 1 / -1; height: 3px; background: var(--sunk); border-radius: 2px; overflow: hidden; display: flex; }
+.mbar i { display: block; height: 100%; }
+.mbar .m { background: var(--ok); } .mbar .l { background: var(--mid); }
+.deck-sep { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; color: var(--muted); padding: 10px 10px 2px; text-transform: uppercase; }
+
+/* study */
+.main { display: grid; gap: 16px; min-width: 0; }
+.opts { display: flex; gap: 10px 16px; flex-wrap: wrap; align-items: center; font-size: .88rem; }
+.opts label { display: inline-flex; gap: 6px; align-items: center; color: var(--muted); }
+.opts select { border: 1px solid var(--line); background: var(--surface); border-radius: 4px; padding: 4px 6px; }
+.card {
+  background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--bad); border-radius: 8px; min-height: 340px; display: grid; grid-template-rows: auto 1fr auto; overflow: hidden;
+}
+.card-head { display: flex; gap: 8px 10px; flex-wrap: wrap; align-items: center; padding: 14px 20px; border-bottom: 1px solid var(--line); }
+.card-head .pos { margin-left: auto; font-family: var(--font-mono); font-size: .8rem; color: var(--muted); }
+.card-body { padding: 26px 24px; display: grid; gap: 18px; align-content: center; min-width: 0; }
+@media (max-width: 480px) { .card-body { padding: 20px 16px; } }
+.front { font-family: var(--font-display); font-size: 1.55rem; font-weight: 600; line-height: 1.35; text-wrap: balance; overflow-wrap: anywhere; }
+.hint { font-size: .85rem; color: var(--muted); }
+.back { font-size: 1.08rem; line-height: 1.7; border-top: 1px dashed var(--line); padding-top: 16px; overflow-wrap: anywhere; }
+.card-foot { display: flex; gap: 8px; flex-wrap: wrap; padding: 14px 20px; border-top: 1px solid var(--line); background: var(--surface); align-items: center; }
+.rate { flex: 1 1 120px; border-radius: var(--r); padding: 10px 12px; font-weight: 600; border: 1px solid; display: grid; justify-items: center; line-height: 1.3; }
+.rate small { font-family: var(--font-mono); font-weight: 400; font-size: .72rem; opacity: .8; }
+.rate.r1 { color: var(--bad); background: var(--bad-soft); border-color: var(--bad); }
+.rate.r2 { color: var(--mid); background: var(--mid-soft); border-color: var(--mid); }
+.rate.r3 { color: var(--ok); background: var(--ok-soft); border-color: var(--ok); }
+.reveal { flex: 1 1 auto; }
+.dots { display: inline-flex; gap: 3px; align-items: center; }
+.dots i { width: 7px; height: 7px; border-radius: 50%; background: var(--sunk); border: 1px solid var(--line); }
+.dots i.on { background: var(--ok); border-color: var(--ok); }
+.keys { font-size: .8rem; color: var(--muted); }
+.kbd { font-family: var(--font-mono); font-size: .76rem; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: var(--surface); color: var(--ink); }
+.done { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 26px; display: grid; gap: 16px; }
+.tally { display: flex; gap: 10px 28px; flex-wrap: wrap; }
+.tally div { display: grid; }
+.tally b { font-family: var(--font-mono); font-size: 1.8rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+
+/* list */
+.search { width: 100%; border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 9px 12px; }
+.list { display: grid; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); }
+.li { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr) auto; gap: 6px 18px; padding: 11px 14px; border-top: 1px solid var(--line); font-size: .9rem; }
+.li:first-child { border-top: 0; }
+.li .f { font-weight: 600; overflow-wrap: anywhere; }
+.li .b { color: var(--muted); overflow-wrap: anywhere; }
+@media (max-width: 640px) { .li { grid-template-columns: minmax(0, 1fr) auto; } .li .b { grid-column: 1 / -1; grid-row: 2; } }
+.st { font-family: var(--font-mono); font-size: .72rem; padding: 0 7px; border-radius: 999px; white-space: nowrap; align-self: start; }
+.st.s-new { color: var(--muted); border: 1px solid var(--line); }
+.st.s-learn { color: var(--mid); background: var(--mid-soft); }
+.st.s-weak { color: var(--bad); background: var(--bad-soft); }
+.st.s-done { color: var(--ok); background: var(--ok-soft); }
+.note { font-size: .82rem; color: var(--muted); }
+mark { background: var(--mid-soft); color: inherit; padding: 0 1px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+
+<div id="app"></div>
+
+<script src="cards-1-ai.js"></script>
+<script src="cards-2-infra.js"></script>
+<script src="cards-3-ops.js"></script>
+<script>
+(function () {
+  "use strict";
+  var DECKS = (window.AIIO_DECKS || []).slice();
+  var DNAME = { 0: "缩写", 1: "领域 1 · AI 基础", 2: "领域 2 · 基础设施", 3: "领域 3 · 运维" };
+  var CARDS = [];
+  DECKS.forEach(function (d) {
+    d.cards.forEach(function (c, i) { CARDS.push({ id: d.key + "|" + c[0], deck: d.key, d: d.d, f: c[0], b: c[1], i: CARDS.length }); });
+  });
+  var DECK = {}; DECKS.forEach(function (d) { DECK[d.key] = d; });
+  var app = document.getElementById("app");
+  var K_PROG = "aiio.cards.v1", K_PREF = "aiio.cards.pref";
+
+  function load(k, f) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch (e) { return f; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+
+  var PROG = load(K_PROG, {});
+  // box: 1 不会, 2–3 学习中, 4–5 已掌握; 无记录 = 没学过
+  function box(id) { return PROG[id] ? PROG[id].b : 0; }
+  function status(id) { var b = box(id); return b === 0 ? "new" : b === 1 ? "weak" : b >= 4 ? "done" : "learn"; }
+  var ST_LABEL = { "new": "未学", weak: "不会", learn: "学习中", done: "已掌握" };
+
+  var pref = load(K_PREF, {});
+  var S = {
+    view: "study", deck: pref.deck || "all", dfil: pref.dfil || "all",
+    order: pref.order || "smart", scope: pref.scope || "all", reverse: !!pref.reverse,
+    queue: [], pos: 0, shown: false, tally: { 1: 0, 2: 0, 3: 0 }, again: [], q: ""
+  };
+  if (S.deck !== "all" && !DECK[S.deck] && !/^d[0-3]$/.test(S.deck)) S.deck = "all";
+  function savePref() { save(K_PREF, { deck: S.deck, dfil: S.dfil, order: S.order, scope: S.scope, reverse: S.reverse }); }
+
+  function selection() {
+    return CARDS.filter(function (c) {
+      if (S.deck === "all") return true;
+      if (/^d[0-3]$/.test(S.deck)) return c.d === +S.deck.slice(1);
+      return c.deck === S.deck;
+    });
+  }
+  function deckLabel() {
+    if (S.deck === "all") return "全部牌组";
+    if (/^d[0-3]$/.test(S.deck)) return DNAME[+S.deck.slice(1)] + "（全部）";
+    return DECK[S.deck].name;
+  }
+
+  function buildQueue(ids) {
+    var cards = ids ? ids.map(function (id) { return CARDS.filter(function (c) { return c.id === id; })[0]; }).filter(Boolean) : selection();
+    if (!ids) cards = cards.filter(function (c) { var s = status(c.id); return S.scope === "all" || (S.scope === "todo" ? s !== "done" : s === "weak"); });
+    if (S.order === "shuffle") cards = shuffle(cards);
+    else if (S.order === "smart") {
+      var rank = { weak: 0, "new": 1, learn: 2, done: 3 };
+      cards = shuffle(cards).sort(function (a, b) { return rank[status(a.id)] - rank[status(b.id)] || box(a.id) - box(b.id); });
+    }
+    S.queue = cards.map(function (c) { return c.id; }); S.pos = 0; S.shown = false; S.tally = { 1: 0, 2: 0, 3: 0 }; S.again = [];
+  }
+
+  function rate(r) {
+    var id = S.queue[S.pos]; if (!id) return;
+    var p = PROG[id] || { b: 0, n: 0 }, b = p.b;
+    if (r === 1) b = 1;
+    else if (r === 2) b = b > 2 ? b - 1 : 2;
+    else b = b ? Math.min(5, b + 1) : 3;
+    PROG[id] = { b: b, n: (p.n || 0) + 1, t: Date.now() }; save(K_PROG, PROG);
+    S.tally[r]++; if (r < 3) S.again.push(id);
+    S.pos++; S.shown = false; render();
+  }
+
+  function counts(cards) {
+    var o = { total: cards.length, done: 0, learn: 0, weak: 0, "new": 0 };
+    cards.forEach(function (c) { o[status(c.id)]++; });
+    return o;
+  }
+
+  // ---------- views ----------
+  function header() {
+    var all = counts(CARDS), today = 0, start = new Date(); start.setHours(0, 0, 0, 0);
+    Object.keys(PROG).forEach(function (k) { if (PROG[k].t >= start.getTime()) today++; });
+    return '<header class="top"><div class="wrap"><h1>AIIO 速记卡</h1>' +
+      '<div class="stat"><span class="label">已掌握</span><b>' + all.done + ' / ' + all.total + '</b></div>' +
+      '<div class="stat"><span class="label">不会</span><b style="color:var(--bad)">' + all.weak + '</b></div>' +
+      '<div class="stat"><span class="label">今天复习</span><b>' + today + '</b></div>' +
+      '<div class="seg" role="group" aria-label="视图"><button data-view="study" aria-pressed="' + (S.view === "study") + '">翻卡</button><button data-view="list" aria-pressed="' + (S.view === "list") + '">列表</button></div>' +
+      '</div></header>';
+  }
+
+  function rack() {
+    var open = window.matchMedia && window.matchMedia("(min-width: 861px)").matches;
+    var h = '<details class="rack" id="rack"' + (open || S.rackOpen ? ' open' : '') + '><summary><span class="cur">' + esc(deckLabel()) + '</span><span class="caret" aria-hidden="true">▾</span></summary>';
+    h += '<div class="dfilter" role="group" aria-label="按领域筛选">';
+    [["all", "全部"], ["1", "D1"], ["2", "D2"], ["3", "D3"], ["0", "缩写"]].forEach(function (x) {
+      h += '<button data-dfil="' + x[0] + '" aria-pressed="' + (S.dfil === x[0]) + '">' + x[1] + '</button>';
+    });
+    h += '</div><div class="decks">';
+    h += deckBtn("all", "全部牌组", CARDS, null);
+    [1, 2, 3, 0].forEach(function (d) {
+      if (S.dfil !== "all" && S.dfil !== String(d)) return;
+      var ds = DECKS.filter(function (x) { return x.d === d; });
+      if (!ds.length) return;
+      h += '<div class="deck-sep">' + DNAME[d] + '</div>';
+      if (d !== 0) h += deckBtn("d" + d, "本领域全部", CARDS.filter(function (c) { return c.d === d; }), d);
+      ds.forEach(function (x) { h += deckBtn(x.key, x.name, CARDS.filter(function (c) { return c.deck === x.key; }), d); });
+    });
+    h += '</div></details>';
+    return h;
+  }
+  function deckBtn(key, name, cards, d) {
+    var c = counts(cards), m = c.done / c.total * 100, l = (c.learn + c.weak) / c.total * 100;
+    return '<button class="deck" data-deck="' + key + '" aria-current="' + (S.deck === key) + '"><span class="nm">' + esc(name) + '</span><span class="ct">' + c.done + '/' + c.total + '</span>' +
+      '<span class="mbar" aria-hidden="true"><i class="m" style="width:' + m + '%"></i><i class="l" style="width:' + l + '%"></i></span></button>';
+  }
+
+  function options() {
+    return '<div class="opts">' +
+      '<label for="sel-order">顺序<select id="sel-order"><option value="smart"' + (S.order === "smart" ? " selected" : "") + '>不会的优先</option><option value="shuffle"' + (S.order === "shuffle" ? " selected" : "") + '>完全乱序</option><option value="seq"' + (S.order === "seq" ? " selected" : "") + '>按牌组顺序</option></select></label>' +
+      '<label for="sel-scope">范围<select id="sel-scope"><option value="all"' + (S.scope === "all" ? " selected" : "") + '>全部卡片</option><option value="todo"' + (S.scope === "todo" ? " selected" : "") + '>未掌握的</option><option value="weak"' + (S.scope === "weak" ? " selected" : "") + '>只看“不会”</option></select></label>' +
+      '<label for="chk-rev"><input type="checkbox" id="chk-rev"' + (S.reverse ? " checked" : "") + '>反向（看解释说术语）</label>' +
+      '<button class="btn" id="btn-restart">重新洗牌</button></div>';
+  }
+
+  function studyView() {
+    var h = options();
+    var id = S.queue[S.pos];
+    if (!S.queue.length) {
+      h += '<div class="done"><h2>这个范围里没有卡片</h2><p class="muted">“' + esc(deckLabel()) + '”在当前范围下是空的。把范围改成“全部卡片”，或者换一个牌组。</p></div>';
+      return h;
+    }
+    if (!id) {
+      var t = S.tally, n = t[1] + t[2] + t[3];
+      h += '<div class="done"><span class="label">本轮完成</span><h2>' + esc(deckLabel()) + ' · ' + n + ' 张</h2>' +
+        '<div class="tally"><div><span class="label">记住</span><b style="color:var(--ok)">' + t[3] + '</b></div><div><span class="label">模糊</span><b style="color:var(--mid)">' + t[2] + '</b></div><div><span class="label">不会</span><b style="color:var(--bad)">' + t[1] + '</b></div></div>' +
+        '<div class="row">' + (S.again.length ? '<button class="btn primary" id="btn-again">再过一遍不会和模糊的（' + S.again.length + '）</button>' : '') +
+        '<button class="btn" id="btn-restart2">整组重新洗牌</button></div>' +
+        '<p class="note">“记住”两次的卡会进入“已掌握”，之后在“不会的优先”顺序里排到最后。</p></div>';
+      return h;
+    }
+    var c = CARDS.filter(function (x) { return x.id === id; })[0], dk = DECK[c.deck], b = box(id);
+    var q = S.reverse ? c.b : c.f, a = S.reverse ? c.f : c.b;
+    h += '<article class="card" aria-live="polite"><div class="card-head"><span class="chip d' + c.d + '">' + (c.d ? 'D' + c.d : '缩写') + '</span><span class="muted" style="font-size:.85rem">' + esc(dk.name) + '</span>' +
+      '<span class="dots" title="熟练度 ' + b + '/5" aria-label="熟练度 ' + b + '/5">' + [1, 2, 3, 4, 5].map(function (k) { return '<i class="' + (k <= b ? 'on' : '') + '"></i>'; }).join('') + '</span>' +
+      '<span class="pos">' + (S.pos + 1) + ' / ' + S.queue.length + '</span></div>';
+    h += '<div class="card-body"><div class="front' + (S.reverse ? '" style="font-family:var(--font-body);font-size:1.15rem;font-weight:500' : '') + '">' + esc(q) + '</div>';
+    if (!S.shown) h += '<p class="hint">' + (S.reverse ? '这说的是哪个术语或命令？' : (dk.hint ? dk.hint + '。' : '先在心里回答，再翻面对照。')) + '</p>';
+    else h += '<div class="back">' + esc(a) + '</div>';
+    h += '</div><div class="card-foot">';
+    if (!S.shown) h += '<button class="btn primary reveal" id="btn-reveal">翻面看答案</button><button class="btn" id="btn-skip">跳过</button>';
+    else h += '<button class="rate r1" data-rate="1">不会<small>1 · 明天还要看</small></button><button class="rate r2" data-rate="2">模糊<small>2 · 想了很久</small></button><button class="rate r3" data-rate="3">记住<small>3 · 立刻答出</small></button>';
+    h += '</div></article>';
+    h += '<p class="keys"><span class="kbd">空格</span> 翻面 · <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> 评分 · <span class="kbd">→</span> 跳过 · 熟练度只保存在这个浏览器里</p>';
+    return h;
+  }
+
+  function listView() {
+    var cards = selection(), q = S.q.trim().toLowerCase();
+    if (q) cards = CARDS.filter(function (c) { return (c.f + " " + c.b).toLowerCase().indexOf(q) >= 0; });
+    var h = '<input class="search" id="search" type="search" placeholder="搜索全部 ' + CARDS.length + ' 张卡片：术语、命令、数字…" value="' + esc(S.q) + '" aria-label="搜索卡片">';
+    h += '<p class="note">' + (q ? '在全部牌组中找到 ' + cards.length + ' 张' : esc(deckLabel()) + ' · ' + cards.length + ' 张') + '</p>';
+    if (!cards.length) return h + '<p class="muted">没有匹配的卡片，换个关键词试试，例如 “MIG”、“PUE”、“Xid”。</p>';
+    var mk = function (s) { s = esc(s); if (!q) return s; var i = s.toLowerCase().indexOf(esc(q)); return i < 0 ? s : s.slice(0, i) + '<mark>' + s.slice(i, i + esc(q).length) + '</mark>' + s.slice(i + esc(q).length); };
+    h += '<div class="list">';
+    cards.slice(0, 400).forEach(function (c) {
+      var s = status(c.id);
+      h += '<div class="li"><span class="f">' + mk(c.f) + '</span><span class="b">' + mk(c.b) + '</span><span class="st s-' + s + '">' + ST_LABEL[s] + '</span></div>';
+    });
+    h += '</div>';
+    if (cards.length > 400) h += '<p class="note">只显示前 400 张，请缩小牌组或搜索范围。</p>';
+    return h;
+  }
+
+  function render() {
+    var focusSearch = document.activeElement && document.activeElement.id === "search";
+    var rk = document.getElementById("rack"); if (rk) S.rackOpen = rk.open;
+    app.innerHTML = header() + '<div class="wrap layout">' + rack() + '<main class="main">' + (S.view === "list" ? listView() : studyView()) + '</main></div>';
+    if (focusSearch) { var s = document.getElementById("search"); if (s) { s.focus(); s.setSelectionRange(s.value.length, s.value.length); } }
+  }
+
+  // ---------- events ----------
+  app.addEventListener("click", function (ev) {
+    var t = ev.target.closest("button"); if (!t) return;
+    if (t.dataset.view) { S.view = t.dataset.view; render(); return; }
+    if (t.dataset.dfil) { S.dfil = t.dataset.dfil; S.rackOpen = true; savePref(); render(); return; }
+    if (t.dataset.deck) {
+      S.deck = t.dataset.deck; S.q = ""; savePref(); buildQueue();
+      S.rackOpen = window.matchMedia && window.matchMedia("(min-width: 861px)").matches; render();
+      if (!S.rackOpen) { var m = app.querySelector(".main"); if (m) m.scrollIntoView({ block: "start" }); }
+      return;
+    }
+    if (t.dataset.rate) { rate(+t.dataset.rate); return; }
+    switch (t.id) {
+      case "btn-reveal": S.shown = true; render(); var r = app.querySelector(".rate.r3"); if (r) r.focus(); break;
+      case "btn-skip": S.pos++; S.shown = false; render(); break;
+      case "btn-restart": case "btn-restart2": buildQueue(); render(); break;
+      case "btn-again": buildQueue(shuffle(S.again)); render(); break;
+    }
+  });
+  app.addEventListener("change", function (ev) {
+    var t = ev.target;
+    if (t.id === "sel-order") { S.order = t.value; savePref(); buildQueue(); render(); }
+    else if (t.id === "sel-scope") { S.scope = t.value; savePref(); buildQueue(); render(); }
+    else if (t.id === "chk-rev") { S.reverse = t.checked; S.shown = false; savePref(); render(); }
+  });
+  app.addEventListener("input", function (ev) { if (ev.target.id === "search") { S.q = ev.target.value; render(); } });
+  app.addEventListener("toggle", function (ev) { if (ev.target.id === "rack") S.rackOpen = ev.target.open; }, true);
+
+  document.addEventListener("keydown", function (ev) {
+    if (S.view !== "study" || ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    var tag = (ev.target.tagName || "").toLowerCase(); if (tag === "input" || tag === "select") return;
+    if (!S.queue[S.pos]) return;
+    if ((ev.key === " " || ev.key === "Enter") && !S.shown) { ev.preventDefault(); S.shown = true; render(); }
+    else if (S.shown && /^[123]$/.test(ev.key)) { ev.preventDefault(); rate(+ev.key); }
+    else if (ev.key === "ArrowRight") { ev.preventDefault(); S.pos++; S.shown = false; render(); }
+  });
+
+  // ---------- boot ----------
+  function start(data) {
+    if (data && data.queue) S = data;
+    else buildQueue();
+    if (!CARDS.length) { app.innerHTML = '<main class="wrap" style="padding-block:40px"><h2>卡片没有加载</h2><p class="muted">cards-*.js 需要和这个页面放在同一个目录。</p></main>'; return; }
+    render();
+  }
+  if (window.claude && window.claude.hot && window.claude.hot.snapshot) window.claude.hot.snapshot(function () { return S; });
+  if (window.claude && window.claude.hot && window.claude.hot.ready) window.claude.hot.ready(start);
+  else start(window.claude && window.claude.hot && window.claude.hot.data || {});
+})();
+</script>
