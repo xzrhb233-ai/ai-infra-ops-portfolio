@@ -1,0 +1,475 @@
+<title>AIIO 思维导图</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a schematic sheet — full-height dot-grid canvas, toolbar strip on top, domain branches fan out left and right of the exam root, details slide in from the right (bottom sheet on phones). Same token family as the AIIO exam and flashcard pages. */
+:root {
+  --bg: #eef1f0;
+  --sheet: #f6f8f7;
+  --surface: #ffffff;
+  --sunk: #e4e9e7;
+  --ink: #16201c;
+  --muted: #56625d;
+  --line: #d2dad6;
+  --dot: #cfd8d4;
+  --accent: #2c46a6;
+  --accent-soft: #e3e8f8;
+  --on-accent: #ffffff;
+  --d1: #6a47b8;
+  --d1-soft: #efe9fb;
+  --d2: #18786d;
+  --d2-soft: #dff2ef;
+  --d3: #a8601a;
+  --d3-soft: #f8ecdf;
+  --hit: #f3dd8a;
+  --on-dom: #ffffff;
+  --font-display: "IBM Plex Sans Condensed", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+  --font-body: "IBM Plex Sans", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  --r: 6px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1412; --sheet: #121816; --surface: #19201d; --sunk: #222a27; --ink: #e4ebe8; --muted: #9aa8a2; --line: #2f3935; --dot: #26302c;
+    --accent: #93a6f2; --accent-soft: #263156; --on-accent: #0f1530;
+    --d1: #b297f0; --d1-soft: #2a2140; --d2: #4fc4b3; --d2-soft: #163330; --d3: #e7a463; --d3-soft: #3a2a1a; --hit: #6b5a1c; --on-dom: #0f1412;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1412; --sheet: #121816; --surface: #19201d; --sunk: #222a27; --ink: #e4ebe8; --muted: #9aa8a2; --line: #2f3935; --dot: #26302c;
+  --accent: #93a6f2; --accent-soft: #263156; --on-accent: #0f1530;
+  --d1: #b297f0; --d1-soft: #2a2140; --d2: #4fc4b3; --d2-soft: #163330; --d3: #e7a463; --d3-soft: #3a2a1a; --hit: #6b5a1c; --on-dom: #0f1412;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 14px; line-height: 1.5; overflow: hidden; }
+button, input { font: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.app { height: 100%; display: grid; grid-template-rows: auto 1fr; }
+
+/* top bar */
+.bar { background: var(--surface); border-bottom: 1px solid var(--line); padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; position: relative; z-index: 4; }
+.brand { display: grid; line-height: 1.2; margin-right: auto; min-width: 0; }
+.brand h1 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 700; margin: 0; }
+.brand span { font-size: .78rem; color: var(--muted); }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; background: var(--surface); }
+.seg button { border: 0; background: transparent; padding: 5px 11px; color: var(--muted); font-size: .85rem; white-space: nowrap; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.seg button .w { font-family: var(--font-mono); font-size: .72rem; opacity: .8; margin-left: 4px; }
+.seg button[data-focus="1"] { border-left: 3px solid var(--d1); }
+.seg button[data-focus="2"] { border-left: 3px solid var(--d2); }
+.seg button[data-focus="3"] { border-left: 3px solid var(--d3); }
+.search { position: relative; flex: 1 1 220px; max-width: 320px; }
+.search input { width: 100%; border: 1px solid var(--line); border-radius: var(--r); background: var(--sheet); padding: 6px 10px; }
+.results { position: absolute; top: calc(100% + 4px); left: 0; right: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); box-shadow: 0 8px 24px rgba(0,0,0,.12); max-height: 360px; overflow: auto; z-index: 6; }
+.results button { display: grid; width: 100%; text-align: left; border: 0; background: transparent; padding: 7px 10px; border-top: 1px solid var(--line); gap: 1px; }
+.results button:first-child { border-top: 0; }
+.results button:hover, .results button.on { background: var(--accent-soft); }
+.results b { font-weight: 600; }
+.results small { color: var(--muted); font-size: .76rem; }
+.results .none { padding: 10px; color: var(--muted); }
+
+/* canvas */
+.stage { position: relative; min-height: 0; background-color: var(--sheet); background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 22px 22px; overflow: hidden; }
+svg#map { width: 100%; height: 100%; display: block; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+svg#map:active { cursor: grabbing; }
+.link { fill: none; stroke-width: 1.6; stroke-opacity: .55; }
+.node { cursor: pointer; }
+.node text { font-family: var(--font-body); fill: var(--ink); dominant-baseline: middle; }
+.node .t1 { font-weight: 600; }
+.node .t2 { fill: var(--muted); font-size: 12px; }
+.node.root rect { fill: var(--ink); }
+.node.root text { fill: var(--bg); font-family: var(--font-display); }
+.node.root .t2 { fill: var(--bg); opacity: .8; }
+.node.dom text { fill: var(--on-dom); }
+.node.dom .t2 { fill: var(--on-dom); opacity: .9; }
+.node.dom .wt { font-family: var(--font-mono); font-size: 11px; font-weight: 600; }
+.node.br:not(.dom) rect.pill { fill: var(--surface); stroke-width: 1.5; }
+.node.leaf rect.hl { fill: transparent; }
+.node.leaf:hover rect.hl { fill: var(--sunk); }
+.node.leaf.sel rect.hl { fill: var(--accent-soft); stroke: var(--accent); stroke-width: 1.2; }
+.node.hit rect.hl, .node.br.hit rect.pill { fill: var(--hit); }
+.node .tog circle { fill: var(--surface); stroke-width: 1.4; }
+.node .tog text { font-family: var(--font-mono); font-size: 9.5px; font-weight: 600; text-anchor: middle; }
+.node:focus { outline: none; }
+.node:focus-visible rect { stroke: var(--accent); stroke-width: 2.5; }
+
+/* tools */
+.tools { position: absolute; left: max(12px, env(safe-area-inset-left, 0px)); bottom: calc(12px + env(safe-area-inset-bottom, 0px)); display: flex; gap: 6px; flex-wrap: wrap; z-index: 3; max-width: calc(100% - 24px); }
+.tools button { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 6px 10px; font-size: .84rem; box-shadow: 0 1px 2px rgba(0,0,0,.06); }
+.tools button:hover { border-color: var(--accent); }
+.tools .ico { font-family: var(--font-mono); min-width: 34px; }
+.hint { position: absolute; right: max(12px, env(safe-area-inset-right, 0px)); bottom: calc(14px + env(safe-area-inset-bottom, 0px)); font-size: .76rem; color: var(--muted); background: var(--surface); border: 1px solid var(--line); border-radius: var(--r); padding: 4px 8px; z-index: 2; }
+@media (max-width: 720px) { .hint { display: none; } }
+
+/* detail panel */
+.panel { position: absolute; top: 12px; right: max(12px, env(safe-area-inset-right, 0px)); bottom: 12px; width: min(380px, calc(100% - 24px)); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 12px 32px rgba(0,0,0,.14); display: grid; grid-template-rows: auto 1fr auto; z-index: 5; overflow: hidden; }
+@media (max-width: 720px) {
+  .panel { top: auto; left: max(8px, env(safe-area-inset-left, 0px)); right: max(8px, env(safe-area-inset-right, 0px)); bottom: calc(8px + env(safe-area-inset-bottom, 0px)); width: auto; max-height: 58%; }
+}
+.p-head { padding: 14px 16px 12px; border-bottom: 1px solid var(--line); display: grid; gap: 6px; position: relative; }
+.crumb { font-family: var(--font-mono); font-size: .72rem; color: var(--muted); letter-spacing: .02em; padding-right: 30px; overflow-wrap: anywhere; }
+.crumb i { font-style: normal; display: inline-block; width: 8px; height: 8px; border-radius: 2px; margin-right: 6px; vertical-align: 0; }
+.p-head h2 { font-family: var(--font-display); font-size: 1.3rem; margin: 0; line-height: 1.25; text-wrap: balance; overflow-wrap: anywhere; }
+.p-head .zh { color: var(--muted); font-size: .95rem; }
+.close { position: absolute; top: 8px; right: 8px; border: 0; background: transparent; width: 30px; height: 30px; border-radius: 4px; font-size: 1.1rem; color: var(--muted); }
+.close:hover { background: var(--sunk); }
+.p-body { overflow: auto; padding: 14px 16px; display: grid; gap: 14px; align-content: start; }
+.qa { display: grid; gap: 4px; }
+.lbl { font-family: var(--font-mono); font-size: .7rem; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.qa p { margin: 0; font-size: .95rem; line-height: 1.65; overflow-wrap: anywhere; }
+.qa .q { font-weight: 600; }
+.p-foot { border-top: 1px solid var(--line); padding: 10px 16px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; justify-content: space-between; font-size: .84rem; }
+.p-foot .nav { display: flex; gap: 6px; }
+.p-foot button { border: 1px solid var(--line); background: var(--surface); border-radius: var(--r); padding: 4px 10px; }
+.p-foot button:disabled { opacity: .4; cursor: not-allowed; }
+.p-foot a { color: var(--accent); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="app">
+  <header class="bar">
+    <div class="brand"><h1>AIIO 思维导图</h1><span>NCA-AIIO Knowledge Map · 251 concepts / 个概念</span></div>
+    <div class="seg" role="group" aria-label="领域 Domain" id="focus">
+      <button data-focus="all" aria-pressed="true">全部 All</button>
+      <button data-focus="1" aria-pressed="false">D1<span class="w">38%</span></button>
+      <button data-focus="2" aria-pressed="false">D2<span class="w">40%</span></button>
+      <button data-focus="3" aria-pressed="false">D3<span class="w">22%</span></button>
+    </div>
+    <div class="seg" role="group" aria-label="语言 Language" id="lang">
+      <button data-lang="both" aria-pressed="true">双语</button>
+      <button data-lang="zh" aria-pressed="false">中文</button>
+      <button data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <div class="search">
+      <input id="q" type="search" placeholder="搜索 Search：MIG、显存、Xid 79…" autocomplete="off" aria-label="搜索概念 Search concepts">
+      <div class="results" id="results" hidden></div>
+    </div>
+  </header>
+  <div class="stage" id="stage">
+    <svg id="map" role="img" aria-label="NCA-AIIO 知识思维导图 Knowledge mind map"><g id="viewport"><g id="links"></g><g id="nodes"></g></g></svg>
+    <div class="tools">
+      <button id="btn-topics" title="展开到主题 Show topics">主题 Topics</button>
+      <button id="btn-all" title="展开全部 Expand all">全部展开 Expand</button>
+      <button id="btn-fit" title="适应窗口 Fit to screen">适应 Fit</button>
+      <button class="ico" id="btn-in" aria-label="放大 Zoom in">+</button>
+      <button class="ico" id="btn-out" aria-label="缩小 Zoom out">−</button>
+    </div>
+    <div class="hint">点主题展开 · 点概念看解释 · 拖动 / 滚轮缩放<br>Click a topic to expand · a concept for details · drag / scroll to zoom</div>
+    <aside class="panel" id="panel" hidden aria-live="polite"></aside>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="map-data.js"></script>
+<script>
+(function () {
+  "use strict";
+  var DATA = window.AIIO_MAP, DECKS = window.AIIO_MAP_DECKS || {};
+  var FLASHCARDS_URL = "https://claude.ai/artifact/Xa3bNYq6zFwThkbVBS964S";
+  var svg = d3.select("#map"), vp = d3.select("#viewport"), gL = d3.select("#links"), gN = d3.select("#nodes");
+  var panel = document.getElementById("panel");
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var DUR = reduce ? 0 : 320;
+
+  function load(k, f) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : f; } catch (e) { return f; } }
+  function save(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+
+  var S = { lang: load("aiio.map.lang", "both"), focus: "all", sel: null, hits: {} };
+
+  // ---------- prepare tree ----------
+  var ALL = [], BYID = {};
+  (function prep(n, parent, dom) {
+    n.parent = parent; n.depth = parent ? parent.depth + 1 : 0;
+    n.id = parent ? parent.id + "." + parent.c.indexOf(n) : "r";
+    n.dom = n.d || dom; n.leaf = !n.c;
+    n.open = n.depth < 2;
+    ALL.push(n); BYID[n.id] = n;
+    if (n.c) { n.c.forEach(function (ch) { prep(ch, n, n.dom); }); n.count = n.c.reduce(function (s, ch) { return s + (ch.leaf ? 1 : ch.count); }, 0); }
+  })(DATA, null, 0);
+  var DOMS = DATA.c;
+
+  // ---------- text measurement ----------
+  var ctx = document.createElement("canvas").getContext("2d");
+  var FONT = {
+    root1: "700 20px " + getComputedStyle(document.documentElement).getPropertyValue("--font-display"),
+    big: "600 15px " + getComputedStyle(document.documentElement).getPropertyValue("--font-body"),
+    mid: "600 13.5px " + getComputedStyle(document.documentElement).getPropertyValue("--font-body"),
+    leaf: "600 13px " + getComputedStyle(document.documentElement).getPropertyValue("--font-body"),
+    small: "400 12px " + getComputedStyle(document.documentElement).getPropertyValue("--font-body")
+  };
+  function tw(text, font) { ctx.font = font; return ctx.measureText(text).width; }
+  function lines(n) {
+    var en = n.en, zh = n.zh;
+    if (n.depth === 0) return S.lang === "zh" ? [zh] : S.lang === "en" ? [en, n.sub] : [en, zh];
+    if (S.lang === "zh") return [zh];
+    if (S.lang === "en") return [en];
+    return en === zh ? [en] : [en, zh];
+  }
+  function fontOf(n) { return n.depth === 0 ? FONT.root1 : n.depth === 1 ? FONT.big : n.leaf ? FONT.leaf : FONT.mid; }
+  function measure(n) {
+    var ls = lines(n), f = fontOf(n), w = tw(ls[0], f);
+    if (ls[1]) w = Math.max(w, tw(ls[1], FONT.small));
+    if (n.depth === 1) w = Math.max(w, tw(ls[0], f) + 36);
+    var padX = n.leaf ? 6 : n.depth === 0 ? 18 : 12;
+    n.lines = ls; n.w = Math.ceil(w + padX * 2 + (n.leaf ? 8 : 0)); n.padX = padX;
+    n.h = ls.length === 2 ? (n.depth === 0 ? 52 : 40) : (n.depth === 0 ? 40 : n.leaf ? 24 : 30);
+  }
+
+  // ---------- layout ----------
+  var GAP = 34, TOG = 20;
+  function rowH() { return S.lang === "both" ? 46 : 32; }
+  var visible = [], links = [];
+  function layout() {
+    ALL.forEach(measure);
+    visible = [DATA]; links = [];
+    DATA.vy = 0; DATA.inner = 0; DATA.side = 0;
+    var sides = S.focus === "all" ? [[1, [DOMS[0]]], [-1, [DOMS[1], DOMS[2]]]] : [[1, [DOMS[+S.focus - 1]]]];
+    sides.forEach(function (sd) {
+      var sign = sd[0], pseudo = { pseudo: true, kids: sd[1] };
+      var h = d3.hierarchy(pseudo, function (n) { return n.pseudo ? n.kids : (n.open && n.c ? n.c : null); });
+      d3.tree().nodeSize([rowH(), 1]).separation(function (a, b) { return a.parent === b.parent ? 1 : 1.3; })(h);
+      h.each(function (hn) {
+        if (hn.data.pseudo) return;
+        var n = hn.data, p = hn.parent.data;
+        n.vy = hn.x; n.side = sign;
+        n.inner = p.pseudo ? sign * (DATA.w / 2 + GAP + 10) : p.inner + sign * (p.w + TOG + GAP);
+        visible.push(n);
+        links.push({ id: n.id, s: p.pseudo ? DATA : p, t: n });
+      });
+    });
+  }
+  function outerX(n) { return n.depth === 0 ? n.side * n.w / 2 : n.inner + n.side * (n.w + TOG); }
+  function linkPath(l) {
+    var p = l.s, sign = l.t.side;
+    var x0 = p.depth === 0 ? sign * p.w / 2 : p.inner + sign * (p.w + TOG - 1), y0 = p.vy, x1 = l.t.inner, y1 = l.t.vy, mx = (x0 + x1) / 2;
+    return "M" + x0 + "," + y0 + "C" + mx + "," + y0 + " " + mx + "," + y1 + " " + x1 + "," + y1;
+  }
+  function domColor(n) { return n.dom ? "var(--d" + n.dom + ")" : "var(--ink)"; }
+
+  // ---------- render ----------
+  function render(anchor) {
+    var before = anchor ? zoomT().apply([anchor.inner, anchor.vy]) : null;
+    layout();
+    var t = svg.transition().duration(DUR);
+
+    gL.selectAll("path.link").data(links, function (d) { return d.id; }).join(
+      function (en) { return en.append("path").attr("class", "link").attr("stroke", function (d) { return domColor(d.t); }).attr("d", linkPath).attr("opacity", 0).call(function (s) { s.transition(t).attr("opacity", 1); }); },
+      function (up) { return up.call(function (s) { s.transition(t).attr("d", linkPath); }); },
+      function (ex) { return ex.transition(t).attr("opacity", 0).remove(); }
+    );
+
+    var sel = gN.selectAll("g.node").data(visible, function (d) { return d.id; }).join(
+      function (en) {
+        var g = en.append("g").attr("tabindex", 0).attr("role", "button")
+          .attr("transform", function (d) { var p = d.parent && d.parent.inner !== undefined ? d.parent : d; return "translate(" + (p.depth === 0 ? 0 : p.inner) + "," + (p.vy || 0) + ")"; })
+          .attr("opacity", 0);
+        g.on("click", function (ev, d) { ev.stopPropagation(); onNode(d); })
+         .on("keydown", function (ev, d) { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); onNode(d); } });
+        return g;
+      },
+      function (up) { return up; },
+      function (ex) { return ex.transition(t).attr("opacity", 0).remove(); }
+    );
+    sel.attr("class", function (d) {
+      return "node " + (d.depth === 0 ? "root" : d.depth === 1 ? "dom br" : d.leaf ? "leaf" : "br") + (S.sel === d ? " sel" : "") + (S.hits[d.id] ? " hit" : "");
+    }).attr("aria-label", function (d) { return d.en + " " + d.zh + (d.leaf ? "" : d.open ? "，已展开 expanded" : "，已收起 collapsed"); })
+      .attr("aria-expanded", function (d) { return d.leaf ? null : String(!!d.open); });
+    sel.each(drawNode);
+    sel.transition(t).attr("opacity", 1).attr("transform", function (d) { return "translate(" + d.inner + "," + d.vy + ")"; });
+
+    if (before) {
+      var after = zoomT().apply([anchor.inner, anchor.vy]);
+      var k = zoomT().k, nt = zoomT().translate((before[0] - after[0]) / k, (before[1] - after[1]) / k);
+      svg.transition().duration(DUR).call(zoom.transform, nt);
+    }
+  }
+
+  function drawNode(d) {
+    var g = d3.select(this); g.selectAll("*").remove();
+    var sign = d.side || 1, left = d.depth === 0 ? -d.w / 2 : sign > 0 ? 0 : -d.w;
+    if (d.leaf) {
+      var two = d.lines.length === 2;
+      g.append("rect").attr("class", "hl").attr("x", left - 2).attr("y", two ? -21 : -13).attr("width", d.w + 4).attr("height", two ? 42 : 26).attr("rx", 4);
+      g.append("circle").attr("r", 3.2).attr("cx", 0).attr("cy", 0).attr("fill", domColor(d));
+      var tx = sign * 10, anchor = sign > 0 ? "start" : "end";
+      if (d.lines.length === 2) {
+        g.append("text").attr("class", "t1").attr("x", tx).attr("y", -8).attr("text-anchor", anchor).style("font-size", "13px").text(d.lines[0]);
+        g.append("text").attr("class", "t2").attr("x", tx).attr("y", 9).attr("text-anchor", anchor).text(d.lines[1]);
+      } else g.append("text").attr("class", "t1").attr("x", tx).attr("y", 0).attr("text-anchor", anchor).style("font-size", "13px").text(d.lines[0]);
+      return;
+    }
+    var rect = g.append("rect").attr("class", "pill").attr("x", left).attr("y", -d.h / 2).attr("width", d.w).attr("height", d.h).attr("rx", d.depth === 0 ? d.h / 2 : 6);
+    if (d.depth === 1) rect.style("fill", domColor(d));
+    else if (d.depth > 1) rect.style("stroke", domColor(d));
+    var cx = d.depth === 0 ? 0 : left + d.w / 2, anchorM = "middle";
+    var fs1 = d.depth === 0 ? "20px" : d.depth === 1 ? "15px" : "13.5px";
+    if (d.lines.length === 2) {
+      g.append("text").attr("class", "t1").attr("x", cx).attr("y", d.depth === 0 ? -9 : -8).attr("text-anchor", anchorM).style("font-size", fs1).text(d.lines[0]);
+      g.append("text").attr("class", "t2").attr("x", cx).attr("y", d.depth === 0 ? 13 : 10).attr("text-anchor", anchorM).text(d.lines[1]);
+    } else g.append("text").attr("class", "t1").attr("x", cx).attr("y", 1).attr("text-anchor", anchorM).style("font-size", fs1).text(d.lines[0]);
+    if (d.depth === 1) {
+      g.select(".t1").attr("x", cx - 16);
+      g.append("text").attr("class", "wt").attr("x", left + d.w - d.padX).attr("y", d.lines.length === 2 ? -8 : 1).attr("text-anchor", "end").text(d.wtxt);
+    }
+    if (d.depth > 0) {
+      var tg = g.append("g").attr("class", "tog").attr("transform", "translate(" + (sign * (d.w + TOG / 2)) + ",0)");
+      tg.append("circle").attr("r", 9).attr("stroke", domColor(d));
+      tg.append("text").attr("y", 0.5).attr("fill", domColor(d)).text(d.open ? "−" : d.count);
+    }
+  }
+  // 领域节点的权重（如 38%）存到 .wtxt，因为 .w 在布局中用作像素宽度
+  DOMS.forEach(function (dm) { dm.wtxt = dm.w; });
+
+  // ---------- zoom ----------
+  var zoom = d3.zoom().scaleExtent([0.06, 2.5]).on("zoom", function (ev) { vp.attr("transform", ev.transform); });
+  svg.call(zoom).on("dblclick.zoom", null);
+  svg.on("click", function () { closeResults(); });
+  function zoomT() { return d3.zoomTransform(svg.node()); }
+  function bounds() {
+    var x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+    visible.forEach(function (n) {
+      var a = n.depth === 0 ? -n.w / 2 : n.side > 0 ? n.inner : n.inner - n.w - TOG;
+      var b = n.depth === 0 ? n.w / 2 : n.side > 0 ? n.inner + n.w + TOG : n.inner;
+      if (n.leaf && n.side < 0) { a = n.inner - n.w - 10; b = n.inner + 4; }
+      if (n.leaf && n.side > 0) { a = n.inner - 4; b = n.inner + n.w + 10; }
+      x0 = Math.min(x0, a); x1 = Math.max(x1, b); y0 = Math.min(y0, n.vy - n.h / 2); y1 = Math.max(y1, n.vy + n.h / 2);
+    });
+    return [x0, y0, x1, y1];
+  }
+  function fit(animate) {
+    var b = bounds(), W0 = svg.node().clientWidth, H = svg.node().clientHeight, pad = 28;
+    var W = !panel.hidden && W0 >= 720 ? W0 - 392 : W0;
+    var bottomReserve = W0 < 720 ? 56 : 48;
+    var k = Math.min((W - pad * 2) / (b[2] - b[0]), (H - pad * 2 - bottomReserve) / (b[3] - b[1]), 1.15);
+    k = Math.max(k, 0.06);
+    var tx = W / 2 - k * (b[0] + b[2]) / 2, ty = (H - bottomReserve) / 2 - k * (b[1] + b[3]) / 2 + 6;
+    var tr = d3.zoomIdentity.translate(tx, ty).scale(k);
+    (animate ? svg.transition().duration(DUR) : svg).call(zoom.transform, tr);
+  }
+  function centerOn(n) {
+    var W = svg.node().clientWidth, H = svg.node().clientHeight, k = Math.max(zoomT().k, 0.9);
+    var panelW = !panel.hidden && W >= 720 ? 380 : 0, panelH = !panel.hidden && W < 720 ? H * 0.5 : 0;
+    var cx = n.inner + n.side * n.w / 2;
+    var tr = d3.zoomIdentity.translate((W - panelW) / 2 - k * cx, (H - panelH) / 2 - k * n.vy).scale(k);
+    svg.transition().duration(DUR).call(zoom.transform, tr);
+  }
+
+  // ---------- interactions ----------
+  function onNode(d) {
+    closeResults();
+    if (d.depth === 0) { fit(true); return; }
+    if (d.leaf) { select(d); return; }
+    d.open = !d.open;
+    render(d);
+  }
+  function siblingsOf(n) { return n.parent.c.filter(function (x) { return x.leaf; }); }
+  function select(n) {
+    S.sel = n; showPanel(n); render();
+  }
+  function crumbs(n) {
+    var a = [], p = n.parent;
+    while (p && p.depth > 0) { a.unshift(p); p = p.parent; }
+    return a;
+  }
+  function pick(en, zh) { return S.lang === "en" ? en : S.lang === "zh" ? zh : en === zh ? en : en + " · " + zh; }
+  function showPanel(n) {
+    var cr = crumbs(n), sib = siblingsOf(n), i = sib.indexOf(n), deck = DECKS[n.k] || ["", ""];
+    var h = '<div class="p-head"><div class="crumb"><i style="background:' + domColor(n) + '"></i>' +
+      cr.map(function (c) { return esc(pick(c.en, c.zh)); }).join(" › ") + '</div>' +
+      '<h2>' + esc(S.lang === "zh" ? n.zh : n.en) + '</h2>' + (S.lang === "both" && n.zh !== n.en ? '<div class="zh">' + esc(n.zh) + '</div>' : '') +
+      '<button class="close" id="p-close" aria-label="关闭 Close">✕</button></div><div class="p-body">';
+    if (n.eb) {
+      var q = S.lang === "zh" ? (n.cz || n.ce) : S.lang === "en" ? n.ce : n.ce + (n.cz && n.cz !== n.ce ? " · " + n.cz : "");
+      h += '<div class="qa"><span class="lbl">速记卡 Flashcard</span><p class="q">' + esc(q) + '</p></div>';
+      if (S.lang !== "zh") h += '<div class="qa"><span class="lbl">English</span><p>' + esc(n.eb) + '</p></div>';
+      if (S.lang !== "en") h += '<div class="qa"><span class="lbl">中文</span><p>' + esc(n.zb) + '</p></div>';
+    }
+    h += '</div><div class="p-foot"><span>' + esc(S.lang === "en" ? deck[0] : deck[1]) + ' · <a href="' + FLASHCARDS_URL + '" target="_blank" rel="noopener">去速记卡练习 Practice ↗</a></span>' +
+      '<span class="nav"><button id="p-prev"' + (i <= 0 ? " disabled" : "") + ' aria-label="上一个 Previous">←</button><button id="p-next"' + (i >= sib.length - 1 ? " disabled" : "") + ' aria-label="下一个 Next">→</button></span></div>';
+    panel.innerHTML = h; panel.hidden = false;
+    document.getElementById("p-close").onclick = closePanel;
+    document.getElementById("p-prev").onclick = function () { if (i > 0) { select(sib[i - 1]); centerOn(sib[i - 1]); } };
+    document.getElementById("p-next").onclick = function () { if (i < sib.length - 1) { select(sib[i + 1]); centerOn(sib[i + 1]); } };
+  }
+  function closePanel() { panel.hidden = true; S.sel = null; render(); }
+
+  function reveal(n) {
+    var dom = n; while (dom.depth > 1) dom = dom.parent;
+    if (S.focus !== "all" && +S.focus !== dom.d) setFocus("all", true);
+    var p = n.parent; while (p) { p.open = true; p = p.parent; }
+  }
+
+  // header controls
+  function setPressed(groupId, attr, val) { d3.selectAll("#" + groupId + " button").attr("aria-pressed", function () { return String(this.getAttribute(attr) === val); }); }
+  function setFocus(f, silent) {
+    S.focus = f; setPressed("focus", "data-focus", f);
+    if (S.sel && f !== "all" && S.sel.dom !== +f) { panel.hidden = true; S.sel = null; }
+    if (!silent) { render(); fit(true); }
+  }
+  d3.selectAll("#focus button").on("click", function () { setFocus(this.getAttribute("data-focus")); });
+  d3.selectAll("#lang button").on("click", function () {
+    S.lang = this.getAttribute("data-lang"); save("aiio.map.lang", S.lang); setPressed("lang", "data-lang", S.lang);
+    render(); if (S.sel) showPanel(S.sel);
+  });
+  setPressed("lang", "data-lang", S.lang);
+
+  document.getElementById("btn-topics").onclick = function () { ALL.forEach(function (n) { if (!n.leaf) n.open = n.depth < 2; }); render(); fit(true); };
+  document.getElementById("btn-all").onclick = function () { ALL.forEach(function (n) { if (!n.leaf) n.open = true; }); render(); fit(true); };
+  document.getElementById("btn-fit").onclick = function () { fit(true); };
+  document.getElementById("btn-in").onclick = function () { svg.transition().duration(DUR).call(zoom.scaleBy, 1.3); };
+  document.getElementById("btn-out").onclick = function () { svg.transition().duration(DUR).call(zoom.scaleBy, 1 / 1.3); };
+
+  // search
+  var qEl = document.getElementById("q"), resEl = document.getElementById("results"), resList = [], resIdx = 0;
+  function closeResults() { resEl.hidden = true; }
+  function doSearch() {
+    var q = qEl.value.trim().toLowerCase(); S.hits = {};
+    if (!q) { closeResults(); render(); return; }
+    resList = ALL.filter(function (n) { return n.depth > 0 && [n.en, n.zh, n.eb || "", n.zb || "", n.ce || ""].join(" ").toLowerCase().indexOf(q) >= 0; })
+      .sort(function (a, b) {
+        var an = (a.en + a.zh).toLowerCase().indexOf(q) >= 0 ? 0 : 1, bn = (b.en + b.zh).toLowerCase().indexOf(q) >= 0 ? 0 : 1;
+        return an - bn || a.depth - b.depth;
+      });
+    resList.forEach(function (n) { S.hits[n.id] = true; });
+    resIdx = 0;
+    var h = resList.length ? resList.slice(0, 30).map(function (n, i) {
+      var cr = crumbs(n).map(function (c) { return S.lang === "zh" ? c.zh : c.en; }).join(" › ");
+      return '<button data-id="' + n.id + '"' + (i === 0 ? ' class="on"' : '') + '><b>' + esc(pick(n.en, n.zh)) + '</b><small>' + esc(cr || (S.lang === "zh" ? "领域" : "Domain")) + '</small></button>';
+    }).join("") : '<div class="none">没有匹配的概念 No matches. 试试 “NVLink”、“存储”。</div>';
+    resEl.innerHTML = h; resEl.hidden = false;
+    render();
+  }
+  function goTo(n) {
+    closeResults(); reveal(n);
+    if (n.leaf) { S.sel = n; showPanel(n); } else n.open = true;
+    render(); setTimeout(function () { centerOn(n); }, reduce ? 0 : 40);
+  }
+  qEl.addEventListener("input", doSearch);
+  qEl.addEventListener("focus", function () { if (qEl.value.trim()) doSearch(); });
+  qEl.addEventListener("keydown", function (ev) {
+    if (resEl.hidden || !resList.length) return;
+    var btns = resEl.querySelectorAll("button");
+    if (ev.key === "ArrowDown" || ev.key === "ArrowUp") {
+      ev.preventDefault(); resIdx = (resIdx + (ev.key === "ArrowDown" ? 1 : -1) + btns.length) % btns.length;
+      btns.forEach(function (b, i) { b.classList.toggle("on", i === resIdx); }); btns[resIdx].scrollIntoView({ block: "nearest" });
+    } else if (ev.key === "Enter") { ev.preventDefault(); goTo(BYID[btns[resIdx].getAttribute("data-id")]); }
+    else if (ev.key === "Escape") closeResults();
+  });
+  resEl.addEventListener("click", function (ev) { var b = ev.target.closest("button[data-id]"); if (b) goTo(BYID[b.getAttribute("data-id")]); });
+  document.addEventListener("keydown", function (ev) { if (ev.key === "Escape" && !panel.hidden && document.activeElement !== qEl) closePanel(); });
+
+  var resizeT; window.addEventListener("resize", function () { clearTimeout(resizeT); resizeT = setTimeout(function () { fit(false); }, 150); });
+
+  // ---------- boot ----------
+  render(); fit(false);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { render(); fit(false); });
+})();
+</script>
